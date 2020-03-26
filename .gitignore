@@ -1,0 +1,4 @@
+#Following files are ignored
+.settings
+.project
+.buildpath

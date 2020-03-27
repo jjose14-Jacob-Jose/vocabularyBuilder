@@ -8,14 +8,19 @@
      <link rel = "stylesheet"    type = "text/css"    href = "../css/wordlist.css" />
 </head>
 <body>
+
 	<label> Meaning : </label>
 	<input type="text" id="txtUserInputMeaning">
 	
 	<label> All : </label>
 	<input type="text" id="txtUserInputAll">
+	
+	
+	
+	
 	<div class="container">
 		<div class="row">
-			<table class="table">
+			<table class="table" id="tableWords">
 				<thead>
 					<th id="No" class="tableRow" >No</th>
 					<th id="Word" class="tableRow">Word</th>
@@ -27,7 +32,7 @@
 					<th id="Root_Unit" class="tableRow">Root Unit</th>
 					<th id="Date" class="tableRow">Date</th>					
 				</thead>
-				<tbody class="tbody" id="wordListTableBody">
+			<tbody class="tbody" id="wordListTableBody">
 				</tbody>
 			</table>
 		</div>

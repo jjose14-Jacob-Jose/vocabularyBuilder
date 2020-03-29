@@ -15,6 +15,11 @@
 	<label> All : </label>
 	<input type="text" id="txtUserInputAll">
 	
+	<label> Meaning NEW : </label>
+	<input type="text" id="txtUserInputMeaningNew">
+	
+		<label> All NEW : </label>
+	<input type="text" id="txtUserInputAllNew">
 	
 	
 	

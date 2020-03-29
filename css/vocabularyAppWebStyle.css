@@ -1,0 +1,46 @@
+.tbodyTableWordsFromDB {
+  vertical-align: top;
+  text-align: left;
+}
+
+
+#No {
+	width:1%;
+}
+
+#Word {
+	width:4%;
+}
+
+#Meaning {
+	width:35%;
+}
+
+#Definition {
+	width:35%;
+}
+
+
+#Additional_Info {
+	width:25%;
+}
+
+#Relevant_Example {
+	width:10%;
+}
+
+#Root_Index {
+	width:4%;
+}
+
+#Root_Unit {
+	width:3%;
+}
+
+#Date {
+	width:1%;
+}
+
+.txtUserInput {
+	width: 14%;
+}

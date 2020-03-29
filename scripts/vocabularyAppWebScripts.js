@@ -1,94 +1,91 @@
 //CONSTANTS FROM FILE vocabularyAppWebConstants.php
-var USER_INPUT_TYPE_WORD = "userInputTypeIsWord_searchWordColumnOnly";
-var USER_INPUT_TYPE_ALL = "userInputTypeIsAll_searchAllColumnsForWords";
+var TEXTBOX_ID_USER_INPUT_TYPE_WORD_WITH_ENTER = "userInputTypeIsWordWithEnter_searchWordColumnOnly";
+var TEXTBOX_ID_USER_INPUT_TYPE_ALL_WITH_ENTER = "userInputTypeIsAllWithEnter_searchAllColumnsForWords";
+var TEXTBOX_ID_USER_INPUT_TYPE_WORD_WITHOUT_ENTER = "userInputTypeIsWordWithoutEnter_searchWordColumnOnly";
+var TEXTBOX_ID_USER_INPUT_TYPE_ALL_WITHOUT_ENTER = "userInputTypeIsAllWithoutEnter_searchAllColumnsForWords";
 var USER_INPUT_VALUE = "valueInputByUser";
 var USER_INPUT_TYPE = "userInputType";
+var MSG_PLEASE_WAIT = "Searching for the word, please wait.";
+var ENTER_KEY_HAS_TO_BE_PRESSED_RB_VALUE = "EnterKeyNeedNotBePressed";
+var ENTER_KEY_NEED_NOT_HAS_TO_BE_PRESSED_RB_VALUE = "Searching EnterKeyNeedNotBePressed the word, please wait.";
+
 
 //OTHER CONSTANTS
 var SERVER_URL = "vocabularyAppWebServer.php";
 
 //INDEX.PHP TEXTBOX IDs
-var USER_INPUT_TYPE_WORD_WORD_ONLY_TEXTBOX_ID = "#" + USER_INPUT_TYPE_WORD;
-var USER_INPUT_TYPE_ALL_TEXTBOX_ID = "#" + USER_INPUT_TYPE_ALL;
+var USER_INPUT_TYPE_WORD_WORD_ONLY_TEXTBOX_ID_WITH_ENTER = "#" + TEXTBOX_ID_USER_INPUT_TYPE_WORD_WITH_ENTER;
+var USER_INPUT_TYPE_ALL_TEXTBOX_ID_WITH_ENTER = "#" + TEXTBOX_ID_USER_INPUT_TYPE_ALL_WITH_ENTER;
+var USER_INPUT_TYPE_WORD_WORD_ONLY_TEXTBOX_ID_WITHOUT_ENTER = "#" + TEXTBOX_ID_USER_INPUT_TYPE_WORD_WITHOUT_ENTER;
+var USER_INPUT_TYPE_ALL_TEXTBOX_ID_WITHOUT_ENTER = "#" + TEXTBOX_ID_USER_INPUT_TYPE_ALL_WITHOUT_ENTER;
 
 
 
 
 
 //FETCHING FROM DB (WORDS ONLY) FROM USER INPUT
-$(document).ready(function(){
-	  $(USER_INPUT_TYPE_WORD_WORD_ONLY_TEXTBOX_ID).change(function(){
-		  
-		  var userInputType = USER_INPUT_TYPE_WORD;
-		  var userInputValue = $(USER_INPUT_TYPE_WORD_WORD_ONLY_TEXTBOX_ID).val();
-		  
-		  var serverURL = SERVER_URL;
-		  
-		  if(userInputValue)
-		  {
+function searchOnlyWordColumnWithEnter(){
+	
+	var userInputType = TEXTBOX_ID_USER_INPUT_TYPE_WORD_WITH_ENTER;
+	var userInputValue = $(USER_INPUT_TYPE_WORD_WORD_ONLY_TEXTBOX_ID_WITH_ENTER).val();
+	
+	var serverURL = SERVER_URL;
+	
+	if(userInputValue)
+	{
 //			  IF THE USER HAS INPUT A WORD THEN DISPLAY ONLY WORDS HAVING USER INPUT
-			  userInputType = "/?" + USER_INPUT_TYPE + "=" + userInputType;
-			  userInputValue = "&" + USER_INPUT_VALUE + "=" + userInputValue;
-			  serverURL = serverURL + userInputType + userInputValue;
-		  }
-
-		  fetch(serverURL).then((res) => res.json())
-		  .then(response => {
-		  	console.log(response);
-		  	let output = '';
-		  	for(let i in response) {
-		  		output += '<tr>';
-		  		
-		  		output += '<td id="No" class="tableRow" >';
-		  			output += response[i].No;
-		  			output += '</td>';		
-		  			
-		  			output += '<td id="Word" class="tableRow" >';
-		  			output += response[i].Word;
-		  			output += '</td>';		
-		  			
-		  			output += '<td id="Meaning" class="tableRow" >';
-		  			output += response[i].Meaning;
-		  			output += '</td>';
-		  			
-		  			output += '<td id="Definition" class="tableRow" >';
-		  			output += response[i].Definition;
-		  			output += '</td>';		
-		  			
-		  			output += '<td id="Additional_Info" class="tableRow" >';
-		  			output += response[i].Additional_Info;
-		  			output += '</td>';		
-		  			
-		  			output += '<td id="Relevant_Example" class="tableRow" >';
-		  			output += response[i].Relevant_Example;
-		  			output += '</td>';
-		  			
-		  			output += '<td id="Root_Index" class="tableRow" >';
-		  			output += response[i].Root_Index;
-		  			output += '</td>';		
-		  			
-		  			output += '<td id="Root_Unit" class="tableRow" >';
-		  			output += response[i].Root_Unit;
-		  			output += '</td>';		
-		  			
-		  			output += '<td id="Date" class="tableRow" >';
-		  			output += response[i].Date;
-		  			output += '</td>';
-		  		
-		  		output += '</tr>';
-		  	}
-		  	document.querySelector('.tbodyTableWordsFromDB').innerHTML = output;
-		  }).catch(error => console.log(error));
-	  });
-	});
+		userInputType = "/?" + USER_INPUT_TYPE + "=" + userInputType;
+		userInputValue = "&" + USER_INPUT_VALUE + "=" + userInputValue;
+		serverURL = serverURL + userInputType + userInputValue;
+	}
+	
+	callServerAndDisplayServerResponse(serverURL);
+};
 
 
 //FETCHING FROM DB (ALL COLUMN SEARCh) FROM USER INPUT
-$(document).ready(function(){
-	  $(USER_INPUT_TYPE_ALL_TEXTBOX_ID).change(function(){
+function searchAllColumnsWithEnter() {
+	
+	var userInputType = TEXTBOX_ID_USER_INPUT_TYPE_ALL_WITH_ENTER;
+	var userInputValue = $(USER_INPUT_TYPE_ALL_TEXTBOX_ID_WITH_ENTER).val();
+	
+	var serverURL = SERVER_URL;
+	if(userInputValue)
+	{
+//			  IF THE USER HAS INPUT A WORD THEN DISPLAY ONLY WORDS HAVING USER INPUT
+		userInputType = "/?" + USER_INPUT_TYPE + "=" + userInputType;
+		userInputValue = "&" + USER_INPUT_VALUE + "=" + userInputValue;
+		serverURL = serverURL + userInputType + userInputValue;
+	}
+	callServerAndDisplayServerResponse(serverURL);
+	
+	
+};
+//FETCHING FROM DB (WORDS ONLY) FROM USER INPUT
+function searchOnlyWordColumnWithoutEnter(){
 		  
-		  var userInputType = USER_INPUT_TYPE_ALL;
-		  var userInputValue = $(USER_INPUT_TYPE_ALL_TEXTBOX_ID).val();
+		  var userInputType = TEXTBOX_ID_USER_INPUT_TYPE_WORD_WITHOUT_ENTER;
+		  var userInputValue = $(USER_INPUT_TYPE_WORD_WORD_ONLY_TEXTBOX_ID_WITHOUT_ENTER).val();
+		  
+		  var serverURL = SERVER_URL;
+		  
+		  if(userInputValue)
+		  {
+//			  IF THE USER HAS INPUT A WORD THEN DISPLAY ONLY WORDS HAVING USER INPUT
+			  userInputType = "/?" + USER_INPUT_TYPE + "=" + userInputType;
+			  userInputValue = "&" + USER_INPUT_VALUE + "=" + userInputValue;
+			  serverURL = serverURL + userInputType + userInputValue;
+		  }
+
+		  callServerAndDisplayServerResponse(serverURL);
+	};
+
+
+//FETCHING FROM DB (ALL COLUMN SEARCh) FROM USER INPUT
+function searchAllColumnsWithoutEnter() {
+		  
+		  var userInputType = TEXTBOX_ID_USER_INPUT_TYPE_ALL_WITHOUT_ENTER;
+		  var userInputValue = $(USER_INPUT_TYPE_ALL_TEXTBOX_ID_WITHOUT_ENTER).val();
 		  
 		  var serverURL = SERVER_URL;
 		  if(userInputValue)
@@ -98,61 +95,93 @@ $(document).ready(function(){
 			  userInputValue = "&" + USER_INPUT_VALUE + "=" + userInputValue;
 			  serverURL = serverURL + userInputType + userInputValue;
 		  }
-
-		  fetch(serverURL).then((res) => res.json())
-		  .then(response => {
-		  	console.log(response);
-		  	let output = '';
-		  	for(let i in response) {
-		  		output += '<tr>';
-		  		
-		  		output += '<td id="No" class="tableRow" >';
-		  			output += response[i].No;
-		  			output += '</td>';		
-		  			
-		  			output += '<td id="Word" class="tableRow" >';
-		  			output += response[i].Word;
-		  			output += '</td>';		
-		  			
-		  			output += '<td id="Meaning" class="tableRow" >';
-		  			output += response[i].Meaning;
-		  			output += '</td>';
-		  			
-		  			output += '<td id="Definition" class="tableRow" >';
-		  			output += response[i].Definition;
-		  			output += '</td>';		
-		  			
-		  			output += '<td id="Additional_Info" class="tableRow" >';
-		  			output += response[i].Additional_Info;
-		  			output += '</td>';		
-		  			
-		  			output += '<td id="Relevant_Example" class="tableRow" >';
-		  			output += response[i].Relevant_Example;
-		  			output += '</td>';
-		  			
-		  			output += '<td id="Root_Index" class="tableRow" >';
-		  			output += response[i].Root_Index;
-		  			output += '</td>';		
-		  			
-		  			output += '<td id="Root_Unit" class="tableRow" >';
-		  			output += response[i].Root_Unit;
-		  			output += '</td>';		
-		  			
-		  			output += '<td id="Date" class="tableRow" >';
-		  			output += response[i].Date;
-		  			output += '</td>';
-		  		
-		  		output += '</tr>';
-		  	}
-		  	document.querySelector('.tbodyTableWordsFromDB').innerHTML = output;
-		  }).catch(error => console.log(error));
-	  });
-	});
+		  callServerAndDisplayServerResponse(serverURL);
 
 
+	};
+
+//	FUNCTION TO CALL SERVER AND DISPLAY THE RESPONSE FROM SERVER
+function callServerAndDisplayServerResponse(serverURL)
+{
+	document.querySelector('.tbodyTableWordsFromDB').innerHTML = "" ;
+	document.getElementById("imgWaitScreen").style.visibility = 'visible';
+	  fetch(serverURL).then((res) => res.json())
+	  .then(response => {
+	  	console.log(response);
+	  	let output = '';
+	  	var responseElementCount = 0;
+	  	for(let i in response) {
+	  		output += '<tr>';
+	  		
+	  		output += '<td id="No" class="tableRow" >';
+	  			output += response[i].No;
+	  			output += '</td>';		
+	  			
+	  			output += '<td id="Word" class="tableRow" >';
+	  			output += response[i].Word;
+	  			output += '</td>';		
+	  			
+	  			output += '<td id="Meaning" class="tableRow" >';
+	  			output += response[i].Meaning;
+	  			output += '</td>';
+	  			
+	  			output += '<td id="Definition" class="tableRow" >';
+	  			output += response[i].Definition;
+	  			output += '</td>';		
+	  			
+	  			output += '<td id="Additional_Info" class="tableRow" >';
+	  			output += response[i].Additional_Info;
+	  			output += '</td>';		
+	  			
+	  			output += '<td id="Relevant_Example" class="tableRow" >';
+	  			output += response[i].Relevant_Example;
+	  			output += '</td>';
+	  			
+	  			output += '<td id="Root_Index" class="tableRow" >';
+	  			output += response[i].Root_Index;
+	  			output += '</td>';		
+	  			
+	  			output += '<td id="Root_Unit" class="tableRow" >';
+	  			output += response[i].Root_Unit;
+	  			output += '</td>';		
+	  			
+	  			output += '<td id="Date" class="tableRow" >';
+	  			output += response[i].Date;
+	  			output += '</td>';
+	  		
+	  		output += '</tr>';
+	  		responseElementCount = responseElementCount + 1;
+	  	}
+	  	document.querySelector('.numberOfWords').innerHTML = responseElementCount + " word(s) have been found.";
+	  	document.querySelector('.tbodyTableWordsFromDB').innerHTML = output;
+	  	document.getElementById("imgWaitScreen").style.visibility = 'hidden';
+	  }).catch(error => console.log(error.stack));
+	}
+
+//FUNCTION TO HIDE THE LOAD SCREEN GIF
+$(document).ready(function() {
+document.getElementById("imgWaitScreen").style.visibility = 'hidden';
+
+//UNCOMMENT IF YOU WANT TO LOAD ALL WORDS WHEN PAGE LOADS
+//callServerAndDisplayServerResponse(SERVER_URL);
+
+//Assigning Enter Press key Event to Word Only Textbox.
+$(USER_INPUT_TYPE_WORD_WORD_ONLY_TEXTBOX_ID_WITH_ENTER).keyup(function(event) {
+	if (event.keyCode === 13) {
+		searchOnlyWordColumnWithEnter();
+		
+	}
+});
+
+//Assigning Enter Press key Event to ALL Textbox.
+$(USER_INPUT_TYPE_ALL_TEXTBOX_ID_WITH_ENTER).keyup(function(event) {
+    if (event.keyCode === 13) {
+    	searchAllColumnsWithEnter();
+    }
+});
 
 
-
+});
 
 
 

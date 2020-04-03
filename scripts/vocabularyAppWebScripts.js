@@ -161,6 +161,7 @@ function callServerAndDisplayServerResponse(serverURL)
 //FUNCTION TO HIDE THE LOAD SCREEN GIF
 $(document).ready(function() {
 document.getElementById("imgWaitScreen").style.visibility = 'hidden';
+clearInputTextFields();
 
 //UNCOMMENT IF YOU WANT TO LOAD ALL WORDS WHEN PAGE LOADS
 //callServerAndDisplayServerResponse(SERVER_URL);
@@ -183,7 +184,17 @@ $(USER_INPUT_TYPE_ALL_TEXTBOX_ID_WITH_ENTER).keyup(function(event) {
 
 });
 
-
+//FUNCTION TO CLEAR TEXTBOXs
+function clearInputTextFields()
+{
+	valueOnLoad = "";
+	
+	$(USER_INPUT_TYPE_WORD_WORD_ONLY_TEXTBOX_ID_WITH_ENTER).val(valueOnLoad);
+	$(USER_INPUT_TYPE_ALL_TEXTBOX_ID_WITH_ENTER).val(valueOnLoad);
+	$(USER_INPUT_TYPE_WORD_WORD_ONLY_TEXTBOX_ID_WITHOUT_ENTER).val(valueOnLoad);
+	$(USER_INPUT_TYPE_ALL_TEXTBOX_ID_WITHOUT_ENTER).val(valueOnLoad);
+	
+}
 
 ////FETCH DATA
 //var serverURL = 'wordlisterServer.php';

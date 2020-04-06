@@ -3,6 +3,11 @@
   text-align: left;
 }
 
+.lettersTypedByUserMagnified #lbllettersTypedByUser {
+	font-size: 100px;
+	padding-left: 25%;
+	padding-right: 25%;
+}
 
 #No {
 	width:1%;

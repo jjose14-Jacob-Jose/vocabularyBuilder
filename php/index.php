@@ -10,24 +10,40 @@
 
 </head>
 <body>
+<!-- USER INPUT AREA START -->
 	<div id="userInput">
 		<label> Meaning : </label>
-		<input type="text" id="<?php echo (TEXTBOX_ID_USER_INPUT_TYPE_WORD_WITH_ENTER); ?>" autofocus placeHolder="<?php echo (MSG_PLACEHOLDER_WORD_WITH_ENTER); ?>" class="txtUserInput">
+		<input type="text" id="<?php echo (TEXTBOX_ID_USER_INPUT_TYPE_WORD_WITH_ENTER); ?>" autofocus placeHolder="<?php echo (MSG_PLACEHOLDER_WORD_WITH_ENTER); ?>" class="txtUserInput" onKeyUp=displayLettersMagnified("<?php echo (TEXTBOX_ID_USER_INPUT_TYPE_WORD_WITH_ENTER); ?>")>
 		<label> All : </label> 
-		<input type="text" id="<?php echo (TEXTBOX_ID_USER_INPUT_TYPE_ALL_WITH_ENTER); ?>" placeHolder="<?php echo (MSG_PLACEHOLDER_WORD_WITH_ENTER); ?>" class="txtUserInput">
+		<input type="text" id="<?php echo (TEXTBOX_ID_USER_INPUT_TYPE_ALL_WITH_ENTER); ?>" placeHolder="<?php echo (MSG_PLACEHOLDER_WORD_WITH_ENTER); ?>" class="txtUserInput" onKeyUp=displayLettersMagnified("<?php echo (TEXTBOX_ID_USER_INPUT_TYPE_ALL_WITH_ENTER); ?>")>
 		
 		<label> Meaning (without Enter): </label>
-		<input type="text" id="<?php echo (TEXTBOX_ID_USER_INPUT_TYPE_WORD_WITHOUT_ENTER); ?>" onKeyUp="searchOnlyWordColumnWithoutEnter()" placeHolder="<?php echo (MSG_PLACEHOLDER_WORD_WITHOUT_ENTER); ?>" class="txtUserInput">
+		<input type="text" id="<?php echo (TEXTBOX_ID_USER_INPUT_TYPE_WORD_WITHOUT_ENTER); ?>" onKeyUp="searchOnlyWordColumnWithoutEnter()" placeHolder="<?php echo (MSG_PLACEHOLDER_WORD_WITHOUT_ENTER); ?>" class="txtUserInput" onKeyUp=displayLettersMagnified("<?php echo (TEXTBOX_ID_USER_INPUT_TYPE_WORD_WITHOUT_ENTER); ?>")>
+		
 		<label> All (without Enter): </label> 
-		<input type="text" id="<?php echo (TEXTBOX_ID_USER_INPUT_TYPE_ALL_WITHOUT_ENTER); ?>" onKeyUp="searchAllColumnsWithoutEnter()" placeHolder="<?php echo (MSG_PLACEHOLDER_WORD_WITHOUT_ENTER); ?>" class="txtUserInput">
+		<input type="text" id="<?php echo (TEXTBOX_ID_USER_INPUT_TYPE_ALL_WITHOUT_ENTER); ?>" onKeyUp="searchAllColumnsWithoutEnter()" placeHolder="<?php echo (MSG_PLACEHOLDER_WORD_WITHOUT_ENTER); ?>" class="txtUserInput" onKeyUp=displayLettersMagnified("<?php echo (TEXTBOX_ID_USER_INPUT_TYPE_ALL_WITHOUT_ENTER); ?>")>
 		
 		
 		<label class="numberOfWords"></label> 
 		
 	</div>
+	
+	<!-- USER INPUT AREA END -->
+	
 	<hr>
-	<div id="divWordsFromDB">
-		<table id="tableWordsFromDB">
+	
+	
+	<!-- SEARCH RESULTS AREA START -->
+	
+	<!-- AREA TO DISPLAY INPUT BY USER IN BIGGER FONT START -->
+	
+	<div class="lettersTypedByUserMagnified" id="lettersTypedByUserMagnified">
+		
+	</div>
+	<!-- AREA TO DISPLAY INPUT BY USER IN BIGGER FONT END -->
+		
+	<div class="divWordsFromDB">
+		<table class="tableWordsFromDB">
 			<thead id="theadTableWordsFromDB" class="theadTableWordsFromDB">
 				<th id="No">No</th>
 				<th id="Word">Word</th>
@@ -39,7 +55,13 @@
 				<th id="Root_Unit">Root Unit</th>
 				<th id="Date">Date</th>
 			</thead>
+		</table>
+	</div>
 			
+
+	
+	<div class="divWordsFromDB">
+			<table class="tableWordsFromDB">
 			<tbody id="tbodyTableWordsFromDB" class="tbodyTableWordsFromDB">
 			</tbody>
 			
@@ -48,9 +70,20 @@
 
 	</div>
 	
+	<!-- SEARCH RESULTS AREA END -->
+	
+	<!-- AREA TO DISPLAY BIGGER FONT DISPLAY SETUP START -->
+	
+	<div class="lettersTypedByUserMagnifiedSetup">
+		<input type="checkbox" id="cbMagnifyLetters"/>
+		<label>Check if you want to magnify the words while you type. </label>
+	</div>
+	<!-- AREA TO DISPLAY BIGGER FONT DISPLAY SETUP END -->
 	
 	
-<!-- 	DISCLAIMER INFORMATION -->
+	
+	
+<!-- 	DISCLAIMER INFORMATION START -->
 	<div>
       <ul style="list-style-type:disc;">
       <li><h3>Help</h3></li>
@@ -73,6 +106,7 @@
 	</ul> 
 	</div>
 	
+<!-- 	DISCLAIMER INFORMATION END -->
 
 </body>
 </html>

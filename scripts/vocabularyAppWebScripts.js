@@ -19,6 +19,19 @@ var USER_INPUT_TYPE_ALL_TEXTBOX_ID_WITH_ENTER = "#" + TEXTBOX_ID_USER_INPUT_TYPE
 var USER_INPUT_TYPE_WORD_WORD_ONLY_TEXTBOX_ID_WITHOUT_ENTER = "#" + TEXTBOX_ID_USER_INPUT_TYPE_WORD_WITHOUT_ENTER;
 var USER_INPUT_TYPE_ALL_TEXTBOX_ID_WITHOUT_ENTER = "#" + TEXTBOX_ID_USER_INPUT_TYPE_ALL_WITHOUT_ENTER;
 
+//CSS ELEMENT SIZES
+TABLECOLUMN_NO_WIDTHPERCENT = 10;
+TABLECOLUMN_WORD_WIDTHPERCENT = 40;
+TABLECOLUMN_MEANING_WIDTHPERCENT = 35;
+TABLECOLUMN_DEFINITION_WIDTHPERCENT = 35;
+TABLECOLUMN_ADDITIONAL_INFO_WIDTHPERCENT = 25;
+TABLECOLUMN_RELEVANT_EXAMPLE_WIDTHPERCENT = 10;
+TABLECOLUMN_ROOT_INDEX_WIDTHPERCENT = 4;
+TABLECOLUMN_ROOT_UNIT_WIDTHPERCENT = 3;
+TABLECOLUMN_DATE_WIDTHPERCENT = 1;
+TABLECOLUMN_TXTUSERINPUT_WIDTHPERCENT = 55;
+ENTRIES_TO_BE_DISPLAYED_WITH_NEW_LINE= 20;
+
 
 
 
@@ -153,8 +166,18 @@ function callServerAndDisplayServerResponse(serverURL)
 	  		responseElementCount = responseElementCount + 1;
 	  	}
 	  	document.querySelector('.numberOfWords').innerHTML = responseElementCount + " word(s) have been found.";
+		
+		//FUCNTION TO REPLACE NEW LINE WITH <br> SO THAT HTML DISPLAYS IT AS A NEW LINE WITH A CHECK TO REDUCE OVERHEAD
+		if(responseElementCount<ENTRIES_TO_BE_DISPLAYED_WITH_NEW_LINE)
+		{
+			output = output.replace(/(?:\r\n|\r|\n)/g, '<br>');
+		}
+		
+		
 	  	document.querySelector('.tbodyTableWordsFromDB').innerHTML = output;
 	  	document.getElementById("imgWaitScreen").style.visibility = 'hidden';
+		setElementWidthAccordingToScreenSize();
+
 	  }).catch(error => console.log(error.stack));
 	}
 
@@ -196,6 +219,31 @@ function clearInputTextFields()
 	
 }
 
+//FUNCTION TO SET WIDTH TO SCREEN ELEMENTS BASED ON SCREEN WIDTH
+function setElementWidthAccordingToScreenSize()
+{
+	
+	
+	var screenWidth = screen.width;
+	var screenWidthDecimalMultiplier = screenWidth / 100;
+	
+	 document.getElementById("No").style.maxWidth = TABLECOLUMN_NO_WIDTHPERCENT * screenWidthDecimalMultiplier; 
+	 document.getElementById("Word").style.maxWidth = TABLECOLUMN_WORD_WIDTHPERCENT * screenWidthDecimalMultiplier; 
+	 
+	 document.getElementById("Meaning").style.maxWidth = TABLECOLUMN_MEANING_WIDTHPERCENT * screenWidthDecimalMultiplier; 
+	 document.getElementById("Definition").style.maxWidth = TABLECOLUMN_DEFINITION_WIDTHPERCENT * screenWidthDecimalMultiplier; 
+	 document.getElementById("Additional_Info").style.maxWidth = TABLECOLUMN_ADDITIONAL_INFO_WIDTHPERCENT * screenWidthDecimalMultiplier; 
+	 document.getElementById("Root_Index").style.maxWidth = TABLECOLUMN_ROOT_INDEX_WIDTHPERCENT * screenWidthDecimalMultiplier; 
+	 document.getElementById("Root_Unit").style.maxWidth = TABLECOLUMN_ROOT_UNIT_WIDTHPERCENT * screenWidthDecimalMultiplier; 
+	 document.getElementById("Date").style.maxWidth = TABLECOLUMN_DATE_WIDTHPERCENT * screenWidthDecimalMultiplier; 
+	 
+	 document.getElementById(USER_INPUT_TYPE_WORD_WORD_ONLY_TEXTBOX_ID_WITH_ENTER).style.width = tableColumn_txtUserInput_WidthPercent * screenWidthDecimalMultiplier; 
+	 document.getElementById(USER_INPUT_TYPE_ALL_TEXTBOX_ID_WITH_ENTER).style.width = tableColumn_txtUserInput_WidthPercent * screenWidthDecimalMultiplier; 
+	 document.getElementById(USER_INPUT_TYPE_WORD_WORD_ONLY_TEXTBOX_ID_WITHOUT_ENTER).style.width = tableColumn_txtUserInput_WidthPercent * screenWidthDecimalMultiplier; 
+	 document.getElementById(USER_INPUT_TYPE_ALL_TEXTBOX_ID_WITHOUT_ENTER).style.width = tableColumn_txtUserInput_WidthPercent * screenWidthDecimalMultiplier; 
+	 
+	
+}
 ////FETCH DATA
 //var serverURL = 'wordlisterServer.php';
 ////fetch('wordListerServer.php').then((res) => res.json())

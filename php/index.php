@@ -13,9 +13,9 @@
 <!-- USER INPUT AREA START -->
 	<div id="userInput">
 		<label> Meaning : </label>
-		<input type="text" id="<?php echo (TEXTBOX_ID_USER_INPUT_TYPE_WORD_WITH_ENTER); ?>" autofocus placeHolder="<?php echo (MSG_PLACEHOLDER_WORD_WITH_ENTER); ?>" class="txtUserInput" onKeyUp=displayLettersMagnified("<?php echo (TEXTBOX_ID_USER_INPUT_TYPE_WORD_WITH_ENTER); ?>")>
+		<input type="text" id="<?php echo (TEXTBOX_ID_USER_INPUT_TYPE_WORD_WITH_ENTER); ?>" autofocus placeHolder="<?php echo (MSG_PLACEHOLDER_WORD_WITH_ENTER); ?>" class="txtUserInput" onKeyUp=displayLettersMagnified("<?php echo (TEXTBOX_ID_USER_INPUT_TYPE_WORD_WITH_ENTER); ?>") onclick=clearTextBoxContents("<?php echo (TEXTBOX_ID_USER_INPUT_TYPE_WORD_WITH_ENTER); ?>")>
 		<label> All : </label> 
-		<input type="text" id="<?php echo (TEXTBOX_ID_USER_INPUT_TYPE_ALL_WITH_ENTER); ?>" placeHolder="<?php echo (MSG_PLACEHOLDER_WORD_WITH_ENTER); ?>" class="txtUserInput" onKeyUp=displayLettersMagnified("<?php echo (TEXTBOX_ID_USER_INPUT_TYPE_ALL_WITH_ENTER); ?>")>
+		<input type="text" id="<?php echo (TEXTBOX_ID_USER_INPUT_TYPE_ALL_WITH_ENTER); ?>" placeHolder="<?php echo (MSG_PLACEHOLDER_WORD_WITH_ENTER); ?>" class="txtUserInput" onKeyUp=displayLettersMagnified("<?php echo (TEXTBOX_ID_USER_INPUT_TYPE_ALL_WITH_ENTER); ?>") onclick=clearTextBoxContents("<?php echo (TEXTBOX_ID_USER_INPUT_TYPE_ALL_WITH_ENTER); ?>")>
 		
 		<label> Meaning (without Enter): </label>
 		<input type="text" id="<?php echo (TEXTBOX_ID_USER_INPUT_TYPE_WORD_WITHOUT_ENTER); ?>" onKeyUp="searchOnlyWordColumnWithoutEnter()" placeHolder="<?php echo (MSG_PLACEHOLDER_WORD_WITHOUT_ENTER); ?>" class="txtUserInput" onKeyUp=displayLettersMagnified("<?php echo (TEXTBOX_ID_USER_INPUT_TYPE_WORD_WITHOUT_ENTER); ?>")>
@@ -43,7 +43,7 @@
 	<!-- AREA TO DISPLAY INPUT BY USER IN BIGGER FONT END -->
 		
 	<div class="divWordsFromDB">
-		<table class="tableWordsFromDB">
+		<table id="tableWordsFromDB">
 			<thead id="theadTableWordsFromDB" class="theadTableWordsFromDB">
 				<th id="No">No</th>
 				<th id="Word">Word</th>
@@ -55,17 +55,19 @@
 				<th id="Root_Unit">Root Unit</th>
 				<th id="Date">Date</th>
 			</thead>
-		</table>
+		<!-- </table>
 	</div>
 			
 
 	
 	<div class="divWordsFromDB">
-			<table class="tableWordsFromDB">
+			<table id="tableWordsFromDB">
+			-->
 			<tbody id="tbodyTableWordsFromDB" class="tbodyTableWordsFromDB">
 			</tbody>
 			
 		</table>
+		</div>
 		<img  id="imgWaitScreen" src="../images/loading-gif-1.gif" alt="Please wait" height="50%"/>
 
 	</div>
@@ -77,7 +79,14 @@
 	<div class="lettersTypedByUserMagnifiedSetup">
 		<input type="checkbox" id="cbMagnifyLetters"/>
 		<label>Check if you want to magnify the words while you type. </label>
+	</div>	
+	
+	<div class="selectTextBoxContentsOnClick">
+		<input type="checkbox" id="cbSelectTextboxOnFocus"/>
+		<label>Check if you want to select the contents of a text box on focux. </label>
 	</div>
+	
+	
 	<!-- AREA TO DISPLAY BIGGER FONT DISPLAY SETUP END -->
 	
 	

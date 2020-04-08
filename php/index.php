@@ -78,12 +78,12 @@
 	
 	<div class="lettersTypedByUserMagnifiedSetup">
 		<input type="checkbox" id="cbMagnifyLetters"/>
-		<label>Check if you want to magnify the words while you type. </label>
+		<label for="cbMagnifyLetters">Check if you want to magnify the words while you type. </label>
 	</div>	
 	
 	<div class="selectTextBoxContentsOnClick">
 		<input type="checkbox" id="cbSelectTextboxOnFocus"/>
-		<label>Check if you want to select the contents of a text box on focux. </label>
+		<label for="cbSelectTextboxOnFocus">Check if you want to select the contents of a text box on focux. </label>
 	</div>
 	
 	

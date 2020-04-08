@@ -18,10 +18,10 @@
 		<input type="text" id="<?php echo (TEXTBOX_ID_USER_INPUT_TYPE_ALL_WITH_ENTER); ?>" placeHolder="<?php echo (MSG_PLACEHOLDER_WORD_WITH_ENTER); ?>" class="txtUserInput" onKeyUp=displayLettersMagnified("<?php echo (TEXTBOX_ID_USER_INPUT_TYPE_ALL_WITH_ENTER); ?>") onclick=clearTextBoxContents("<?php echo (TEXTBOX_ID_USER_INPUT_TYPE_ALL_WITH_ENTER); ?>")>
 		
 		<label> Meaning (without Enter): </label>
-		<input type="text" id="<?php echo (TEXTBOX_ID_USER_INPUT_TYPE_WORD_WITHOUT_ENTER); ?>" onKeyUp="searchOnlyWordColumnWithoutEnter()" placeHolder="<?php echo (MSG_PLACEHOLDER_WORD_WITHOUT_ENTER); ?>" class="txtUserInput" onKeyUp=displayLettersMagnified("<?php echo (TEXTBOX_ID_USER_INPUT_TYPE_WORD_WITHOUT_ENTER); ?>")>
+		<input type="text" id="<?php echo (TEXTBOX_ID_USER_INPUT_TYPE_WORD_WITHOUT_ENTER); ?>" onKeyUp="searchOnlyWordColumnWithoutEnter()" placeHolder="<?php echo (MSG_PLACEHOLDER_WORD_WITHOUT_ENTER); ?>" class="txtUserInput" onKeyUp=displayLettersMagnified("<?php echo (TEXTBOX_ID_USER_INPUT_TYPE_WORD_WITHOUT_ENTER); ?>") onclick=clearTextBoxContents("<?php echo (TEXTBOX_ID_USER_INPUT_TYPE_WORD_WITHOUT_ENTER); ?>")>
 		
 		<label> All (without Enter): </label> 
-		<input type="text" id="<?php echo (TEXTBOX_ID_USER_INPUT_TYPE_ALL_WITHOUT_ENTER); ?>" onKeyUp="searchAllColumnsWithoutEnter()" placeHolder="<?php echo (MSG_PLACEHOLDER_WORD_WITHOUT_ENTER); ?>" class="txtUserInput" onKeyUp=displayLettersMagnified("<?php echo (TEXTBOX_ID_USER_INPUT_TYPE_ALL_WITHOUT_ENTER); ?>")>
+		<input type="text" id="<?php echo (TEXTBOX_ID_USER_INPUT_TYPE_ALL_WITHOUT_ENTER); ?>" onKeyUp="searchAllColumnsWithoutEnter()" placeHolder="<?php echo (MSG_PLACEHOLDER_WORD_WITHOUT_ENTER); ?>" class="txtUserInput" onKeyUp=displayLettersMagnified("<?php echo (TEXTBOX_ID_USER_INPUT_TYPE_ALL_WITHOUT_ENTER); ?>") onclick=clearTextBoxContents("<?php echo (TEXTBOX_ID_USER_INPUT_TYPE_ALL_WITHOUT_ENTER); ?>")>
 		
 		
 		<label class="numberOfWords"></label> 

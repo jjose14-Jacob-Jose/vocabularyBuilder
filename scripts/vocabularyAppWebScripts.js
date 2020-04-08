@@ -10,28 +10,30 @@ var ENTER_KEY_HAS_TO_BE_PRESSED_RB_VALUE = "EnterKeyNeedNotBePressed";
 var ENTER_KEY_NEED_NOT_HAS_TO_BE_PRESSED_RB_VALUE = "Searching EnterKeyNeedNotBePressed the word, please wait.";
 var LABEL_MAGNIFY_USER_INPUT_LETTERS = "lbllettersTypedByUser";
 var CB_MAGNIFY_USER_INPUT_LETTERS = "cbMagnifyLetters";
-
+var CB_SELECT_ALL_TEXT_BOX_LETTERS_ON_FOCUS = "cbSelectTextboxOnFocus";
+var SYMBOL_HASH = "#";
 
 //OTHER CONSTANTS
 var SERVER_URL = "vocabularyAppWebServer.php";
 
 //INDEX.PHP TEXTBOX IDs
-var USER_INPUT_TYPE_WORD_WORD_ONLY_TEXTBOX_ID_WITH_ENTER = "#" + TEXTBOX_ID_USER_INPUT_TYPE_WORD_WITH_ENTER;
-var USER_INPUT_TYPE_ALL_TEXTBOX_ID_WITH_ENTER = "#" + TEXTBOX_ID_USER_INPUT_TYPE_ALL_WITH_ENTER;
-var USER_INPUT_TYPE_WORD_WORD_ONLY_TEXTBOX_ID_WITHOUT_ENTER = "#" + TEXTBOX_ID_USER_INPUT_TYPE_WORD_WITHOUT_ENTER;
-var USER_INPUT_TYPE_ALL_TEXTBOX_ID_WITHOUT_ENTER = "#" + TEXTBOX_ID_USER_INPUT_TYPE_ALL_WITHOUT_ENTER;
-var LABEL_MAGNIFY_USER_INPUT_LETTERS_ID = "#" + LABEL_MAGNIFY_USER_INPUT_LETTERS;
-var CB_MAGNIFY_USER_INPUT_LETTERS_ID = "#" + CB_MAGNIFY_USER_INPUT_LETTERS;
+var USER_INPUT_TYPE_WORD_WORD_ONLY_TEXTBOX_ID_WITH_ENTER = SYMBOL_HASH + TEXTBOX_ID_USER_INPUT_TYPE_WORD_WITH_ENTER;
+var USER_INPUT_TYPE_ALL_TEXTBOX_ID_WITH_ENTER = SYMBOL_HASH + TEXTBOX_ID_USER_INPUT_TYPE_ALL_WITH_ENTER;
+var USER_INPUT_TYPE_WORD_WORD_ONLY_TEXTBOX_ID_WITHOUT_ENTER = SYMBOL_HASH + TEXTBOX_ID_USER_INPUT_TYPE_WORD_WITHOUT_ENTER;
+var USER_INPUT_TYPE_ALL_TEXTBOX_ID_WITHOUT_ENTER = SYMBOL_HASH + TEXTBOX_ID_USER_INPUT_TYPE_ALL_WITHOUT_ENTER;
+var LABEL_MAGNIFY_USER_INPUT_LETTERS_ID = SYMBOL_HASH + LABEL_MAGNIFY_USER_INPUT_LETTERS;
+var CB_MAGNIFY_USER_INPUT_LETTERS_ID = SYMBOL_HASH + CB_MAGNIFY_USER_INPUT_LETTERS;
+var CB_SELECT_ALL_TEXT_BOX_LETTERS_ON_FOCUS_ID = SYMBOL_HASH + CB_SELECT_ALL_TEXT_BOX_LETTERS_ON_FOCUS;
 
 //CSS ELEMENT SIZES
-TABLECOLUMN_NO_WIDTHPERCENT = 10;
-TABLECOLUMN_WORD_WIDTHPERCENT = 40;
-TABLECOLUMN_MEANING_WIDTHPERCENT = 35;
-TABLECOLUMN_DEFINITION_WIDTHPERCENT = 35;
-TABLECOLUMN_ADDITIONAL_INFO_WIDTHPERCENT = 25;
-TABLECOLUMN_RELEVANT_EXAMPLE_WIDTHPERCENT = 10;
-TABLECOLUMN_ROOT_INDEX_WIDTHPERCENT = 4;
-TABLECOLUMN_ROOT_UNIT_WIDTHPERCENT = 3;
+TABLECOLUMN_NO_WIDTHPERCENT = 1;
+TABLECOLUMN_WORD_WIDTHPERCENT = 10;
+TABLECOLUMN_MEANING_WIDTHPERCENT = 17;
+TABLECOLUMN_DEFINITION_WIDTHPERCENT = 51;
+TABLECOLUMN_ADDITIONAL_INFO_WIDTHPERCENT = 16;
+TABLECOLUMN_RELEVANT_EXAMPLE_WIDTHPERCENT = 5;
+TABLECOLUMN_ROOT_INDEX_WIDTHPERCENT = 1;
+TABLECOLUMN_ROOT_UNIT_WIDTHPERCENT = 1;
 TABLECOLUMN_DATE_WIDTHPERCENT = 1;
 TABLECOLUMN_TXTUSERINPUT_WIDTHPERCENT = 55;
 ENTRIES_TO_BE_DISPLAYED_WITH_NEW_LINE= 20;
@@ -58,6 +60,7 @@ function searchOnlyWordColumnWithEnter(){
 	
 	callServerAndDisplayServerResponse(serverURL);
 	clearMagnifiedWords();
+	clearTextBoxContents(USER_INPUT_TYPE_WORD_WORD_ONLY_TEXTBOX_ID_WITH_ENTER);
 };
 
 
@@ -77,6 +80,8 @@ function searchAllColumnsWithEnter() {
 	}
 	callServerAndDisplayServerResponse(serverURL);
 	clearMagnifiedWords();
+	clearTextBoxContents(USER_INPUT_TYPE_ALL_TEXTBOX_ID_WITH_ENTER);
+
 	
 	
 };
@@ -235,15 +240,24 @@ function setElementWidthAccordingToScreenSize()
 	var screenWidth = screen.width;
 	var screenWidthDecimalMultiplier = screenWidth / 100;
 	
+	 document.getElementById("No").style.width = TABLECOLUMN_NO_WIDTHPERCENT * screenWidthDecimalMultiplier; 
+	 document.getElementById("Word").style.width = TABLECOLUMN_WORD_WIDTHPERCENT * screenWidthDecimalMultiplier; 
+	 document.getElementById("Meaning").style.width = TABLECOLUMN_MEANING_WIDTHPERCENT * screenWidthDecimalMultiplier; 
+	 document.getElementById("Definition").style.width = TABLECOLUMN_DEFINITION_WIDTHPERCENT * screenWidthDecimalMultiplier; 
+	 document.getElementById("Additional_Info").style.width = TABLECOLUMN_ADDITIONAL_INFO_WIDTHPERCENT * screenWidthDecimalMultiplier; 
+	 document.getElementById("Root_Index").style.width = TABLECOLUMN_ROOT_INDEX_WIDTHPERCENT * screenWidthDecimalMultiplier; 
+	 document.getElementById("Root_Unit").style.width = TABLECOLUMN_ROOT_UNIT_WIDTHPERCENT * screenWidthDecimalMultiplier; 
+	 document.getElementById("Date").style.width = TABLECOLUMN_DATE_WIDTHPERCENT * screenWidthDecimalMultiplier; 	 
+	 
 	 document.getElementById("No").style.maxWidth = TABLECOLUMN_NO_WIDTHPERCENT * screenWidthDecimalMultiplier; 
 	 document.getElementById("Word").style.maxWidth = TABLECOLUMN_WORD_WIDTHPERCENT * screenWidthDecimalMultiplier; 
-	 
 	 document.getElementById("Meaning").style.maxWidth = TABLECOLUMN_MEANING_WIDTHPERCENT * screenWidthDecimalMultiplier; 
 	 document.getElementById("Definition").style.maxWidth = TABLECOLUMN_DEFINITION_WIDTHPERCENT * screenWidthDecimalMultiplier; 
 	 document.getElementById("Additional_Info").style.maxWidth = TABLECOLUMN_ADDITIONAL_INFO_WIDTHPERCENT * screenWidthDecimalMultiplier; 
 	 document.getElementById("Root_Index").style.maxWidth = TABLECOLUMN_ROOT_INDEX_WIDTHPERCENT * screenWidthDecimalMultiplier; 
 	 document.getElementById("Root_Unit").style.maxWidth = TABLECOLUMN_ROOT_UNIT_WIDTHPERCENT * screenWidthDecimalMultiplier; 
 	 document.getElementById("Date").style.maxWidth = TABLECOLUMN_DATE_WIDTHPERCENT * screenWidthDecimalMultiplier; 
+	 
 	 
 	 document.getElementById(USER_INPUT_TYPE_WORD_WORD_ONLY_TEXTBOX_ID_WITH_ENTER).style.width = tableColumn_txtUserInput_WidthPercent * screenWidthDecimalMultiplier; 
 	 document.getElementById(USER_INPUT_TYPE_ALL_TEXTBOX_ID_WITH_ENTER).style.width = tableColumn_txtUserInput_WidthPercent * screenWidthDecimalMultiplier; 
@@ -255,13 +269,16 @@ function setElementWidthAccordingToScreenSize()
 //FUNCTION TO DISPLAY THE WORDS INPUT BY USER MAGNIFIED BELOW
 function displayLettersMagnified(inputTextBoxId)
 {
-	var textFieldContents = $("#" + inputTextBoxId).val()
+	var textFieldContents = $(SYMBOL_HASH + inputTextBoxId).val()
 	
 	if($(CB_MAGNIFY_USER_INPUT_LETTERS_ID).is(":checked")) {
 		
 		var magnifiedLetters = "<label id=\"lbllettersTypedByUser\" >" + textFieldContents + "</label>";
 		document.querySelector("#lettersTypedByUserMagnified").innerHTML = magnifiedLetters;
 	}
+	
+	if(textFieldContents.length === 0)
+		clearMagnifiedWords();
 }	
 
 //FUNCTION CLEAR THE MAGNIFIED WORDS
@@ -270,6 +287,22 @@ function clearMagnifiedWords()
 	document.querySelector("#lbllettersTypedByUser").remove();
 	
 }
+
+//FUNCTION TO SELECT ALL TEXTBOX CONTENTS 
+function clearTextBoxContents(textBoxID)
+{
+	if($(CB_SELECT_ALL_TEXT_BOX_LETTERS_ON_FOCUS_ID).is(":checked")) {
+		
+		//Adding # if the textbox ID passed does not have a # at its front
+		if(textBoxID.charAt(0) !== SYMBOL_HASH)
+			textBoxID = SYMBOL_HASH + textBoxID;
+		
+		
+		document.querySelector(textBoxID).select();
+	}
+		
+}
+
 
 ////FETCH DATA
 //var serverURL = 'wordlisterServer.php';

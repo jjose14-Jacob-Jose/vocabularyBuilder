@@ -9,4 +9,11 @@
 	border-bottom: 1px solid #000000;  	
 }
 
+.lettersTypedByUserMagnified #lbllettersTypedByUser {
+	font-size: 100px;
+	padding-left: 25%;
+	padding-right: 25%;
+}
+
+
 

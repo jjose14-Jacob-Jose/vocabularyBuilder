@@ -8,6 +8,8 @@ var USER_INPUT_TYPE = "userInputType";
 var MSG_PLEASE_WAIT = "Searching for the word, please wait.";
 var ENTER_KEY_HAS_TO_BE_PRESSED_RB_VALUE = "EnterKeyNeedNotBePressed";
 var ENTER_KEY_NEED_NOT_HAS_TO_BE_PRESSED_RB_VALUE = "Searching EnterKeyNeedNotBePressed the word, please wait.";
+var LABEL_MAGNIFY_USER_INPUT_LETTERS = "lbllettersTypedByUser";
+var CB_MAGNIFY_USER_INPUT_LETTERS = "cbMagnifyLetters";
 
 
 //OTHER CONSTANTS
@@ -18,6 +20,8 @@ var USER_INPUT_TYPE_WORD_WORD_ONLY_TEXTBOX_ID_WITH_ENTER = "#" + TEXTBOX_ID_USER
 var USER_INPUT_TYPE_ALL_TEXTBOX_ID_WITH_ENTER = "#" + TEXTBOX_ID_USER_INPUT_TYPE_ALL_WITH_ENTER;
 var USER_INPUT_TYPE_WORD_WORD_ONLY_TEXTBOX_ID_WITHOUT_ENTER = "#" + TEXTBOX_ID_USER_INPUT_TYPE_WORD_WITHOUT_ENTER;
 var USER_INPUT_TYPE_ALL_TEXTBOX_ID_WITHOUT_ENTER = "#" + TEXTBOX_ID_USER_INPUT_TYPE_ALL_WITHOUT_ENTER;
+var LABEL_MAGNIFY_USER_INPUT_LETTERS_ID = "#" + LABEL_MAGNIFY_USER_INPUT_LETTERS;
+var CB_MAGNIFY_USER_INPUT_LETTERS_ID = "#" + CB_MAGNIFY_USER_INPUT_LETTERS;
 
 //CSS ELEMENT SIZES
 TABLECOLUMN_NO_WIDTHPERCENT = 10;
@@ -53,6 +57,7 @@ function searchOnlyWordColumnWithEnter(){
 	}
 	
 	callServerAndDisplayServerResponse(serverURL);
+	clearMagnifiedWords();
 };
 
 
@@ -71,6 +76,7 @@ function searchAllColumnsWithEnter() {
 		serverURL = serverURL + userInputType + userInputValue;
 	}
 	callServerAndDisplayServerResponse(serverURL);
+	clearMagnifiedWords();
 	
 	
 };
@@ -91,6 +97,7 @@ function searchOnlyWordColumnWithoutEnter(){
 		  }
 
 		  callServerAndDisplayServerResponse(serverURL);
+		  clearMagnifiedWords();
 	};
 
 
@@ -109,6 +116,7 @@ function searchAllColumnsWithoutEnter() {
 			  serverURL = serverURL + userInputType + userInputValue;
 		  }
 		  callServerAndDisplayServerResponse(serverURL);
+		  clearMagnifiedWords();
 
 
 	};
@@ -244,6 +252,25 @@ function setElementWidthAccordingToScreenSize()
 	 
 	
 }
+//FUNCTION TO DISPLAY THE WORDS INPUT BY USER MAGNIFIED BELOW
+function displayLettersMagnified(inputTextBoxId)
+{
+	var textFieldContents = $("#" + inputTextBoxId).val()
+	
+	if($(CB_MAGNIFY_USER_INPUT_LETTERS_ID).is(":checked")) {
+		
+		var magnifiedLetters = "<label id=\"lbllettersTypedByUser\" >" + textFieldContents + "</label>";
+		document.querySelector("#lettersTypedByUserMagnified").innerHTML = magnifiedLetters;
+	}
+}	
+
+//FUNCTION CLEAR THE MAGNIFIED WORDS
+function clearMagnifiedWords()
+{
+	document.querySelector("#lbllettersTypedByUser").remove();
+	
+}
+
 ////FETCH DATA
 //var serverURL = 'wordlisterServer.php';
 ////fetch('wordListerServer.php').then((res) => res.json())

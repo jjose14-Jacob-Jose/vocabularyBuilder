@@ -76,19 +76,85 @@
 	
 	<!-- AREA TO DISPLAY BIGGER FONT DISPLAY SETUP START -->
 	
-	<div class="lettersTypedByUserMagnifiedSetup">
-		<input type="checkbox" id="cbMagnifyLetters"/>
-		<label for="cbMagnifyLetters">Check if you want to magnify the words while you type. </label>
-	</div>	
-	
-	<div class="selectTextBoxContentsOnClick">
-		<input type="checkbox" id="cbSelectTextboxOnFocus"/>
-		<label for="cbSelectTextboxOnFocus">Check if you want to select the contents of a text box on focux. </label>
+	<div class="divConfigurationSection">
+	<h3> Configuration </h3>
+		<ol>
+			<li>
+			<label for="cbMagnifyLetters">
+				<input type="checkbox" id="cbMagnifyLetters"/>
+				Check if you want to magnify the words while you type. 
+			</label>
+			</li>
+			
+			<li>
+			<label for="cbSelectTextboxOnFocus">
+				<input type="checkbox" id="cbSelectTextboxOnFocus"/>
+				Check if you want to select the contents of a text box on focus. 
+			</label>
+			</li>
+		
+			<li>
+			<label for="cbsearchExternalSourcesIfNotFoundInYourOwnDB">
+				<input type="checkbox" id="cbsearchExternalSourcesIfNotFoundInYourOwnDB"/>
+				Check if you want to search results of words ONLY if they are not found in your own list. 
+			</label>
+			</li>			
+			
+			<li>
+			<label for="cbsearchMerriamWebsterDictionary">
+				<input type="checkbox" id="cbsearchMerriamWebsterDictionary"/>
+				Check if you want to display the results on Merriam Webster Dictionary on a new tab. 
+			</label>
+			</li>
+			
+			<li>
+			<label for="cbsearchMerriamWebsterThesaurus">
+				<input type="checkbox" id="cbsearchMerriamWebsterThesaurus"/>
+				Check if you want to display the results on Merriam Webster Thesaurus on a new tab.  
+			</label>
+			</li>
+			
+			<li>
+			<label for="cbsearchOlamDictionary">
+				<input type="checkbox" id="cbsearchOlamDictionary"/>
+				Check if you want to display the results on Olam (English to Malayalam) Dictionary on a new tab.  
+			</label>	
+			</li>
+			
+			<li>
+			<label for="cbsearchGoogle">
+				<input type="checkbox" id="cbsearchGoogle"/>
+				Check if you want to display the results on Google Search on a new tab.  
+			</label>
+			</li>
+			
+			<li>
+			<label for="cbsearchGoogleImages">
+				<input type="checkbox" id="cbsearchGoogleImages"/>
+				Check if you want to display the results on Google Images on a new tab.  
+			</label>
+			</li>
+			
+			<li>
+			<label for="cbsearchYouTube">
+				<input type="checkbox" id="cbsearchYouTube"/>
+				Check if you want to display the results on YouTube on a new tab.  
+			</label>
+			</li>
+		
+		</ol>
+		
+		
 	</div>
 	
 	
 	<!-- AREA TO DISPLAY BIGGER FONT DISPLAY SETUP END -->
 	
+	<!-- AREA TO DISPLAY SEARCH RESULTS FROM MERRIAM-WEBSTER DICTIONARY START -->
+	<div class="searchResultsFromOtherSites" id="searchResultsFromOtherSitesMWDictionary">
+		
+	</div>
+	<!-- AREA TO DISPLAY SEARCH RESULTS FROM MERRIAM-WEBSTER DICTIONARY END -->
 	
 	
 	

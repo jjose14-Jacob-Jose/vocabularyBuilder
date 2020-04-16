@@ -28,7 +28,7 @@ else {
     $query = "SELECT * FROM allwords WHERE 1";
     
 	//UNCOMMENT FOLLOWING LINE AFTER TESTING
-	//$query = "SELECT * FROM allwords WHERE 1 LIMIT 100";
+	$query = "SELECT * FROM allwords WHERE 1 LIMIT 100";
 	
 	
     $sql = mysqli_query($conn, $query);

@@ -15,5 +15,11 @@
 	padding-right: 25%;
 }
 
+.divConfigurationSection label {
+	display:block;
+	clear:both;
+}
+
+
 
 

@@ -11,7 +11,16 @@ var ENTER_KEY_NEED_NOT_HAS_TO_BE_PRESSED_RB_VALUE = "Searching EnterKeyNeedNotBe
 var LABEL_MAGNIFY_USER_INPUT_LETTERS = "lbllettersTypedByUser";
 var CB_MAGNIFY_USER_INPUT_LETTERS = "cbMagnifyLetters";
 var CB_SELECT_ALL_TEXT_BOX_LETTERS_ON_FOCUS = "cbSelectTextboxOnFocus";
+var CB_SHOW_SEARCH_RESULTS_FROM_MERRIAM_WEBSTER_DICTIONARY = "cbsearchMerriamWebsterDictionary";
+var CB_SHOW_SEARCH_RESULTS_FROM_MERRIAM_WEBSTER_THESAURUS = "cbsearchMerriamWebsterThesaurus";
+var CB_SHOW_SEARCH_RESULTS_FROM_OLAM_DICTIONARY = "cbsearchOlamDictionary";
+var CB_SHOW_SEARCH_RESULTS_FROM_GOOGLE_SEARCH = "cbsearchGoogle";
+var CB_SHOW_SEARCH_RESULTS_FROM_GOOGLE_IMAGES = "cbsearchGoogleImages";
+var CB_SHOW_SEARCH_RESULTS_FROM_YOUTUBE = "cbsearchYouTube";
+var CB_SEARCH_ONLY_IF_WORDS_ARE_NOT_IN_OWN_LIST = "cbsearchExternalSourcesIfNotFoundInYourOwnDB";
+
 var SYMBOL_HASH = "#";
+var SYMBOL_PLUS = "+";
 
 //OTHER CONSTANTS
 var SERVER_URL = "vocabularyAppWebServer.php";
@@ -24,6 +33,13 @@ var USER_INPUT_TYPE_ALL_TEXTBOX_ID_WITHOUT_ENTER = SYMBOL_HASH + TEXTBOX_ID_USER
 var LABEL_MAGNIFY_USER_INPUT_LETTERS_ID = SYMBOL_HASH + LABEL_MAGNIFY_USER_INPUT_LETTERS;
 var CB_MAGNIFY_USER_INPUT_LETTERS_ID = SYMBOL_HASH + CB_MAGNIFY_USER_INPUT_LETTERS;
 var CB_SELECT_ALL_TEXT_BOX_LETTERS_ON_FOCUS_ID = SYMBOL_HASH + CB_SELECT_ALL_TEXT_BOX_LETTERS_ON_FOCUS;
+var CB_SHOW_SEARCH_RESULTS_FROM_MERRIAM_WEBSTER_DICTIONARY_ID = SYMBOL_HASH + CB_SHOW_SEARCH_RESULTS_FROM_MERRIAM_WEBSTER_DICTIONARY;
+var CB_SHOW_SEARCH_RESULTS_FROM_MERRIAM_WEBSTER_THESAURUS_ID = SYMBOL_HASH + CB_SHOW_SEARCH_RESULTS_FROM_MERRIAM_WEBSTER_THESAURUS;
+var CB_SHOW_SEARCH_RESULTS_FROM_OLAM_DICTIONARY_ID = SYMBOL_HASH + CB_SHOW_SEARCH_RESULTS_FROM_OLAM_DICTIONARY;
+var CB_SHOW_SEARCH_RESULTS_FROM_GOOGLE_SEARCH_ID = SYMBOL_HASH + CB_SHOW_SEARCH_RESULTS_FROM_GOOGLE_SEARCH;
+var CB_SHOW_SEARCH_RESULTS_FROM_GOOGLE_IMAGES_ID = SYMBOL_HASH + CB_SHOW_SEARCH_RESULTS_FROM_GOOGLE_IMAGES;
+var CB_SHOW_SEARCH_RESULTS_FROM_YOUTUBE_ID = SYMBOL_HASH + CB_SHOW_SEARCH_RESULTS_FROM_YOUTUBE;
+var CB_SEARCH_ONLY_IF_WORDS_ARE_NOT_IN_OWN_LIST_ID = SYMBOL_HASH + CB_SEARCH_ONLY_IF_WORDS_ARE_NOT_IN_OWN_LIST;
 
 //CSS ELEMENT SIZES
 TABLECOLUMN_NO_WIDTHPERCENT = 1;
@@ -39,7 +55,23 @@ TABLECOLUMN_TXTUSERINPUT_WIDTHPERCENT = 55;
 ENTRIES_TO_BE_DISPLAYED_WITH_NEW_LINE= 20;
 
 
+//URLs OF MERRIAM-WEBSTER AND OLAM
+var URL_MERRIAM_WEBSTER_DICTIONARY = "https://www.merriam-webster.com/dictionary/";
+var URL_MERRIAM_WEBSTER_THESAURUS = "https://www.merriam-webster.com/thesaurus/";
+var URL_OLAM_DICTIONARY = "https://olam.in/Dictionary/en_ml/";
+var URL_GOOGLE_SEARCH = "https://www.google.com/search?q=";
+var URL_GOOGLE_IMAGES = "https://www.google.com/search?tbm=isch&q=";
+var URL_YOUTUBE = "https://www.youtube.com/results?search_query=";
 
+//TABS FOR LOADING DIFFERENT PAGES
+var tabMerriamWebsterDictionary;
+var tabMerriamWebsterThesaurus;
+var tabOlam;
+var tabGoogleSearch;
+var tabGoogleImages;
+var tabYoutube;
+
+var matchingWordsInOwnList;
 
 
 //FETCHING FROM DB (WORDS ONLY) FROM USER INPUT
@@ -54,13 +86,15 @@ function searchOnlyWordColumnWithEnter(){
 	{
 //			  IF THE USER HAS INPUT A WORD THEN DISPLAY ONLY WORDS HAVING USER INPUT
 		userInputType = "/?" + USER_INPUT_TYPE + "=" + userInputType;
-		userInputValue = "&" + USER_INPUT_VALUE + "=" + userInputValue;
-		serverURL = serverURL + userInputType + userInputValue;
+		var userInputValueInURLFormat = "&" + USER_INPUT_VALUE + "=" + userInputValue;
+		serverURL = serverURL + userInputType + userInputValueInURLFormat;
 	}
 	
 	callServerAndDisplayServerResponse(serverURL);
 	clearMagnifiedWords();
 	clearTextBoxContents(USER_INPUT_TYPE_WORD_WORD_ONLY_TEXTBOX_ID_WITH_ENTER);
+	closeAdditionalSearchTabs();
+	getWordDefinitionFromOtherSources(userInputValue);
 };
 
 
@@ -81,9 +115,8 @@ function searchAllColumnsWithEnter() {
 	callServerAndDisplayServerResponse(serverURL);
 	clearMagnifiedWords();
 	clearTextBoxContents(USER_INPUT_TYPE_ALL_TEXTBOX_ID_WITH_ENTER);
-
-	
-	
+	closeAdditionalSearchTabs();
+	getWordDefinitionFromOtherSources(userInputValue);	
 };
 //FETCHING FROM DB (WORDS ONLY) FROM USER INPUT
 function searchOnlyWordColumnWithoutEnter(){
@@ -103,6 +136,7 @@ function searchOnlyWordColumnWithoutEnter(){
 
 		  callServerAndDisplayServerResponse(serverURL);
 		  clearMagnifiedWords();
+		  
 	};
 
 
@@ -135,7 +169,7 @@ function callServerAndDisplayServerResponse(serverURL)
 	  .then(response => {
 	  	console.log(response);
 	  	let output = '';
-	  	var responseElementCount = 0;
+	  	matchingWordsInOwnList = 0;
 	  	for(let i in response) {
 	  		output += '<tr>';
 	  		
@@ -176,12 +210,12 @@ function callServerAndDisplayServerResponse(serverURL)
 	  			output += '</td>';
 	  		
 	  		output += '</tr>';
-	  		responseElementCount = responseElementCount + 1;
+	  		matchingWordsInOwnList = matchingWordsInOwnList + 1;
 	  	}
-	  	document.querySelector('.numberOfWords').innerHTML = responseElementCount + " word(s) have been found.";
+	  	document.querySelector('.numberOfWords').innerHTML = matchingWordsInOwnList + " word(s) have been found.";
 		
 		//FUCNTION TO REPLACE NEW LINE WITH <br> SO THAT HTML DISPLAYS IT AS A NEW LINE WITH A CHECK TO REDUCE OVERHEAD
-		if(responseElementCount<ENTRIES_TO_BE_DISPLAYED_WITH_NEW_LINE)
+		if(matchingWordsInOwnList<ENTRIES_TO_BE_DISPLAYED_WITH_NEW_LINE)
 		{
 			output = output.replace(/(?:\r\n|\r|\n)/g, '<br>');
 		}
@@ -284,7 +318,10 @@ function displayLettersMagnified(inputTextBoxId)
 //FUNCTION CLEAR THE MAGNIFIED WORDS
 function clearMagnifiedWords()
 {
-	document.querySelector("#lbllettersTypedByUser").remove();
+	if (document.querySelector("#lbllettersTypedByUser") != null ) {
+			document.querySelector("#lbllettersTypedByUser").remove();
+	}	
+	
 	
 }
 
@@ -303,6 +340,79 @@ function clearTextBoxContents(textBoxID)
 		
 }
 
+
+//FUNCION TO LIST DICTIONARY DEFINITION OF WORDS FROM MERRIAM-WEBSTER
+function getWordDefinitionFromOtherSources (userInputWord)
+{
+	var greenFlagToSearchOtherLists = 1;
+	
+	if($(CB_SEARCH_ONLY_IF_WORDS_ARE_NOT_IN_OWN_LIST_ID).is(":checked")) {
+		
+		if (matchingWordsInOwnList > 0)
+		{
+			greenFlagToSearchOtherLists = 0;
+		}
+		alert("matchingWordsInOwnList" + matchingWordsInOwnList + "greenFlagToSearchOtherList" + greenFlagToSearchOtherLists);		
+	}
+	
+	
+	
+	if($(CB_SHOW_SEARCH_RESULTS_FROM_YOUTUBE_ID).is(":checked") && greenFlagToSearchOtherLists) {
+		tabYoutube = window.open(URL_YOUTUBE + userInputWord, '_blank');
+	}
+	
+	
+	if($(CB_SHOW_SEARCH_RESULTS_FROM_GOOGLE_IMAGES_ID).is(":checked") && greenFlagToSearchOtherLists) {
+		tabGoogleImages = window.open(URL_GOOGLE_IMAGES + userInputWord, '_blank');
+	}
+	
+			
+	if($(CB_SHOW_SEARCH_RESULTS_FROM_GOOGLE_SEARCH_ID).is(":checked") && greenFlagToSearchOtherLists) {
+		tabGoogleSearch = window.open(URL_GOOGLE_SEARCH + userInputWord, '_blank');
+	}
+	
+	if($(CB_SHOW_SEARCH_RESULTS_FROM_OLAM_DICTIONARY_ID).is(":checked") && greenFlagToSearchOtherLists) {
+		tabOlam = window.open(URL_OLAM_DICTIONARY + userInputWord, '_blank');
+	}
+	
+	if($(CB_SHOW_SEARCH_RESULTS_FROM_MERRIAM_WEBSTER_THESAURUS_ID).is(":checked") && greenFlagToSearchOtherLists) {
+		tabMerriamWebsterThesaurus = window.open(URL_MERRIAM_WEBSTER_THESAURUS + userInputWord, '_blank');
+	}
+	
+	if($(CB_SHOW_SEARCH_RESULTS_FROM_MERRIAM_WEBSTER_DICTIONARY_ID).is(":checked") && greenFlagToSearchOtherLists) {
+		tabMerriamWebsterDictionary = window.open(URL_MERRIAM_WEBSTER_DICTIONARY + userInputWord, '_blank');
+	}	
+}	
+
+
+//FUNCTION TO CLOSE THE ADDITIONAL TABS OPENED
+function closeAdditionalSearchTabs()
+{
+	if(tabMerriamWebsterDictionary != null) { 	
+		tabMerriamWebsterDictionary.close();	
+	} 
+		
+	if( tabMerriamWebsterThesaurus != null) { 	
+		tabMerriamWebsterThesaurus.close();	
+	} 
+	
+	if( tabOlam != null) { 	
+		tabOlam.close();	
+	} 
+	
+	if( tabGoogleSearch != null) { 	
+		tabGoogleSearch.close();	
+	} 
+	
+	if( tabGoogleImages != null) { 	
+		tabGoogleImages.close();
+	} 
+	
+	if( tabYoutube != null) { 	
+		tabYoutube.close();
+	} 
+
+}
 
 ////FETCH DATA
 //var serverURL = 'wordlisterServer.php';

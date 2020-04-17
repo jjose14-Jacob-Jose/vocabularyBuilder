@@ -27,8 +27,8 @@ if(isset($_GET[USER_INPUT_TYPE]) && (isset($_GET[USER_INPUT_VALUE]))) {
 else {
     $query = "SELECT * FROM allwords WHERE 1";
     
-	//UNCOMMENT FOLLOWING LINE AFTER TESTING
-	$query = "SELECT * FROM allwords WHERE 1 LIMIT 100";
+	//COMMENT FOLLOWING LINE AFTER TESTING
+	//$query = "SELECT * FROM allwords WHERE 1 LIMIT 100";
 	
 	
     $sql = mysqli_query($conn, $query);

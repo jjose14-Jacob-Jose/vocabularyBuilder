@@ -157,14 +157,6 @@
 	
 	<!-- AREA TO DISPLAY BIGGER FONT DISPLAY SETUP END -->
 	
-	<!-- AREA TO DISPLAY SEARCH RESULTS FROM MERRIAM-WEBSTER DICTIONARY START -->
-	<div class="searchResultsFromOtherSites" id="searchResultsFromOtherSitesMWDictionary">
-		
-	</div>
-	<!-- AREA TO DISPLAY SEARCH RESULTS FROM MERRIAM-WEBSTER DICTIONARY END -->
-	
-	
-	
 <!-- 	DISCLAIMER INFORMATION START -->
 	<div>
       <ul style="list-style-type:disc;">

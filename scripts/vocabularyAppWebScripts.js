@@ -344,7 +344,7 @@ function clearTextBoxContents(textBoxID)
 }
 
 
-//FUNCION TO LIST DICTIONARY DEFINITION OF WORDS FROM MERRIAM-WEBSTER
+//FUNCION TO SEARCH THE USER INPUT WORD IN EXTERNAL SOURCES
 function getWordDefinitionFromOtherSources (userInputWord)
 {
 	var greenFlagToSearchOtherLists = 1;

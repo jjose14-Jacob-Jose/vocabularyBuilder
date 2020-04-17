@@ -11,7 +11,7 @@
 </head>
 <body>
 <!-- USER INPUT AREA START -->
-	<div id="userInput">
+	<div id="userInput" tabIndex="1">
 		<label> Meaning : </label>
 		<input type="text" id="<?php echo (TEXTBOX_ID_USER_INPUT_TYPE_WORD_WITH_ENTER); ?>" autofocus placeHolder="<?php echo (MSG_PLACEHOLDER_WORD_WITH_ENTER); ?>" class="txtUserInput" onKeyUp=displayLettersMagnified("<?php echo (TEXTBOX_ID_USER_INPUT_TYPE_WORD_WITH_ENTER); ?>") onclick=clearTextBoxContents("<?php echo (TEXTBOX_ID_USER_INPUT_TYPE_WORD_WITH_ENTER); ?>")>
 		<label> All : </label> 
@@ -42,7 +42,7 @@
 	</div>
 	<!-- AREA TO DISPLAY INPUT BY USER IN BIGGER FONT END -->
 		
-	<div class="divWordsFromDB">
+	<div class="divWordsFromDB" tabIndex="2">
 		<table id="tableWordsFromDB">
 			<thead id="theadTableWordsFromDB" class="theadTableWordsFromDB">
 				<th id="No">No</th>
@@ -63,7 +63,7 @@
 	<div class="divWordsFromDB">
 			<table id="tableWordsFromDB">
 			-->
-			<tbody id="tbodyTableWordsFromDB" class="tbodyTableWordsFromDB">
+			<tbody id="tbodyTableWordsFromDB" class="tbodyTableWordsFromDB" tabIndex="3">
 			</tbody>
 			
 		</table>
@@ -76,12 +76,12 @@
 	
 	<!-- AREA TO DISPLAY BIGGER FONT DISPLAY SETUP START -->
 	
-	<div class="divConfigurationSection">
+	<div class="divConfigurationSection" id="divConfigurationSection" tabIndex="4">
 	<h3> Configuration </h3>
 		<ol>
 			<li>
 			<label for="cbMagnifyLetters">
-				<input type="checkbox" id="cbMagnifyLetters"/>
+				<input type="checkbox" id="cbMagnifyLetters" tabIndex="5"/>
 				Check if you want to magnify the words while you type. 
 			</label>
 			</li>
@@ -165,6 +165,12 @@
       <li>Enter word or characters in the 3rd and 4th TextBoxes to search and display the words while you type.</li>
       <li>Simply press 'Enter' on 1st and 2nd TextBoxes WITHOUT any content to list all words.</li>
       <li>Delete ALL contents from 3rd and 4th TextBoxes to list all words.</li>
+	  <li>Toggle a checkbox with index "#" by pressing the respective "#" key.</li>
+	  <li>Configuration Item #10 can be toggled by pressing "1".</li>
+	  <li>Press "0" to go to the Configuration Section.</li>
+	  <li>Press "a" to focus on the 'Search-all-fields Textbox Field'.</li>
+	  <li>Press "m" to focus on the 'Search-only-meaning Textbox Field'.</li>
+	  
           
 	</ul> 
 	</div>

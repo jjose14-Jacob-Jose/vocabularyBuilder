@@ -18,6 +18,7 @@ var CB_SHOW_SEARCH_RESULTS_FROM_GOOGLE_SEARCH = "cbsearchGoogle";
 var CB_SHOW_SEARCH_RESULTS_FROM_GOOGLE_IMAGES = "cbsearchGoogleImages";
 var CB_SHOW_SEARCH_RESULTS_FROM_YOUTUBE = "cbsearchYouTube";
 var CB_SEARCH_ONLY_IF_WORDS_ARE_NOT_IN_OWN_LIST = "cbsearchExternalSourcesIfNotFoundInYourOwnDB";
+var CB_FOCUS_BACK_TO_VOCABULARY_APP_WEB_AFTER_SEARCHING_EXTERNAL_SOURCES = "cbFocusBackToVocabularyAppWebAfterExternalSearch";
 
 var SYMBOL_HASH = "#";
 var SYMBOL_PLUS = "+";
@@ -40,6 +41,7 @@ var CB_SHOW_SEARCH_RESULTS_FROM_GOOGLE_SEARCH_ID = SYMBOL_HASH + CB_SHOW_SEARCH_
 var CB_SHOW_SEARCH_RESULTS_FROM_GOOGLE_IMAGES_ID = SYMBOL_HASH + CB_SHOW_SEARCH_RESULTS_FROM_GOOGLE_IMAGES;
 var CB_SHOW_SEARCH_RESULTS_FROM_YOUTUBE_ID = SYMBOL_HASH + CB_SHOW_SEARCH_RESULTS_FROM_YOUTUBE;
 var CB_SEARCH_ONLY_IF_WORDS_ARE_NOT_IN_OWN_LIST_ID = SYMBOL_HASH + CB_SEARCH_ONLY_IF_WORDS_ARE_NOT_IN_OWN_LIST;
+var CB_FOCUS_BACK_TO_VOCABULARY_APP_WEB_AFTER_SEARCHING_EXTERNAL_SOURCES_ID = SYMBOL_HASH + CB_FOCUS_BACK_TO_VOCABULARY_APP_WEB_AFTER_SEARCHING_EXTERNAL_SOURCES;
 
 //CSS ELEMENT SIZES
 TABLECOLUMN_NO_WIDTHPERCENT = 1;
@@ -90,11 +92,9 @@ function searchOnlyWordColumnWithEnter(){
 		serverURL = serverURL + userInputType + userInputValueInURLFormat;
 	}
 	
-	callServerAndDisplayServerResponse(serverURL);
+	callServerAndDisplayServerResponse(userInputValue, serverURL);
 	clearMagnifiedWords();
 	clearTextBoxContents(USER_INPUT_TYPE_WORD_WORD_ONLY_TEXTBOX_ID_WITH_ENTER);
-	closeAdditionalSearchTabs();
-	getWordDefinitionFromOtherSources(userInputValue);
 };
 
 
@@ -109,15 +109,14 @@ function searchAllColumnsWithEnter() {
 	{
 //			  IF THE USER HAS INPUT A WORD THEN DISPLAY ONLY WORDS HAVING USER INPUT
 		userInputType = "/?" + USER_INPUT_TYPE + "=" + userInputType;
-		userInputValue = "&" + USER_INPUT_VALUE + "=" + userInputValue;
-		serverURL = serverURL + userInputType + userInputValue;
+		var userInputValueInURLFormat = "&" + USER_INPUT_VALUE + "=" + userInputValue;
+		serverURL = serverURL + userInputType + userInputValueInURLFormat;
 	}
-	callServerAndDisplayServerResponse(serverURL);
+	callServerAndDisplayServerResponse(userInputValue, serverURL);
 	clearMagnifiedWords();
 	clearTextBoxContents(USER_INPUT_TYPE_ALL_TEXTBOX_ID_WITH_ENTER);
-	closeAdditionalSearchTabs();
-	getWordDefinitionFromOtherSources(userInputValue);	
 };
+
 //FETCHING FROM DB (WORDS ONLY) FROM USER INPUT
 function searchOnlyWordColumnWithoutEnter(){
 		  
@@ -130,11 +129,11 @@ function searchOnlyWordColumnWithoutEnter(){
 		  {
 //			  IF THE USER HAS INPUT A WORD THEN DISPLAY ONLY WORDS HAVING USER INPUT
 			  userInputType = "/?" + USER_INPUT_TYPE + "=" + userInputType;
-			  userInputValue = "&" + USER_INPUT_VALUE + "=" + userInputValue;
-			  serverURL = serverURL + userInputType + userInputValue;
+			  var userInputValueInURLFormat = "&" + USER_INPUT_VALUE + "=" + userInputValue;
+			  serverURL = serverURL + userInputType + userInputValueInURLFormat;
 		  }
 
-		  callServerAndDisplayServerResponse(serverURL);
+		  callServerAndDisplayServerResponse(userInputValue, serverURL);
 		  clearMagnifiedWords();
 		  
 	};
@@ -151,17 +150,17 @@ function searchAllColumnsWithoutEnter() {
 		  {
 //			  IF THE USER HAS INPUT A WORD THEN DISPLAY ONLY WORDS HAVING USER INPUT
 			  userInputType = "/?" + USER_INPUT_TYPE + "=" + userInputType;
-			  userInputValue = "&" + USER_INPUT_VALUE + "=" + userInputValue;
-			  serverURL = serverURL + userInputType + userInputValue;
+			  var userInputValueInURLFormat = "&" + USER_INPUT_VALUE + "=" + userInputValue;
+			  serverURL = serverURL + userInputType + userInputValueInURLFormat;
 		  }
-		  callServerAndDisplayServerResponse(serverURL);
+		  callServerAndDisplayServerResponse(userInputValue, serverURL);
 		  clearMagnifiedWords();
 
 
 	};
 
 //	FUNCTION TO CALL SERVER AND DISPLAY THE RESPONSE FROM SERVER
-function callServerAndDisplayServerResponse(serverURL)
+function callServerAndDisplayServerResponse(userInputValue, serverURL)
 {
 	document.querySelector('.tbodyTableWordsFromDB').innerHTML = "" ;
 	document.getElementById("imgWaitScreen").style.visibility = 'visible';
@@ -223,7 +222,11 @@ function callServerAndDisplayServerResponse(serverURL)
 		
 	  	document.querySelector('.tbodyTableWordsFromDB').innerHTML = output;
 	  	document.getElementById("imgWaitScreen").style.visibility = 'hidden';
+		
 		setElementWidthAccordingToScreenSize();
+		closeAdditionalSearchTabs();
+		getWordDefinitionFromOtherSources(userInputValue);
+
 
 	  }).catch(error => console.log(error.stack));
 	}
@@ -292,12 +295,12 @@ function setElementWidthAccordingToScreenSize()
 	 document.getElementById("Root_Unit").style.maxWidth = TABLECOLUMN_ROOT_UNIT_WIDTHPERCENT * screenWidthDecimalMultiplier; 
 	 document.getElementById("Date").style.maxWidth = TABLECOLUMN_DATE_WIDTHPERCENT * screenWidthDecimalMultiplier; 
 	 
-	 
+	 /*
 	 document.getElementById(USER_INPUT_TYPE_WORD_WORD_ONLY_TEXTBOX_ID_WITH_ENTER).style.width = tableColumn_txtUserInput_WidthPercent * screenWidthDecimalMultiplier; 
 	 document.getElementById(USER_INPUT_TYPE_ALL_TEXTBOX_ID_WITH_ENTER).style.width = tableColumn_txtUserInput_WidthPercent * screenWidthDecimalMultiplier; 
 	 document.getElementById(USER_INPUT_TYPE_WORD_WORD_ONLY_TEXTBOX_ID_WITHOUT_ENTER).style.width = tableColumn_txtUserInput_WidthPercent * screenWidthDecimalMultiplier; 
 	 document.getElementById(USER_INPUT_TYPE_ALL_TEXTBOX_ID_WITHOUT_ENTER).style.width = tableColumn_txtUserInput_WidthPercent * screenWidthDecimalMultiplier; 
-	 
+	 */
 	
 }
 //FUNCTION TO DISPLAY THE WORDS INPUT BY USER MAGNIFIED BELOW
@@ -352,10 +355,9 @@ function getWordDefinitionFromOtherSources (userInputWord)
 		{
 			greenFlagToSearchOtherLists = 0;
 		}
-		alert("matchingWordsInOwnList" + matchingWordsInOwnList + "greenFlagToSearchOtherList" + greenFlagToSearchOtherLists);		
 	}
 	
-	
+	window.name = "vocabularyAppWebHomePage";
 	
 	if($(CB_SHOW_SEARCH_RESULTS_FROM_YOUTUBE_ID).is(":checked") && greenFlagToSearchOtherLists) {
 		tabYoutube = window.open(URL_YOUTUBE + userInputWord, '_blank');
@@ -382,6 +384,12 @@ function getWordDefinitionFromOtherSources (userInputWord)
 	if($(CB_SHOW_SEARCH_RESULTS_FROM_MERRIAM_WEBSTER_DICTIONARY_ID).is(":checked") && greenFlagToSearchOtherLists) {
 		tabMerriamWebsterDictionary = window.open(URL_MERRIAM_WEBSTER_DICTIONARY + userInputWord, '_blank');
 	}	
+	
+	if($(CB_FOCUS_BACK_TO_VOCABULARY_APP_WEB_AFTER_SEARCHING_EXTERNAL_SOURCES_ID).is(":checked") && greenFlagToSearchOtherLists) {
+			var vocabularyAppWebHomeTab = window.open('', 'vocabularyAppWebHomePage');
+		vocabularyAppWebHomeTab.focus();
+	}	
+
 }	
 
 

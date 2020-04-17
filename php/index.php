@@ -140,6 +140,13 @@
 				<input type="checkbox" id="cbsearchYouTube"/>
 				Check if you want to display the results on YouTube on a new tab.  
 			</label>
+			</li>			
+			
+			<li>
+			<label for="cbFocusBackToVocabularyAppWebAfterExternalSearch">
+				<input type="checkbox" id="cbFocusBackToVocabularyAppWebAfterExternalSearch"/>
+				Check if you come back automatically to the Vocabulary App Web after searching external sources.  
+			</label>
 			</li>
 		
 		</ol>

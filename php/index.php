@@ -160,16 +160,22 @@
 <!-- 	DISCLAIMER INFORMATION START -->
 	<div>
       <ul style="list-style-type:disc;">
-      <li><h3>Help</h3></li>
+      <li><h3>General Help</h3></li>
       <li>Enter word or characters in the 1st and 2nd TextBoxes and press 'Enter' key to search and display the words.</li>
       <li>Enter word or characters in the 3rd and 4th TextBoxes to search and display the words while you type.</li>
       <li>Simply press 'Enter' on 1st and 2nd TextBoxes WITHOUT any content to list all words.</li>
       <li>Delete ALL contents from 3rd and 4th TextBoxes to list all words.</li>
-	  <li>Toggle a checkbox with index "#" by pressing the respective "#" key.</li>
+	  </ul>
+	  
+	<ul style="list-style-type:disc;">
+      <li><h3>Hotkeys</h3></li>
+	  <li>Toggle a checkbox of index "#" by pressing the corresponding "#" key.</li>
 	  <li>Configuration Item #10 can be toggled by pressing "1".</li>
 	  <li>Press "0" to go to the Configuration Section.</li>
-	  <li>Press "a" to focus on the 'Search-all-fields Textbox Field'.</li>
-	  <li>Press "m" to focus on the 'Search-only-meaning Textbox Field'.</li>
+	  <li>Press "-" on NumPad  to focus on the 'Search-all-fields Textbox Field'.</li>
+	  <li>Press "+" on NumPad  to focus on the 'Search-only-meaning Textbox Field'.</li>
+	  <li>Press "*" on NumPad  to focus on the 'Search-all-fields without enter Textbox Field'.</li>
+	  <li>Press "/" on NumPad  to focus on the 'Search-only-meaning without enter Textbox Field'.</li>
 	  
           
 	</ul> 

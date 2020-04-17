@@ -303,6 +303,8 @@ function setElementWidthAccordingToScreenSize()
 	 document.getElementById("Date").style.maxWidth = TABLECOLUMN_DATE_WIDTHPERCENT * screenWidthDecimalMultiplier; 
 	 
 	 /*
+	 //The following section is causing an exception. 
+	 
 	 document.getElementById(USER_INPUT_TYPE_WORD_WORD_ONLY_TEXTBOX_ID_WITH_ENTER).style.width = tableColumn_txtUserInput_WidthPercent * screenWidthDecimalMultiplier; 
 	 document.getElementById(USER_INPUT_TYPE_ALL_TEXTBOX_ID_WITH_ENTER).style.width = tableColumn_txtUserInput_WidthPercent * screenWidthDecimalMultiplier; 
 	 document.getElementById(USER_INPUT_TYPE_WORD_WORD_ONLY_TEXTBOX_ID_WITHOUT_ENTER).style.width = tableColumn_txtUserInput_WidthPercent * screenWidthDecimalMultiplier; 
@@ -432,7 +434,6 @@ function closeAdditionalSearchTabs()
 //FUNCTION TO BIND KEY PRESS TO EVENTS
 function keyPressEvent(eventKeyCode)
 {
-	console.log("In keyPressEvent with eventKeyCode :" + eventKeyCode);
 		switch (eventKeyCode) {
 	
 		case 96:
@@ -480,19 +481,6 @@ function keyPressEvent(eventKeyCode)
 			
 		case 65:$(USER_INPUT_TYPE_ALL_TEXTBOX_ID_WITH_ENTER).focus();		
 			break;
-
-			
-			/*
-			var CB_SELECT_ALL_TEXT_BOX_LETTERS_ON_FOCUS_ID = SYMBOL_HASH + CB_SELECT_ALL_TEXT_BOX_LETTERS_ON_FOCUS;
-var CB_SHOW_SEARCH_RESULTS_FROM_MERRIAM_WEBSTER_DICTIONARY_ID = SYMBOL_HASH + CB_SHOW_SEARCH_RESULTS_FROM_MERRIAM_WEBSTER_DICTIONARY;
-var CB_SHOW_SEARCH_RESULTS_FROM_MERRIAM_WEBSTER_THESAURUS_ID = SYMBOL_HASH + CB_SHOW_SEARCH_RESULTS_FROM_MERRIAM_WEBSTER_THESAURUS;
-var CB_SHOW_SEARCH_RESULTS_FROM_OLAM_DICTIONARY_ID = SYMBOL_HASH + CB_SHOW_SEARCH_RESULTS_FROM_OLAM_DICTIONARY;
-var CB_SHOW_SEARCH_RESULTS_FROM_GOOGLE_SEARCH_ID = SYMBOL_HASH + CB_SHOW_SEARCH_RESULTS_FROM_GOOGLE_SEARCH;
-var CB_SHOW_SEARCH_RESULTS_FROM_GOOGLE_IMAGES_ID = SYMBOL_HASH + CB_SHOW_SEARCH_RESULTS_FROM_GOOGLE_IMAGES;
-var CB_SHOW_SEARCH_RESULTS_FROM_YOUTUBE_ID = SYMBOL_HASH + CB_SHOW_SEARCH_RESULTS_FROM_YOUTUBE;
-var CB_SEARCH_ONLY_IF_WORDS_ARE_NOT_IN_OWN_LIST_ID = SYMBOL_HASH + CB_SEARCH_ONLY_IF_WORDS_ARE_NOT_IN_OWN_LIST;
-var CB_FOCUS_BACK_TO_VOCABULARY_APP_WEB_AFTER_SEARCHING_EXTERNAL_SOURCES_ID = SYMBOL_HASH + 
-			*/
 			
 
 		}

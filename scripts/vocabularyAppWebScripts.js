@@ -476,13 +476,18 @@ function keyPressEvent(eventKeyCode)
 		case 49:toggleCheckBox(CB_FOCUS_BACK_TO_VOCABULARY_APP_WEB_AFTER_SEARCHING_EXTERNAL_SOURCES_ID);		
 			break;
 			
-		case 77:$(USER_INPUT_TYPE_WORD_WORD_ONLY_TEXTBOX_ID_WITH_ENTER).focus();		
+		case 107:clearTextBoxContents(USER_INPUT_TYPE_WORD_WORD_ONLY_TEXTBOX_ID_WITH_ENTER);		
 			break;
 			
-		case 65:$(USER_INPUT_TYPE_ALL_TEXTBOX_ID_WITH_ENTER).focus();		
+		case 109:clearTextBoxContents(USER_INPUT_TYPE_ALL_TEXTBOX_ID_WITH_ENTER);		
 			break;
-			
 
+		case 106:clearTextBoxContents(USER_INPUT_TYPE_WORD_WORD_ONLY_TEXTBOX_ID_WITHOUT_ENTER);		
+			break;
+			
+		case 111:clearTextBoxContents(USER_INPUT_TYPE_ALL_TEXTBOX_ID_WITHOUT_ENTER);		
+			break;
+			
 		}
 
 }

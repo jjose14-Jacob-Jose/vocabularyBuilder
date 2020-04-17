@@ -15,5 +15,14 @@
 	padding-right: 25%;
 }
 
+.divConfigurationSection label {
+	display:block;
+	clear:both;
+}
+
+.txtUserInput {
+	width : 15%;
+}
+
 
 

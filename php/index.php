@@ -80,6 +80,20 @@
 	<h3> Configuration </h3>
 		<ol>
 			<li>
+			<label for="cbsearchExternalSourcesIfNotFoundInYourOwnDB">
+				<input type="checkbox" id="cbsearchExternalSourcesIfNotFoundInYourOwnDB"/>
+				Check if you want to search results of words ONLY if they are not found in your own list. 
+			</label>
+			</li>			
+				
+			<li>
+			<label for="cbsearchSelectAllExternalSearchOptions">
+				<input type="checkbox" id="cbsearchSelectAllExternalSearchOptions"/ onClick="selectAllExternalSearchOptions()">
+				Check if you select all the external search options.
+			</label>
+			</li>
+		
+			<li>
 			<label for="cbMagnifyLetters">
 				<input type="checkbox" id="cbMagnifyLetters" tabIndex="5"/>
 				Check if you want to magnify the words while you type. 
@@ -92,20 +106,21 @@
 				Check if you want to select the contents of a text box on focus. 
 			</label>
 			</li>
-		
+					
 			<li>
-			<label for="cbsearchExternalSourcesIfNotFoundInYourOwnDB">
-				<input type="checkbox" id="cbsearchExternalSourcesIfNotFoundInYourOwnDB"/>
-				Check if you want to search results of words ONLY if they are not found in your own list. 
+			<label for="cbFocusBackToVocabularyAppWebAfterExternalSearch">
+				<input type="checkbox" id="cbFocusBackToVocabularyAppWebAfterExternalSearch"/>
+				Check if you come back automatically to the Vocabulary App Web after searching external sources.  
 			</label>
-			</li>			
+			</li>
+			
 			
 			<li>
 			<label for="cbsearchMerriamWebsterDictionary">
 				<input type="checkbox" id="cbsearchMerriamWebsterDictionary"/>
 				Check if you want to display the results on Merriam Webster Dictionary on a new tab. 
 			</label>
-			</li>
+			</li>	
 			
 			<li>
 			<label for="cbsearchMerriamWebsterThesaurus">
@@ -128,6 +143,13 @@
 			</label>
 			</li>
 			
+						<li>
+			<label for="cbsearchMerriamWebsterDictionaryForEtymologySection">
+				<input type="checkbox" id="cbsearchMerriamWebsterDictionaryForEtymologySection"/>
+				Check if you want to display the results on Merriam Webster Dictionary on 1 more tab for search the Etymology Section. 
+			</label>
+			</li>	
+			
 			<li>
 			<label for="cbsearchGoogleImages">
 				<input type="checkbox" id="cbsearchGoogleImages"/>
@@ -141,14 +163,7 @@
 				Check if you want to display the results on YouTube on a new tab.  
 			</label>
 			</li>			
-			
-			<li>
-			<label for="cbFocusBackToVocabularyAppWebAfterExternalSearch">
-				<input type="checkbox" id="cbFocusBackToVocabularyAppWebAfterExternalSearch"/>
-				Check if you come back automatically to the Vocabulary App Web after searching external sources.  
-			</label>
-			</li>
-		
+					
 		</ol>
 		
 		
@@ -171,7 +186,7 @@
       <h3>Hotkeys</h3>
 	  <li>Toggle a checkbox of index "#" by pressing the corresponding "#" key.</li>
 	  <li>Configuration Item #10 can be toggled by pressing "1".</li>
-	  <li>Press "0" to go to the Configuration Section.</li>
+	  <li>Press "~" to go to the Configuration Section.</li>
 	  <li>Press "-" on NumPad  to focus on the 'Search-all-fields Textbox Field'.</li>
 	  <li>Press "+" on NumPad  to focus on the 'Search-only-meaning Textbox Field'.</li>
 	  <li>Press "*" on NumPad  to focus on the 'Search-all-fields without enter Textbox Field'.</li>

@@ -12,6 +12,8 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
 if(isset($_GET[USER_INPUT_TYPE]) && (isset($_GET[USER_INPUT_VALUE]))) {
     $userInputType = $_GET[USER_INPUT_TYPE];
     $userInputValue = $_GET[USER_INPUT_VALUE];
+	$userInputType = mysqli_real_escape_string($conn, $userInputType);
+	$userInputValue = mysqli_real_escape_string($conn, $userInputValue);
 
     if ($userInputType == TEXTBOX_ID_USER_INPUT_TYPE_WORD_WITH_ENTER || $userInputType == TEXTBOX_ID_USER_INPUT_TYPE_WORD_WITHOUT_ENTER){
         

@@ -77,12 +77,19 @@ var tabYoutube;
 
 var matchingWordsInOwnList;
 
+//FUNCTION TO FETCH USER-INPUT VALUE FROM TEXT FIELD
+function getValueFromTextField (textFieldID)
+{
+	var textFieldValue = $(textFieldID).val();
+	return(textFieldValue);
+}
+
 
 //FETCHING FROM DB (WORDS ONLY) FROM USER INPUT
 function searchOnlyWordColumnWithEnter(){
 	
 	var userInputType = TEXTBOX_ID_USER_INPUT_TYPE_WORD_WITH_ENTER;
-	var userInputValue = $(USER_INPUT_TYPE_WORD_WORD_ONLY_TEXTBOX_ID_WITH_ENTER).val();
+	var userInputValue = getValueFromTextField(USER_INPUT_TYPE_WORD_WORD_ONLY_TEXTBOX_ID_WITH_ENTER);
 	
 	var serverURL = SERVER_URL;
 	
@@ -93,7 +100,7 @@ function searchOnlyWordColumnWithEnter(){
 		var userInputValueInURLFormat = "&" + USER_INPUT_VALUE + "=" + userInputValue;
 		serverURL = serverURL + userInputType + userInputValueInURLFormat;
 	}
-	
+	alert(serverURL);
 	callServerAndDisplayServerResponse(userInputValue, serverURL);
 	clearMagnifiedWords();
 	clearTextBoxContents(USER_INPUT_TYPE_WORD_WORD_ONLY_TEXTBOX_ID_WITH_ENTER);
@@ -104,7 +111,7 @@ function searchOnlyWordColumnWithEnter(){
 function searchAllColumnsWithEnter() {
 	
 	var userInputType = TEXTBOX_ID_USER_INPUT_TYPE_ALL_WITH_ENTER;
-	var userInputValue = $(USER_INPUT_TYPE_ALL_TEXTBOX_ID_WITH_ENTER).val();
+	var userInputValue = getValueFromTextField(USER_INPUT_TYPE_ALL_TEXTBOX_ID_WITH_ENTER);
 	
 	var serverURL = SERVER_URL;
 	if(userInputValue)
@@ -123,7 +130,7 @@ function searchAllColumnsWithEnter() {
 function searchOnlyWordColumnWithoutEnter(){
 		  
 		  var userInputType = TEXTBOX_ID_USER_INPUT_TYPE_WORD_WITHOUT_ENTER;
-		  var userInputValue = $(USER_INPUT_TYPE_WORD_WORD_ONLY_TEXTBOX_ID_WITHOUT_ENTER).val();
+		  var userInputValue = getValueFromTextField(TEXTBOX_ID_USER_INPUT_TYPE_WORD_WITHOUT_ENTER);
 		  
 		  var serverURL = SERVER_URL;
 		  
@@ -145,8 +152,8 @@ function searchOnlyWordColumnWithoutEnter(){
 function searchAllColumnsWithoutEnter() {
 		  
 		  var userInputType = TEXTBOX_ID_USER_INPUT_TYPE_ALL_WITHOUT_ENTER;
-		  var userInputValue = $(USER_INPUT_TYPE_ALL_TEXTBOX_ID_WITHOUT_ENTER).val();
-		  
+  		  var userInputValue = getValueFromTextField(USER_INPUT_TYPE_ALL_TEXTBOX_ID_WITHOUT_ENTER);
+
 		  var serverURL = SERVER_URL;
 		  if(userInputValue)
 		  {

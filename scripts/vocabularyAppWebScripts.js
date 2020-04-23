@@ -12,14 +12,17 @@ var LABEL_MAGNIFY_USER_INPUT_LETTERS = "lbllettersTypedByUser";
 var CB_MAGNIFY_USER_INPUT_LETTERS = "cbMagnifyLetters";
 var CB_SELECT_ALL_TEXT_BOX_LETTERS_ON_FOCUS = "cbSelectTextboxOnFocus";
 var CB_SHOW_SEARCH_RESULTS_FROM_MERRIAM_WEBSTER_DICTIONARY = "cbsearchMerriamWebsterDictionary";
+var CB_SHOW_SEARCH_RESULTS_FROM_MERRIAM_WEBSTER_DICTIONARY_FOR_ETYMOLOGY_SECTION = "cbsearchMerriamWebsterDictionaryForEtymologySection";
 var CB_SHOW_SEARCH_RESULTS_FROM_MERRIAM_WEBSTER_THESAURUS = "cbsearchMerriamWebsterThesaurus";
 var CB_SHOW_SEARCH_RESULTS_FROM_OLAM_DICTIONARY = "cbsearchOlamDictionary";
 var CB_SHOW_SEARCH_RESULTS_FROM_GOOGLE_SEARCH = "cbsearchGoogle";
 var CB_SHOW_SEARCH_RESULTS_FROM_GOOGLE_IMAGES = "cbsearchGoogleImages";
 var CB_SHOW_SEARCH_RESULTS_FROM_YOUTUBE = "cbsearchYouTube";
 var CB_SEARCH_ONLY_IF_WORDS_ARE_NOT_IN_OWN_LIST = "cbsearchExternalSourcesIfNotFoundInYourOwnDB";
+var CB_SELECT_ALL_EXTERNAL_SEARCH_OPTIONS = "cbsearchSelectAllExternalSearchOptions";
 var CB_FOCUS_BACK_TO_VOCABULARY_APP_WEB_AFTER_SEARCHING_EXTERNAL_SOURCES = "cbFocusBackToVocabularyAppWebAfterExternalSearch";
 var DIV_CONFIGURATION_SECTION = "divConfigurationSection";
+var DIV_USER_INPUT_SECTION = "userInput";
 
 var SYMBOL_HASH = "#";
 var SYMBOL_PLUS = "+";
@@ -36,12 +39,14 @@ var LABEL_MAGNIFY_USER_INPUT_LETTERS_ID = SYMBOL_HASH + LABEL_MAGNIFY_USER_INPUT
 var CB_MAGNIFY_USER_INPUT_LETTERS_ID = SYMBOL_HASH + CB_MAGNIFY_USER_INPUT_LETTERS;
 var CB_SELECT_ALL_TEXT_BOX_LETTERS_ON_FOCUS_ID = SYMBOL_HASH + CB_SELECT_ALL_TEXT_BOX_LETTERS_ON_FOCUS;
 var CB_SHOW_SEARCH_RESULTS_FROM_MERRIAM_WEBSTER_DICTIONARY_ID = SYMBOL_HASH + CB_SHOW_SEARCH_RESULTS_FROM_MERRIAM_WEBSTER_DICTIONARY;
+var CB_SHOW_SEARCH_RESULTS_FROM_MERRIAM_WEBSTER_DICTIONARY_FOR_ETYMOLOGY_SECTION_ID = SYMBOL_HASH + CB_SHOW_SEARCH_RESULTS_FROM_MERRIAM_WEBSTER_DICTIONARY_FOR_ETYMOLOGY_SECTION;
 var CB_SHOW_SEARCH_RESULTS_FROM_MERRIAM_WEBSTER_THESAURUS_ID = SYMBOL_HASH + CB_SHOW_SEARCH_RESULTS_FROM_MERRIAM_WEBSTER_THESAURUS;
 var CB_SHOW_SEARCH_RESULTS_FROM_OLAM_DICTIONARY_ID = SYMBOL_HASH + CB_SHOW_SEARCH_RESULTS_FROM_OLAM_DICTIONARY;
 var CB_SHOW_SEARCH_RESULTS_FROM_GOOGLE_SEARCH_ID = SYMBOL_HASH + CB_SHOW_SEARCH_RESULTS_FROM_GOOGLE_SEARCH;
 var CB_SHOW_SEARCH_RESULTS_FROM_GOOGLE_IMAGES_ID = SYMBOL_HASH + CB_SHOW_SEARCH_RESULTS_FROM_GOOGLE_IMAGES;
 var CB_SHOW_SEARCH_RESULTS_FROM_YOUTUBE_ID = SYMBOL_HASH + CB_SHOW_SEARCH_RESULTS_FROM_YOUTUBE;
 var CB_SEARCH_ONLY_IF_WORDS_ARE_NOT_IN_OWN_LIST_ID = SYMBOL_HASH + CB_SEARCH_ONLY_IF_WORDS_ARE_NOT_IN_OWN_LIST;
+var CB_SELECT_ALL_EXTERNAL_SEARCH_OPTIONS_ID = SYMBOL_HASH + CB_SELECT_ALL_EXTERNAL_SEARCH_OPTIONS;
 var CB_FOCUS_BACK_TO_VOCABULARY_APP_WEB_AFTER_SEARCHING_EXTERNAL_SOURCES_ID = SYMBOL_HASH + CB_FOCUS_BACK_TO_VOCABULARY_APP_WEB_AFTER_SEARCHING_EXTERNAL_SOURCES;
 var DIV_CONFIGURATION_SECTION_ID = SYMBOL_HASH + DIV_CONFIGURATION_SECTION;
 
@@ -76,6 +81,7 @@ var tabGoogleImages;
 var tabYoutube;
 
 var matchingWordsInOwnList;
+var variableForTogglingTopAndConfigurationSectionOfPage = 0;
 
 //FUNCTION TO FETCH USER-INPUT VALUE FROM TEXT FIELD
 function getValueFromTextField (textFieldID)
@@ -355,6 +361,7 @@ function clearTextBoxContents(textBoxID)
 		
 		document.querySelector(textBoxID).select();
 	}
+	document.querySelector(textBoxID).focus();
 		
 }
 
@@ -437,53 +444,122 @@ function closeAdditionalSearchTabs()
 
 }
 
+//FUNCTION TO TOGGLE BETWEEN TOP AND CONFIGURATION SECTION OF PAGE
+function goToTopOrConfigurationSection()
+{
+	if (variableForTogglingTopAndConfigurationSectionOfPage == 0) {
+	document.getElementById(DIV_CONFIGURATION_SECTION).scrollIntoView();
+	variableForTogglingTopAndConfigurationSectionOfPage = 1;
+	}
+	else {
+	document.getElementById(DIV_USER_INPUT_SECTION).scrollIntoView();
+	variableForTogglingTopAndConfigurationSectionOfPage = 0;
+	}
+		
+}
+//FUNCTION TO SELECT ALL EXTERNAL SEARCH CHECKBOXES
+function selectAllExternalSearchOptions()
+{
+	if($(CB_SELECT_ALL_EXTERNAL_SEARCH_OPTIONS_ID).is(":checked"))
+	{
+		$(CB_SHOW_SEARCH_RESULTS_FROM_MERRIAM_WEBSTER_DICTIONARY_ID).prop("checked", true);
+		$(CB_SHOW_SEARCH_RESULTS_FROM_MERRIAM_WEBSTER_DICTIONARY_FOR_ETYMOLOGY_SECTION_ID).prop("checked", true);
+		$(CB_SHOW_SEARCH_RESULTS_FROM_MERRIAM_WEBSTER_THESAURUS_ID).prop("checked", true);
+		$(CB_SHOW_SEARCH_RESULTS_FROM_OLAM_DICTIONARY_ID).prop("checked", true);
+		$(CB_SHOW_SEARCH_RESULTS_FROM_GOOGLE_SEARCH_ID).prop("checked", true);
+		$(CB_SHOW_SEARCH_RESULTS_FROM_GOOGLE_IMAGES_ID).prop("checked", true);
+		$(CB_SHOW_SEARCH_RESULTS_FROM_YOUTUBE_ID).prop("checked", true);
+		$(CB_SEARCH_ONLY_IF_WORDS_ARE_NOT_IN_OWN_LIST_ID).prop("checked", true);
+		$(CB_FOCUS_BACK_TO_VOCABULARY_APP_WEB_AFTER_SEARCHING_EXTERNAL_SOURCES_ID).prop("checked", true);
+	}
+	else
+	{
+		$(CB_SHOW_SEARCH_RESULTS_FROM_MERRIAM_WEBSTER_DICTIONARY_ID).prop("checked", false);
+		$(CB_SHOW_SEARCH_RESULTS_FROM_MERRIAM_WEBSTER_DICTIONARY_FOR_ETYMOLOGY_SECTION_ID).prop("checked", false);
+		$(CB_SHOW_SEARCH_RESULTS_FROM_MERRIAM_WEBSTER_THESAURUS_ID).prop("checked", false);
+		$(CB_SHOW_SEARCH_RESULTS_FROM_OLAM_DICTIONARY_ID).prop("checked", false);
+		$(CB_SHOW_SEARCH_RESULTS_FROM_GOOGLE_SEARCH_ID).prop("checked", false);
+		$(CB_SHOW_SEARCH_RESULTS_FROM_GOOGLE_IMAGES_ID).prop("checked", false);
+		$(CB_SHOW_SEARCH_RESULTS_FROM_YOUTUBE_ID).prop("checked", false);
+		$(CB_SEARCH_ONLY_IF_WORDS_ARE_NOT_IN_OWN_LIST_ID).prop("checked", false);
+		$(CB_FOCUS_BACK_TO_VOCABULARY_APP_WEB_AFTER_SEARCHING_EXTERNAL_SOURCES_ID).prop("checked", false);
+	}
+	
+
+}
+
+
+//FUNCTION TO BLUR OUT OF TEXTBOXES WHEN A DIGIT KEY ABOVE ALPHABETS IS PRESSED
+function blurOutOfAllTextBoxes()
+{
+	$(USER_INPUT_TYPE_WORD_WORD_ONLY_TEXTBOX_ID_WITH_ENTER).blur();
+	$(USER_INPUT_TYPE_ALL_TEXTBOX_ID_WITH_ENTER).blur();
+	$(USER_INPUT_TYPE_WORD_WORD_ONLY_TEXTBOX_ID_WITHOUT_ENTER).blur();
+	$(USER_INPUT_TYPE_ALL_TEXTBOX_ID_WITHOUT_ENTER).blur();
+	
+}
+	
 //FUNCTION TO BIND KEY PRESS TO EVENTS
 function keyPressEvent(eventKeyCode)
 {
 		switch (eventKeyCode) {
+			
 	
-		case 48:$(DIV_CONFIGURATION_SECTION_ID).focus();
-			break;	
+		case 48:goToTopOrConfigurationSection();
+				blurOutOfAllTextBoxes();		
+				break;	
 			
-		case 50:toggleCheckBox(CB_SELECT_ALL_TEXT_BOX_LETTERS_ON_FOCUS_ID);		
-			break;
-			
-		case 51:toggleCheckBox(CB_SEARCH_ONLY_IF_WORDS_ARE_NOT_IN_OWN_LIST_ID);		
-			break;
-			
-		case 52:toggleCheckBox(CB_SHOW_SEARCH_RESULTS_FROM_MERRIAM_WEBSTER_DICTIONARY_ID);		
-			break;
-			
-		case 53:toggleCheckBox(CB_SHOW_SEARCH_RESULTS_FROM_MERRIAM_WEBSTER_THESAURUS_ID);		
-			break;
-			
-		case 54:toggleCheckBox(CB_SHOW_SEARCH_RESULTS_FROM_OLAM_DICTIONARY_ID);		
-			break;
-		
-		case 55:toggleCheckBox(CB_SHOW_SEARCH_RESULTS_FROM_GOOGLE_SEARCH_ID);		
-			break;
+		case 49:toggleCheckBox(CB_SEARCH_ONLY_IF_WORDS_ARE_NOT_IN_OWN_LIST_ID);
+				blurOutOfAllTextBoxes();		
+				break;
+				
+		case 50:toggleCheckBox(CB_SELECT_ALL_EXTERNAL_SEARCH_OPTIONS_ID);
+				selectAllExternalSearchOptions();
+				blurOutOfAllTextBoxes();		
+				break;
+				
+		case 51:toggleCheckBox(CB_MAGNIFY_USER_INPUT_LETTERS_ID);
+				blurOutOfAllTextBoxes();		
+				break;
+				
+		case 52:toggleCheckBox(CB_SELECT_ALL_TEXT_BOX_LETTERS_ON_FOCUS_ID);		
+				blurOutOfAllTextBoxes();
+				break;
+				
+		case 53:toggleCheckBox(CB_FOCUS_BACK_TO_VOCABULARY_APP_WEB_AFTER_SEARCHING_EXTERNAL_SOURCES_ID);		
+				blurOutOfAllTextBoxes();	
+				break;
+								
+		case 54:toggleCheckBox(CB_SHOW_SEARCH_RESULTS_FROM_MERRIAM_WEBSTER_DICTIONARY_ID);
+				toggleCheckBox(CB_SHOW_SEARCH_RESULTS_FROM_MERRIAM_WEBSTER_DICTIONARY_FOR_ETYMOLOGY_SECTION_ID);
+				blurOutOfAllTextBoxes();		
+				break;
+				
 
-		case 56:toggleCheckBox(CB_SHOW_SEARCH_RESULTS_FROM_GOOGLE_IMAGES_ID);		
-			break;
-
-		case 57:toggleCheckBox(CB_SHOW_SEARCH_RESULTS_FROM_YOUTUBE_ID);		
-			break;	
-		
-		case 49:toggleCheckBox(CB_FOCUS_BACK_TO_VOCABULARY_APP_WEB_AFTER_SEARCHING_EXTERNAL_SOURCES_ID);		
-			break;
-			
+		case 55:toggleCheckBox(CB_SHOW_SEARCH_RESULTS_FROM_MERRIAM_WEBSTER_THESAURUS_ID);		
+				blurOutOfAllTextBoxes();		
+				break;
+				
+		case 56:toggleCheckBox(CB_SHOW_SEARCH_RESULTS_FROM_OLAM_DICTIONARY_ID);		
+				blurOutOfAllTextBoxes();		
+				break;
+				
+		case 57:toggleCheckBox(CB_SHOW_SEARCH_RESULTS_FROM_GOOGLE_SEARCH_ID);		
+				blurOutOfAllTextBoxes();
+				break;
+				
 		case 107:clearTextBoxContents(USER_INPUT_TYPE_WORD_WORD_ONLY_TEXTBOX_ID_WITH_ENTER);		
-			break;
-			
+				break;
+				
 		case 109:clearTextBoxContents(USER_INPUT_TYPE_ALL_TEXTBOX_ID_WITH_ENTER);		
-			break;
-
+				break;
+				
 		case 106:clearTextBoxContents(USER_INPUT_TYPE_WORD_WORD_ONLY_TEXTBOX_ID_WITHOUT_ENTER);		
-			break;
-			
+				break;
+				
 		case 111:clearTextBoxContents(USER_INPUT_TYPE_ALL_TEXTBOX_ID_WITHOUT_ENTER);		
-			break;
-			
+				break;
+				
 		}
 
 }

@@ -442,43 +442,33 @@ function keyPressEvent(eventKeyCode)
 {
 		switch (eventKeyCode) {
 	
-		case 96:
 		case 48:$(DIV_CONFIGURATION_SECTION_ID).focus();
 			break;	
 			
-		case 98:
 		case 50:toggleCheckBox(CB_SELECT_ALL_TEXT_BOX_LETTERS_ON_FOCUS_ID);		
 			break;
 			
-		case 99:
 		case 51:toggleCheckBox(CB_SEARCH_ONLY_IF_WORDS_ARE_NOT_IN_OWN_LIST_ID);		
 			break;
 			
-		case 100:
 		case 52:toggleCheckBox(CB_SHOW_SEARCH_RESULTS_FROM_MERRIAM_WEBSTER_DICTIONARY_ID);		
 			break;
 			
-		case 101:
 		case 53:toggleCheckBox(CB_SHOW_SEARCH_RESULTS_FROM_MERRIAM_WEBSTER_THESAURUS_ID);		
 			break;
 			
-		case 102:
 		case 54:toggleCheckBox(CB_SHOW_SEARCH_RESULTS_FROM_OLAM_DICTIONARY_ID);		
 			break;
 		
-		case 103:
 		case 55:toggleCheckBox(CB_SHOW_SEARCH_RESULTS_FROM_GOOGLE_SEARCH_ID);		
 			break;
 
-		case 104:
 		case 56:toggleCheckBox(CB_SHOW_SEARCH_RESULTS_FROM_GOOGLE_IMAGES_ID);		
 			break;
 
-		case 105:
 		case 57:toggleCheckBox(CB_SHOW_SEARCH_RESULTS_FROM_YOUTUBE_ID);		
 			break;	
 		
-		case 97	:
 		case 49:toggleCheckBox(CB_FOCUS_BACK_TO_VOCABULARY_APP_WEB_AFTER_SEARCHING_EXTERNAL_SOURCES_ID);		
 			break;
 			

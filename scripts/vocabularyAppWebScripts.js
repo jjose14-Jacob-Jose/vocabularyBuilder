@@ -100,7 +100,6 @@ function searchOnlyWordColumnWithEnter(){
 		var userInputValueInURLFormat = "&" + USER_INPUT_VALUE + "=" + userInputValue;
 		serverURL = serverURL + userInputType + userInputValueInURLFormat;
 	}
-	alert(serverURL);
 	callServerAndDisplayServerResponse(userInputValue, serverURL);
 	clearMagnifiedWords();
 	clearTextBoxContents(USER_INPUT_TYPE_WORD_WORD_ONLY_TEXTBOX_ID_WITH_ENTER);

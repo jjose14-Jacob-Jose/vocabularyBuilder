@@ -79,6 +79,7 @@ var tabOlam;
 var tabGoogleSearch;
 var tabGoogleImages;
 var tabYoutube;
+var tabMerriamWebsterDictionary2ForEymologySection;
 
 var matchingWordsInOwnList;
 var variableForTogglingTopAndConfigurationSectionOfPage = 0;
@@ -390,6 +391,9 @@ function getWordDefinitionFromOtherSources (userInputWord)
 		tabGoogleImages = window.open(URL_GOOGLE_IMAGES + userInputWord, '_blank');
 	}
 	
+	if($(CB_SHOW_SEARCH_RESULTS_FROM_MERRIAM_WEBSTER_DICTIONARY_FOR_ETYMOLOGY_SECTION_ID).is(":checked") && greenFlagToSearchOtherLists) {
+		tabMerriamWebsterDictionary2ForEymologySection = window.open(URL_MERRIAM_WEBSTER_DICTIONARY + userInputWord, '_blank');
+	}
 			
 	if($(CB_SHOW_SEARCH_RESULTS_FROM_GOOGLE_SEARCH_ID).is(":checked") && greenFlagToSearchOtherLists) {
 		tabGoogleSearch = window.open(URL_GOOGLE_SEARCH + userInputWord, '_blank');
@@ -421,6 +425,11 @@ function closeAdditionalSearchTabs()
 	if(tabMerriamWebsterDictionary != null) { 	
 		tabMerriamWebsterDictionary.close();	
 	} 
+	
+	if(tabMerriamWebsterDictionary2ForEymologySection != null) { 	
+		tabMerriamWebsterDictionary2ForEymologySection.close();	
+	} 
+	
 		
 	if( tabMerriamWebsterThesaurus != null) { 	
 		tabMerriamWebsterThesaurus.close();	

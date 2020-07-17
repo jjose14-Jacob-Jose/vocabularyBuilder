@@ -83,6 +83,8 @@ var tabMerriamWebsterDictionary2ForEymologySection;
 
 var matchingWordsInOwnList;
 var variableForTogglingTopAndConfigurationSectionOfPage = 0;
+var timeStampOfLastTimeCloseAllTabsKeyIsPressed = 0;
+var CONST_CLOSE_ALL_TABS_KEY_CONSECUTIVE_KEY_PRESS_INTERVAL_SECONDS = 2;
 
 //FUNCTION TO FETCH USER-INPUT VALUE FROM TEXT FIELD
 function getValueFromTextField (textFieldID)
@@ -507,13 +509,29 @@ function blurOutOfAllTextBoxes()
 	$(USER_INPUT_TYPE_ALL_TEXTBOX_ID_WITHOUT_ENTER).blur();
 	
 }
+
+function shortcutKeyPressedForClosingAdditionalTabs()
+{
+    var currentTimestamp = new Date().getTime();
+    if(timeStampOfLastTimeCloseAllTabsKeyIsPressed>0)
+    {
+        var timeDifferenceInMilliSeconds = currentTimestamp - timeStampOfLastTimeCloseAllTabsKeyIsPressed;
+        if(timeDifferenceInMilliSeconds <= (CONST_CLOSE_ALL_TABS_KEY_CONSECUTIVE_KEY_PRESS_INTERVAL_SECONDS * 1000))
+        {
+            closeAdditionalSearchTabs();
+        }
+    }
+    timeStampOfLastTimeCloseAllTabsKeyIsPressed = currentTimestamp;
+}
 	
 //FUNCTION TO BIND KEY PRESS TO EVENTS
 function keyPressEvent(eventKeyCode)
 {
 		switch (eventKeyCode) {
-			
-	
+
+		case 27:shortcutKeyPressedForClosingAdditionalTabs();
+		        break;
+
 		case 48:goToTopOrConfigurationSection();
 				blurOutOfAllTextBoxes();		
 				break;	

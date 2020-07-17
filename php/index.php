@@ -191,7 +191,8 @@
 	  <li>Press "+" on NumPad  to focus on the 'Search-only-meaning Textbox Field'.</li>
 	  <li>Press "*" on NumPad  to focus on the 'Search-all-fields without enter Textbox Field'.</li>
 	  <li>Press "/" on NumPad  to focus on the 'Search-only-meaning without enter Textbox Field'.</li>
-	  
+	  <li>Press "Esc" twice within 2 seconds to close additional tabs.</li>
+
           
 	</ul> 
 	</div>

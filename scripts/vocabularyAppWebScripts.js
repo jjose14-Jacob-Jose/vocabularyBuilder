@@ -398,7 +398,7 @@ function getWordDefinitionFromOtherSources (userInputWord)
 	}
 			
 	if($(CB_SHOW_SEARCH_RESULTS_FROM_GOOGLE_SEARCH_ID).is(":checked") && greenFlagToSearchOtherLists) {
-		tabGoogleSearch = window.open(URL_GOOGLE_SEARCH + userInputWord, '_blank');
+		tabGoogleSearch = window.open(URL_GOOGLE_SEARCH + userInputWord + " meaning", '_blank');
 	}
 	
 	if($(CB_SHOW_SEARCH_RESULTS_FROM_OLAM_DICTIONARY_ID).is(":checked") && greenFlagToSearchOtherLists) {

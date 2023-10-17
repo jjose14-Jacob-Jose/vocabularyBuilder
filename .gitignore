@@ -2,3 +2,9 @@
 .settings
 .project
 .buildpath
+
+# IntelliJ configuration files
+.idea
+
+# Files to be resided only on local development machine.
+local_files

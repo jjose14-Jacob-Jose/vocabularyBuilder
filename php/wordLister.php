@@ -3,9 +3,9 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=Cp1252">
     <title>Word Lister</title>
-    <script type="text/javascript" src="../scripts/jquery-3.4.1.js"></script>
-    <script type="text/javascript" src="../scripts/wordListerScript.js"></script>
-     <link rel = "stylesheet"    type = "text/css"    href = "../css/wordlist.css" />
+    <script type="text/javascript" src="scripts/jquery-3.4.1.js"></script>
+    <script type="text/javascript" src="scripts/wordListerScript.js"></script>
+     <link rel = "stylesheet"    type = "text/css"    href = "css/wordlist.css" />
 </head>
 <body>
 

@@ -5,14 +5,14 @@
 <title>Databased Loader</title>
 
 <!-- JAVASCRIPTS -->
-<script type="text/javascript" src="../scripts/jquery-3.4.1.js"></script>
-<script type="text/javascript" src="../scripts/databaseLoaderScript.js"></script>
-<script type="text/javascript" src="../scripts/databaseLoader-dataTables.fixedHeader.min.js"></script>
-<script type="text/javascript" src="../scripts/databaseLoader-jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="scripts/jquery-3.4.1.js"></script>
+<script type="text/javascript" src="scripts/databaseLoaderScript.js"></script>
+<script type="text/javascript" src="scripts/databaseLoader-dataTables.fixedHeader.min.js"></script>
+<script type="text/javascript" src="scripts/databaseLoader-jquery.dataTables.min.js"></script>
 
 <!-- CSS STYLES -->
-<link rel="stylesheet" type="text/css" href="../css/databaseLoader-jquery.dataTables.css">
-<link rel="stylesheet" type="text/css" href="../css/databaseLoader-jquery.databaseLoader-fixedHeader.dataTables.css">
+<link rel="stylesheet" type="text/css" href="css/databaseLoader-jquery.dataTables.css">
+<link rel="stylesheet" type="text/css" href="css/databaseLoader-jquery.databaseLoader-fixedHeader.dataTables.css">
 </head>
 <body>
 	<table id="example" class="display" style="width: 100%">

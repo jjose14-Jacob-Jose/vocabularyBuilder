@@ -89,7 +89,7 @@ var CONST_CLOSE_ALL_TABS_KEY_CONSECUTIVE_KEY_PRESS_INTERVAL_SECONDS = 2;
 //FUNCTION TO FETCH USER-INPUT VALUE FROM TEXT FIELD
 function getValueFromTextField (textFieldID)
 {
-	var textFieldValue = $(textFieldID).val();
+	var textFieldValue = $(`#${textFieldID}`).val();
 	return(textFieldValue);
 }
 

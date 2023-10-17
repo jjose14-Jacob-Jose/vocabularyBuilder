@@ -3,9 +3,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=Cp1252">
 <title>Vocabulary Builder Web App</title>
-<script type="text/javascript" src="../scripts/jquery-3.4.1.js"></script>
-<script type="text/javascript" src="../scripts/vocabularyAppWebScripts.js"></script>
-<link rel = "stylesheet"    type = "text/css"    href = "../css/vocabularyAppWebStyle.css" />
+<script type="text/javascript" src="scripts/jquery-3.4.1.js"></script>
+<script type="text/javascript" src="scripts/vocabularyAppWebScripts.js"></script>
+<link rel = "stylesheet"    type = "text/css"    href = "css/vocabularyAppWebStyle.css" />
 <?php include 'vocabularyAppWebConstants.php'?>
 
 </head>
@@ -68,7 +68,7 @@
 			
 		</table>
 		</div>
-		<img  id="imgWaitScreen" src="../images/loading-gif-1.gif" alt="Please wait" height="50%"/>
+		<img id="imgWaitScreen" src="images/loading-gif-1.gif" alt="Please wait" height="50%"/>
 
 	</div>
 	

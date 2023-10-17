@@ -89,7 +89,7 @@ var CONST_CLOSE_ALL_TABS_KEY_CONSECUTIVE_KEY_PRESS_INTERVAL_SECONDS = 2;
 //FUNCTION TO FETCH USER-INPUT VALUE FROM TEXT FIELD
 function getValueFromTextField (textFieldID)
 {
-	var textFieldValue = $(`#${textFieldID}`).val();
+	var textFieldValue = $(`${textFieldID}`).val();
 	return(textFieldValue);
 }
 
@@ -138,7 +138,7 @@ function searchAllColumnsWithEnter() {
 function searchOnlyWordColumnWithoutEnter(){
 		  
 		  var userInputType = TEXTBOX_ID_USER_INPUT_TYPE_WORD_WITHOUT_ENTER;
-		  var userInputValue = getValueFromTextField(TEXTBOX_ID_USER_INPUT_TYPE_WORD_WITHOUT_ENTER);
+		  var userInputValue = getValueFromTextField(USER_INPUT_TYPE_WORD_WORD_ONLY_TEXTBOX_ID_WITHOUT_ENTER);
 		  
 		  var serverURL = SERVER_URL;
 		  
@@ -207,12 +207,8 @@ function callServerAndDisplayServerResponse(userInputValue, serverURL)
 	  			
 	  			output += '<td id="Additional_Info" class="tableRow" >';
 	  			output += response[i].Additional_Info;
-	  			output += '</td>';		
-	  			
-	  			output += '<td id="Relevant_Example" class="tableRow" >';
-	  			output += response[i].Relevant_Example;
 	  			output += '</td>';
-	  			
+
 	  			output += '<td id="Root_Index" class="tableRow" >';
 	  			output += response[i].Root_Index;
 	  			output += '</td>';		
@@ -228,7 +224,7 @@ function callServerAndDisplayServerResponse(userInputValue, serverURL)
 	  		output += '</tr>';
 	  		matchingWordsInOwnList = matchingWordsInOwnList + 1;
 	  	}
-	  	document.querySelector('.numberOfWords').innerHTML = matchingWordsInOwnList + " word(s) have been found.";
+	  	document.querySelector('.numberOfWords').innerHTML = "<br>" + matchingWordsInOwnList + " word(s) have been found.";
 		
 		//FUCNTION TO REPLACE NEW LINE WITH <br> SO THAT HTML DISPLAYS IT AS A NEW LINE WITH A CHECK TO REDUCE OVERHEAD
 		if(matchingWordsInOwnList<ENTRIES_TO_BE_DISPLAYED_WITH_NEW_LINE)
@@ -355,6 +351,10 @@ function clearMagnifiedWords()
 //FUNCTION TO SELECT ALL TEXTBOX CONTENTS 
 function clearTextBoxContents(textBoxID)
 {
+	if (!textBoxID.startsWith("#")) {
+		textBoxID = "#" + textBoxID;
+	}
+
 	if($(CB_SELECT_ALL_TEXT_BOX_LETTERS_ON_FOCUS_ID).is(":checked")) {
 		
 		//Adding # if the textbox ID passed does not have a # at its front

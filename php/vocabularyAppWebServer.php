@@ -82,7 +82,8 @@
 
     } else {
         // If no specific filter is provided, get all records
-        $query = new MongoDB\Driver\Query([]);
+//        $query = new MongoDB\Driver\Query([]);
+        $query = new MongoDB\Driver\Query([], ['limit' => 10]);
     }
 
     // Execute the query against the MongoDB database

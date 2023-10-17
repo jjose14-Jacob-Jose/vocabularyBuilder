@@ -45,14 +45,12 @@
 	<div class="divWordsFromDB" tabIndex="2">
 		<table id="tableWordsFromDB">
 			<thead id="theadTableWordsFromDB" class="theadTableWordsFromDB">
-				<th id="No">No</th>
 				<th id="Word">Word</th>
 				<th id="Meaning">Meaning</th>
 				<th id="Definition">Definition</th>
 				<th id="Additional_Info">Additional Information</th>
-				<th id="Relevant_Example">Relevant Example</th>
-				<th id="Root_Index">Root Index</th>
-				<th id="Root_Unit">Root Unit</th>
+				<th id="Root_Index">Source</th>
+				<th id="Root_Unit">Source Chapter</th>
 				<th id="Date">Date</th>
 			</thead>
 		<!-- </table>

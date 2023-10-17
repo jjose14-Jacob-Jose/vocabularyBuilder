@@ -50,6 +50,9 @@ var CB_SELECT_ALL_EXTERNAL_SEARCH_OPTIONS_ID = SYMBOL_HASH + CB_SELECT_ALL_EXTER
 var CB_FOCUS_BACK_TO_VOCABULARY_APP_WEB_AFTER_SEARCHING_EXTERNAL_SOURCES_ID = SYMBOL_HASH + CB_FOCUS_BACK_TO_VOCABULARY_APP_WEB_AFTER_SEARCHING_EXTERNAL_SOURCES;
 var DIV_CONFIGURATION_SECTION_ID = SYMBOL_HASH + DIV_CONFIGURATION_SECTION;
 
+var STRING_VALUE_UNDEFINED = undefined;
+var STRING_VALUE_EMPTY = '';
+
 //CSS ELEMENT SIZES
 TABLECOLUMN_NO_WIDTHPERCENT = 1;
 TABLECOLUMN_WORD_WIDTHPERCENT = 10;
@@ -176,6 +179,20 @@ function searchAllColumnsWithoutEnter() {
 
 	};
 
+/**
+ * Replace a string if its equal to a specific string.
+ * @param stringOriginal : String whose value is to be checked.
+ * @param stringToBeChecked : String against which the string must be checked.
+ * @param stringReplacement : Replacement string.
+ * @returns {*} : String
+ */
+function replaceStringWithString(stringOriginal, stringToBeChecked, stringReplacement) {
+	if (stringOriginal === stringToBeChecked)
+		return stringReplacement;
+	else
+		return stringOriginal;
+}
+
 //	FUNCTION TO CALL SERVER AND DISPLAY THE RESPONSE FROM SERVER
 function callServerAndDisplayServerResponse(userInputValue, serverURL)
 {
@@ -188,39 +205,29 @@ function callServerAndDisplayServerResponse(userInputValue, serverURL)
 	  	matchingWordsInOwnList = 0;
 	  	for(let i in response) {
 	  		output += '<tr>';
-	  		
-	  		output += '<td id="No" class="tableRow" >';
-	  			output += response[i].No;
-	  			output += '</td>';		
-	  			
-	  			output += '<td id="Word" class="tableRow" >';
-	  			output += response[i].Word;
-	  			output += '</td>';		
-	  			
-	  			output += '<td id="Meaning" class="tableRow" >';
-	  			output += response[i].Meaning;
-	  			output += '</td>';
-	  			
-	  			output += '<td id="Definition" class="tableRow" >';
-	  			output += response[i].Definition;
-	  			output += '</td>';		
-	  			
-	  			output += '<td id="Additional_Info" class="tableRow" >';
-	  			output += response[i].Additional_Info;
-	  			output += '</td>';
+	  		let valueFromJSON = '';
 
-	  			output += '<td id="Root_Index" class="tableRow" >';
-	  			output += response[i].Root_Index;
-	  			output += '</td>';		
-	  			
-	  			output += '<td id="Root_Unit" class="tableRow" >';
-	  			output += response[i].Root_Unit;
-	  			output += '</td>';		
-	  			
-	  			output += '<td id="Date" class="tableRow" >';
-	  			output += response[i].Date;
-	  			output += '</td>';
-	  		
+			output += '<td id="Word" class="tableRow" >';
+			output += replaceStringWithString(response[i].Word, STRING_VALUE_UNDEFINED, STRING_VALUE_EMPTY) + '</td>';
+
+			output += '<td id="Meaning" class="tableRow" >';
+			output += replaceStringWithString(response[i].Meaning, STRING_VALUE_UNDEFINED, STRING_VALUE_EMPTY) + '</td>';
+
+			output += '<td id="Definition" class="tableRow" >';
+			output += replaceStringWithString(response[i].Definition, STRING_VALUE_UNDEFINED, STRING_VALUE_EMPTY) + '</td>';
+
+			output += '<td id="Additional_Info" class="tableRow" >';
+			output += replaceStringWithString(response[i].Additional_Info, STRING_VALUE_UNDEFINED, STRING_VALUE_EMPTY) + '</td>';
+
+			output += '<td id="Root_Index" class="tableRow" >';
+			output += replaceStringWithString(response[i].Root_Index, STRING_VALUE_UNDEFINED, STRING_VALUE_EMPTY) + '</td>';
+
+			output += '<td id="Root_Unit" class="tableRow" >';
+			output += replaceStringWithString(response[i].Root_Unit, STRING_VALUE_UNDEFINED, STRING_VALUE_EMPTY) + '</td>';
+
+			output += '<td id="Date" class="tableRow" >';
+			output += replaceStringWithString(response[i].Date, STRING_VALUE_UNDEFINED, STRING_VALUE_EMPTY) + '</td>';
+
 	  		output += '</tr>';
 	  		matchingWordsInOwnList = matchingWordsInOwnList + 1;
 	  	}

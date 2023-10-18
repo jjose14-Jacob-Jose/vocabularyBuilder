@@ -196,6 +196,7 @@ function callServerAndDisplayServerResponse(userInputValue, serverURL)
 {
 	document.querySelector('.tbodyTableWordsFromDB').innerHTML = "" ;
 	document.getElementById("imgWaitScreen").style.visibility = 'visible';
+	document.getElementById("imgWaitScreen").style.height = "50%";
 	  fetch(serverURL).then((res) => res.json())
 	  .then(response => {
 	  	console.log(response);
@@ -234,7 +235,8 @@ function callServerAndDisplayServerResponse(userInputValue, serverURL)
 		
 	  	document.querySelector('.tbodyTableWordsFromDB').innerHTML = output;
 	  	document.getElementById("imgWaitScreen").style.visibility = 'hidden';
-		
+	  	document.getElementById("imgWaitScreen").style.height = "0px";
+
 		setElementWidthAccordingToScreenSize();
 		closeAdditionalSearchTabs();
 		getWordDefinitionFromOtherSources(userInputValue);
@@ -246,6 +248,7 @@ function callServerAndDisplayServerResponse(userInputValue, serverURL)
 //FUNCTION TO HIDE THE LOAD SCREEN GIF
 $(document).ready(function() {
 document.getElementById("imgWaitScreen").style.visibility = 'hidden';
+document.getElementById("imgWaitScreen").style.height = "0px";
 clearInputTextFields();
 
 //UNCOMMENT IF YOU WANT TO LOAD ALL WORDS WHEN PAGE LOADS
@@ -783,3 +786,29 @@ function toggleCheckBox (checkBoxID)
 //	  });
 //	});
 
+/**
+ * Scroll and display the HTML element in the middle of the screen.
+ * Show red border around the object.
+ * @param elementId : ID of the HTML element to be rendered.
+ */
+function scrollToMiddle(elementId) {
+	// Get the element by its ID
+	var element = document.getElementById(elementId);
+	if (element) {
+		// Calculate the middle position of the element
+		var position = element.offsetTop;
+		var middle = position - window.innerHeight / 2;
+
+		// Scroll to the middle of the element
+		window.scrollTo(0, middle);
+
+		// Add a red border to the element
+		element.style.border = "2px solid red";
+
+		// Add a click event listener to the document to remove the border
+		document.addEventListener("click", function() {
+			// Remove the red border
+			element.style.border = "none";
+		});
+	}
+}

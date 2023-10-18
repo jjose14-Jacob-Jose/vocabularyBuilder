@@ -23,8 +23,6 @@
                     ['Meaning' => new MongoDB\BSON\Regex($userInputValue, 'i')],
                     ['Definition' => new MongoDB\BSON\Regex($userInputValue, 'i')],
                     ['Additional_Info' => new MongoDB\BSON\Regex($userInputValue, 'i')],
-                    ['Root_Index' => new MongoDB\BSON\Regex($userInputValue, 'i')],
-                    ['Root_Unit' => new MongoDB\BSON\Regex($userInputValue, 'i')],
                     ['Date' => new MongoDB\BSON\Regex($userInputValue, 'i')],
                 ]
             ];

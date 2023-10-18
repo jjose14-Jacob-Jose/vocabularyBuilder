@@ -72,8 +72,6 @@
                 <th id="Meaning">Meaning</th>
                 <th id="Definition">Definition</th>
                 <th id="Additional_Info">Additional Information</th>
-                <th id="Root_Index">Source</th>
-                <th id="Root_Unit">Source Chapter</th>
                 <th id="Date">Date</th>
                 </thead>
                 <!-- </table>

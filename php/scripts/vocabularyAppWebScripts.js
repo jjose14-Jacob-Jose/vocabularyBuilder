@@ -60,8 +60,6 @@ TABLECOLUMN_MEANING_WIDTHPERCENT = 17;
 TABLECOLUMN_DEFINITION_WIDTHPERCENT = 51;
 TABLECOLUMN_ADDITIONAL_INFO_WIDTHPERCENT = 16;
 TABLECOLUMN_RELEVANT_EXAMPLE_WIDTHPERCENT = 5;
-TABLECOLUMN_ROOT_INDEX_WIDTHPERCENT = 1;
-TABLECOLUMN_ROOT_UNIT_WIDTHPERCENT = 1;
 TABLECOLUMN_DATE_WIDTHPERCENT = 1;
 TABLECOLUMN_TXTUSERINPUT_WIDTHPERCENT = 55;
 ENTRIES_TO_BE_DISPLAYED_WITH_NEW_LINE= 20;
@@ -219,12 +217,6 @@ function callServerAndDisplayServerResponse(userInputValue, serverURL)
 			output += '<td id="Additional_Info" class="tableRow" >';
 			output += replaceStringWithString(response[i].Additional_Info, STRING_VALUE_UNDEFINED, STRING_VALUE_EMPTY) + '</td>';
 
-			output += '<td id="Root_Index" class="tableRow" >';
-			output += replaceStringWithString(response[i].Root_Index, STRING_VALUE_UNDEFINED, STRING_VALUE_EMPTY) + '</td>';
-
-			output += '<td id="Root_Unit" class="tableRow" >';
-			output += replaceStringWithString(response[i].Root_Unit, STRING_VALUE_UNDEFINED, STRING_VALUE_EMPTY) + '</td>';
-
 			output += '<td id="Date" class="tableRow" >';
 			output += replaceStringWithString(response[i].Date, STRING_VALUE_UNDEFINED, STRING_VALUE_EMPTY) + '</td>';
 
@@ -307,18 +299,14 @@ function setElementWidthAccordingToScreenSize()
 	 document.getElementById("Meaning").style.width = TABLECOLUMN_MEANING_WIDTHPERCENT * screenWidthDecimalMultiplier; 
 	 document.getElementById("Definition").style.width = TABLECOLUMN_DEFINITION_WIDTHPERCENT * screenWidthDecimalMultiplier; 
 	 document.getElementById("Additional_Info").style.width = TABLECOLUMN_ADDITIONAL_INFO_WIDTHPERCENT * screenWidthDecimalMultiplier; 
-	 document.getElementById("Root_Index").style.width = TABLECOLUMN_ROOT_INDEX_WIDTHPERCENT * screenWidthDecimalMultiplier; 
-	 document.getElementById("Root_Unit").style.width = TABLECOLUMN_ROOT_UNIT_WIDTHPERCENT * screenWidthDecimalMultiplier; 
-	 document.getElementById("Date").style.width = TABLECOLUMN_DATE_WIDTHPERCENT * screenWidthDecimalMultiplier; 	 
+	 document.getElementById("Date").style.width = TABLECOLUMN_DATE_WIDTHPERCENT * screenWidthDecimalMultiplier;
 	 
 	 document.getElementById("No").style.maxWidth = TABLECOLUMN_NO_WIDTHPERCENT * screenWidthDecimalMultiplier; 
 	 document.getElementById("Word").style.maxWidth = TABLECOLUMN_WORD_WIDTHPERCENT * screenWidthDecimalMultiplier; 
 	 document.getElementById("Meaning").style.maxWidth = TABLECOLUMN_MEANING_WIDTHPERCENT * screenWidthDecimalMultiplier; 
 	 document.getElementById("Definition").style.maxWidth = TABLECOLUMN_DEFINITION_WIDTHPERCENT * screenWidthDecimalMultiplier; 
 	 document.getElementById("Additional_Info").style.maxWidth = TABLECOLUMN_ADDITIONAL_INFO_WIDTHPERCENT * screenWidthDecimalMultiplier; 
-	 document.getElementById("Root_Index").style.maxWidth = TABLECOLUMN_ROOT_INDEX_WIDTHPERCENT * screenWidthDecimalMultiplier; 
-	 document.getElementById("Root_Unit").style.maxWidth = TABLECOLUMN_ROOT_UNIT_WIDTHPERCENT * screenWidthDecimalMultiplier; 
-	 document.getElementById("Date").style.maxWidth = TABLECOLUMN_DATE_WIDTHPERCENT * screenWidthDecimalMultiplier; 
+	 document.getElementById("Date").style.maxWidth = TABLECOLUMN_DATE_WIDTHPERCENT * screenWidthDecimalMultiplier;
 	 
 	 /*
 	 //The following section is causing an exception. 

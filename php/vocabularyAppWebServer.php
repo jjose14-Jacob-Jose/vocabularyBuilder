@@ -78,11 +78,12 @@
         }
 
         // Define a query with the filter
-        $query = new MongoDB\Driver\Query($filter);
+//        $query = new MongoDB\Driver\Query($filter);
+//        $query = new MongoDB\Driver\Query($filter).limit;
+        $query = new MongoDB\Driver\Query($filter, ['limit' => 50]);
 
     } else {
         // If no specific filter is provided, get all records
-//        $query = new MongoDB\Driver\Query([]);
         $query = new MongoDB\Driver\Query([], ['limit' => 10]);
     }
 

@@ -1,0 +1,72 @@
+:root {
+	--header_height_in_px: 140px;
+	--header_background: #ffbb33;
+	--body_results_background: #ffffff;
+	--body_menu_background: #f0e1e1;
+}
+
+body {
+	background: var(--body_results_background);
+}
+
+.divHeading {
+	display: flex;
+	justify-content: space-around;
+	height: auto;
+	padding: 0;
+}
+
+.divHeading a {
+	text-decoration: none; /* Remove underline */
+}
+
+#divFloating {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: var(--header_height_in_px);
+	background: var(--header_background);
+	z-index: 1;
+}
+
+#divWordsFromDB {
+	position: relative;
+	margin-top: var(--header_height_in_px);
+}
+
+.tbodyTableWordsFromDB {
+  vertical-align: top;
+  text-align: left;
+}
+
+.tableRow {
+	border-left: 1px solid #000000;  	
+	border-bottom: 1px solid #000000;  	
+}
+
+.lettersTypedByUserMagnified #lbllettersTypedByUser {
+	font-size: 100px;
+	padding-left: 25%;
+	padding-right: 25%;
+}
+
+
+.divConfigurationSection label {
+	display:block;
+	clear:both;
+}
+
+.txtUserInput {
+	width : 15%;
+}
+
+.divMenu {
+	background: var(--body_menu_background);
+}
+
+footer {
+	display: flex;
+	justify-content: center;
+	background: var(--header_background);
+}

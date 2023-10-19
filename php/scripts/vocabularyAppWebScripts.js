@@ -50,6 +50,9 @@ var CB_SELECT_ALL_EXTERNAL_SEARCH_OPTIONS_ID = SYMBOL_HASH + CB_SELECT_ALL_EXTER
 var CB_FOCUS_BACK_TO_VOCABULARY_APP_WEB_AFTER_SEARCHING_EXTERNAL_SOURCES_ID = SYMBOL_HASH + CB_FOCUS_BACK_TO_VOCABULARY_APP_WEB_AFTER_SEARCHING_EXTERNAL_SOURCES;
 var DIV_CONFIGURATION_SECTION_ID = SYMBOL_HASH + DIV_CONFIGURATION_SECTION;
 
+var STRING_VALUE_UNDEFINED = undefined;
+var STRING_VALUE_EMPTY = '';
+
 //CSS ELEMENT SIZES
 TABLECOLUMN_NO_WIDTHPERCENT = 1;
 TABLECOLUMN_WORD_WIDTHPERCENT = 10;
@@ -57,8 +60,6 @@ TABLECOLUMN_MEANING_WIDTHPERCENT = 17;
 TABLECOLUMN_DEFINITION_WIDTHPERCENT = 51;
 TABLECOLUMN_ADDITIONAL_INFO_WIDTHPERCENT = 16;
 TABLECOLUMN_RELEVANT_EXAMPLE_WIDTHPERCENT = 5;
-TABLECOLUMN_ROOT_INDEX_WIDTHPERCENT = 1;
-TABLECOLUMN_ROOT_UNIT_WIDTHPERCENT = 1;
 TABLECOLUMN_DATE_WIDTHPERCENT = 1;
 TABLECOLUMN_TXTUSERINPUT_WIDTHPERCENT = 55;
 ENTRIES_TO_BE_DISPLAYED_WITH_NEW_LINE= 20;
@@ -89,7 +90,7 @@ var CONST_CLOSE_ALL_TABS_KEY_CONSECUTIVE_KEY_PRESS_INTERVAL_SECONDS = 2;
 //FUNCTION TO FETCH USER-INPUT VALUE FROM TEXT FIELD
 function getValueFromTextField (textFieldID)
 {
-	var textFieldValue = $(textFieldID).val();
+	var textFieldValue = $(`${textFieldID}`).val();
 	return(textFieldValue);
 }
 
@@ -138,7 +139,7 @@ function searchAllColumnsWithEnter() {
 function searchOnlyWordColumnWithoutEnter(){
 		  
 		  var userInputType = TEXTBOX_ID_USER_INPUT_TYPE_WORD_WITHOUT_ENTER;
-		  var userInputValue = getValueFromTextField(TEXTBOX_ID_USER_INPUT_TYPE_WORD_WITHOUT_ENTER);
+		  var userInputValue = getValueFromTextField(USER_INPUT_TYPE_WORD_WORD_ONLY_TEXTBOX_ID_WITHOUT_ENTER);
 		  
 		  var serverURL = SERVER_URL;
 		  
@@ -176,11 +177,26 @@ function searchAllColumnsWithoutEnter() {
 
 	};
 
+/**
+ * Replace a string if its equal to a specific string.
+ * @param stringOriginal : String whose value is to be checked.
+ * @param stringToBeChecked : String against which the string must be checked.
+ * @param stringReplacement : Replacement string.
+ * @returns {*} : String
+ */
+function replaceStringWithString(stringOriginal, stringToBeChecked, stringReplacement) {
+	if (stringOriginal === stringToBeChecked)
+		return stringReplacement;
+	else
+		return stringOriginal;
+}
+
 //	FUNCTION TO CALL SERVER AND DISPLAY THE RESPONSE FROM SERVER
 function callServerAndDisplayServerResponse(userInputValue, serverURL)
 {
 	document.querySelector('.tbodyTableWordsFromDB').innerHTML = "" ;
 	document.getElementById("imgWaitScreen").style.visibility = 'visible';
+	document.getElementById("imgWaitScreen").style.height = "50%";
 	  fetch(serverURL).then((res) => res.json())
 	  .then(response => {
 	  	console.log(response);
@@ -188,47 +204,27 @@ function callServerAndDisplayServerResponse(userInputValue, serverURL)
 	  	matchingWordsInOwnList = 0;
 	  	for(let i in response) {
 	  		output += '<tr>';
-	  		
-	  		output += '<td id="No" class="tableRow" >';
-	  			output += response[i].No;
-	  			output += '</td>';		
-	  			
-	  			output += '<td id="Word" class="tableRow" >';
-	  			output += response[i].Word;
-	  			output += '</td>';		
-	  			
-	  			output += '<td id="Meaning" class="tableRow" >';
-	  			output += response[i].Meaning;
-	  			output += '</td>';
-	  			
-	  			output += '<td id="Definition" class="tableRow" >';
-	  			output += response[i].Definition;
-	  			output += '</td>';		
-	  			
-	  			output += '<td id="Additional_Info" class="tableRow" >';
-	  			output += response[i].Additional_Info;
-	  			output += '</td>';		
-	  			
-	  			output += '<td id="Relevant_Example" class="tableRow" >';
-	  			output += response[i].Relevant_Example;
-	  			output += '</td>';
-	  			
-	  			output += '<td id="Root_Index" class="tableRow" >';
-	  			output += response[i].Root_Index;
-	  			output += '</td>';		
-	  			
-	  			output += '<td id="Root_Unit" class="tableRow" >';
-	  			output += response[i].Root_Unit;
-	  			output += '</td>';		
-	  			
-	  			output += '<td id="Date" class="tableRow" >';
-	  			output += response[i].Date;
-	  			output += '</td>';
-	  		
+	  		let valueFromJSON = '';
+
+			output += '<td id="Word" class="tableRow" >';
+			output += replaceStringWithString(response[i].Word, STRING_VALUE_UNDEFINED, STRING_VALUE_EMPTY) + '</td>';
+
+			output += '<td id="Meaning" class="tableRow" >';
+			output += replaceStringWithString(response[i].Meaning, STRING_VALUE_UNDEFINED, STRING_VALUE_EMPTY) + '</td>';
+
+			output += '<td id="Definition" class="tableRow" >';
+			output += replaceStringWithString(response[i].Definition, STRING_VALUE_UNDEFINED, STRING_VALUE_EMPTY) + '</td>';
+
+			output += '<td id="Additional_Info" class="tableRow" >';
+			output += replaceStringWithString(response[i].Additional_Info, STRING_VALUE_UNDEFINED, STRING_VALUE_EMPTY) + '</td>';
+
+			output += '<td id="Date" class="tableRow" >';
+			output += replaceStringWithString(response[i].Date, STRING_VALUE_UNDEFINED, STRING_VALUE_EMPTY) + '</td>';
+
 	  		output += '</tr>';
 	  		matchingWordsInOwnList = matchingWordsInOwnList + 1;
 	  	}
-	  	document.querySelector('.numberOfWords').innerHTML = matchingWordsInOwnList + " word(s) have been found.";
+	  	document.querySelector('.numberOfWords').innerHTML = "<br>" + matchingWordsInOwnList + " word(s) have been found.";
 		
 		//FUCNTION TO REPLACE NEW LINE WITH <br> SO THAT HTML DISPLAYS IT AS A NEW LINE WITH A CHECK TO REDUCE OVERHEAD
 		if(matchingWordsInOwnList<ENTRIES_TO_BE_DISPLAYED_WITH_NEW_LINE)
@@ -239,7 +235,8 @@ function callServerAndDisplayServerResponse(userInputValue, serverURL)
 		
 	  	document.querySelector('.tbodyTableWordsFromDB').innerHTML = output;
 	  	document.getElementById("imgWaitScreen").style.visibility = 'hidden';
-		
+	  	document.getElementById("imgWaitScreen").style.height = "0px";
+
 		setElementWidthAccordingToScreenSize();
 		closeAdditionalSearchTabs();
 		getWordDefinitionFromOtherSources(userInputValue);
@@ -251,6 +248,7 @@ function callServerAndDisplayServerResponse(userInputValue, serverURL)
 //FUNCTION TO HIDE THE LOAD SCREEN GIF
 $(document).ready(function() {
 document.getElementById("imgWaitScreen").style.visibility = 'hidden';
+document.getElementById("imgWaitScreen").style.height = "0px";
 clearInputTextFields();
 
 //UNCOMMENT IF YOU WANT TO LOAD ALL WORDS WHEN PAGE LOADS
@@ -304,18 +302,14 @@ function setElementWidthAccordingToScreenSize()
 	 document.getElementById("Meaning").style.width = TABLECOLUMN_MEANING_WIDTHPERCENT * screenWidthDecimalMultiplier; 
 	 document.getElementById("Definition").style.width = TABLECOLUMN_DEFINITION_WIDTHPERCENT * screenWidthDecimalMultiplier; 
 	 document.getElementById("Additional_Info").style.width = TABLECOLUMN_ADDITIONAL_INFO_WIDTHPERCENT * screenWidthDecimalMultiplier; 
-	 document.getElementById("Root_Index").style.width = TABLECOLUMN_ROOT_INDEX_WIDTHPERCENT * screenWidthDecimalMultiplier; 
-	 document.getElementById("Root_Unit").style.width = TABLECOLUMN_ROOT_UNIT_WIDTHPERCENT * screenWidthDecimalMultiplier; 
-	 document.getElementById("Date").style.width = TABLECOLUMN_DATE_WIDTHPERCENT * screenWidthDecimalMultiplier; 	 
+	 document.getElementById("Date").style.width = TABLECOLUMN_DATE_WIDTHPERCENT * screenWidthDecimalMultiplier;
 	 
 	 document.getElementById("No").style.maxWidth = TABLECOLUMN_NO_WIDTHPERCENT * screenWidthDecimalMultiplier; 
 	 document.getElementById("Word").style.maxWidth = TABLECOLUMN_WORD_WIDTHPERCENT * screenWidthDecimalMultiplier; 
 	 document.getElementById("Meaning").style.maxWidth = TABLECOLUMN_MEANING_WIDTHPERCENT * screenWidthDecimalMultiplier; 
 	 document.getElementById("Definition").style.maxWidth = TABLECOLUMN_DEFINITION_WIDTHPERCENT * screenWidthDecimalMultiplier; 
 	 document.getElementById("Additional_Info").style.maxWidth = TABLECOLUMN_ADDITIONAL_INFO_WIDTHPERCENT * screenWidthDecimalMultiplier; 
-	 document.getElementById("Root_Index").style.maxWidth = TABLECOLUMN_ROOT_INDEX_WIDTHPERCENT * screenWidthDecimalMultiplier; 
-	 document.getElementById("Root_Unit").style.maxWidth = TABLECOLUMN_ROOT_UNIT_WIDTHPERCENT * screenWidthDecimalMultiplier; 
-	 document.getElementById("Date").style.maxWidth = TABLECOLUMN_DATE_WIDTHPERCENT * screenWidthDecimalMultiplier; 
+	 document.getElementById("Date").style.maxWidth = TABLECOLUMN_DATE_WIDTHPERCENT * screenWidthDecimalMultiplier;
 	 
 	 /*
 	 //The following section is causing an exception. 
@@ -355,6 +349,10 @@ function clearMagnifiedWords()
 //FUNCTION TO SELECT ALL TEXTBOX CONTENTS 
 function clearTextBoxContents(textBoxID)
 {
+	if (!textBoxID.startsWith("#")) {
+		textBoxID = "#" + textBoxID;
+	}
+
 	if($(CB_SELECT_ALL_TEXT_BOX_LETTERS_ON_FOCUS_ID).is(":checked")) {
 		
 		//Adding # if the textbox ID passed does not have a # at its front
@@ -788,3 +786,29 @@ function toggleCheckBox (checkBoxID)
 //	  });
 //	});
 
+/**
+ * Scroll and display the HTML element in the middle of the screen.
+ * Show red border around the object.
+ * @param elementId : ID of the HTML element to be rendered.
+ */
+function scrollToMiddle(elementId) {
+	// Get the element by its ID
+	var element = document.getElementById(elementId);
+	if (element) {
+		// Calculate the middle position of the element
+		var position = element.offsetTop;
+		var middle = position - window.innerHeight / 2;
+
+		// Scroll to the middle of the element
+		window.scrollTo(0, middle);
+
+		// Add a red border to the element
+		element.style.border = "2px solid red";
+
+		// Add a click event listener to the document to remove the border
+		document.addEventListener("click", function() {
+			// Remove the red border
+			element.style.border = "none";
+		});
+	}
+}

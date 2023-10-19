@@ -193,6 +193,7 @@
                     <p>This software includes vocabulary definitions sourced from external providers for prototyping and educational purposes. These definitions belong to their respective owners. We acknowledge and sincerely credit:</p>
                     <ul>
                         <li>Merriam-Webster: <a href="https://www.merriam-webster.com/">https://www.merriam-webster.com/</a></li>
+                        <li>Olam: <a href="https://olam.in">https://olam.in/</a></li>
                         <li>Google: <a href="https://www.google.com/">https://www.google.com/</a></li>
                     </ul>
                     <p>This usage is not intended for commercial purposes but aims to facilitate learning and understanding of words. We respect and appreciate the content provided by these sources.</p>
@@ -211,7 +212,8 @@
                     </ul>
                     <li>v2</li>
                     <ul>
-                        <li>Development started  10:000 17-October-2023 PT</li>
+                        <li>Redesign started  10:000 17-October-2023 PT</li>
+                        <li>Deployed to cloud around 12:00 of 18-October-2023 PT.</li>
                     </ul>
                 </ul>
             </div>

@@ -1,8 +1,8 @@
 :root {
 	--header_height_in_px: 140px;
-	--header_background: #ffbb33;
+	--header_background: #d7d7d7;
 	--body_results_background: #ffffff;
-	--body_menu_background: #f0e1e1;
+	--body_menu_background: #d7d7d7;
 }
 
 body {
@@ -14,10 +14,12 @@ body {
 	justify-content: space-around;
 	height: auto;
 	padding: 0;
+	color: #383894;
 }
 
 .divHeading a {
 	text-decoration: none; /* Remove underline */
+	cursor: pointer;
 }
 
 #divFloating {

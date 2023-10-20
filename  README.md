@@ -29,6 +29,13 @@ It has been designed in a way that you can work with as few clicks and typing as
 #### MongoDB Structure
 Database name must be 'VocabularyBuilder' and collections name must be 'all_words'.
 If you are using different names, kindly update in the file `php/vocabularyAppWebServer.php`
+###### Collection: VocabularyBuilder.all_words (structure)
+    _id: ObjectId('6531c1fe5fcacb701d73e8b4')
+    Word : "a"
+    Meaning : "on"
+    Definition : "afire - on fire; ashore - on the shore; aside - on the side"
+    Additional_Info : "Latin"
+    Date : "01 January 2019"
 
 
 
@@ -40,7 +47,7 @@ If you are using different names, kindly update in the file `php/vocabularyAppWe
 #### v.2
 
     Redesign started 10:000 17-October-2023 PT
-    Deployed to cloud around 12:00 of 18-October-2023 PT.
+    Deployed to cloud around 23:30 of 19-October-2023 PT.
 
 
 ## Disclaimer 

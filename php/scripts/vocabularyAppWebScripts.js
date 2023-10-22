@@ -5,9 +5,6 @@ var TEXTBOX_ID_USER_INPUT_TYPE_WORD_WITHOUT_ENTER = "userInputTypeIsWordWithoutE
 var TEXTBOX_ID_USER_INPUT_TYPE_ALL_WITHOUT_ENTER = "userInputTypeIsAllWithoutEnter_searchAllColumnsForWords";
 var USER_INPUT_VALUE = "valueInputByUser";
 var USER_INPUT_TYPE = "userInputType";
-var MSG_PLEASE_WAIT = "Searching for the word, please wait.";
-var ENTER_KEY_HAS_TO_BE_PRESSED_RB_VALUE = "EnterKeyNeedNotBePressed";
-var ENTER_KEY_NEED_NOT_HAS_TO_BE_PRESSED_RB_VALUE = "Searching EnterKeyNeedNotBePressed the word, please wait.";
 var LABEL_MAGNIFY_USER_INPUT_LETTERS = "lbllettersTypedByUser";
 var CB_MAGNIFY_USER_INPUT_LETTERS = "cbMagnifyLetters";
 var CB_SELECT_ALL_TEXT_BOX_LETTERS_ON_FOCUS = "cbSelectTextboxOnFocus";
@@ -25,7 +22,7 @@ var DIV_CONFIGURATION_SECTION = "divConfigurationSection";
 var DIV_USER_INPUT_SECTION = "userInput";
 
 var SYMBOL_HASH = "#";
-var SYMBOL_PLUS = "+";
+var DELAY_FOR_TOAST_MESSAGE_IN_MILLISECONDS = "5000";
 
 //OTHER CONSTANTS
 var SERVER_URL = "vocabularyAppWebServer.php";
@@ -52,6 +49,18 @@ var DIV_CONFIGURATION_SECTION_ID = SYMBOL_HASH + DIV_CONFIGURATION_SECTION;
 
 var STRING_VALUE_UNDEFINED = undefined;
 var STRING_VALUE_EMPTY = '';
+var MSG_WORD_NOT_FOUND = "I am sorry, the vocabulary list is not comprehensive."
+	+ getStringConcatenated("<br>", 3)
+	+ "Can you try another word?"
+	+ getStringConcatenated("<br>", 3)
+	+ "Thank you very much.";
+
+var MSG_SERVER_ERROR	 = "Our server is currently facing outage."
+	+ getStringConcatenated("<br>", 3)
+	+ "Would you mind trying again after sometime."
+	+ getStringConcatenated("<br>", 3)
+	+ "Thank you for consideration.";
+
 
 //CSS ELEMENT SIZES
 TABLECOLUMN_NO_WIDTHPERCENT = 1;
@@ -94,6 +103,13 @@ function getValueFromTextField (textFieldID)
 	return(textFieldValue);
 }
 
+function getStringConcatenated(string, count) {
+	let stringConcatenated = "";
+	for(let i=0; i<count; i++) {
+		stringConcatenated = stringConcatenated + string;
+	}
+	return stringConcatenated;
+}
 
 //FETCHING FROM DB (WORDS ONLY) FROM USER INPUT
 function searchOnlyWordColumnWithEnter(){
@@ -200,6 +216,10 @@ function callServerAndDisplayServerResponse(userInputValue, serverURL)
 	  fetch(serverURL).then((res) => res.json())
 	  .then(response => {
 	  	console.log(response);
+
+		if(response.length === 0)
+			showToast(MSG_WORD_NOT_FOUND, DELAY_FOR_TOAST_MESSAGE_IN_MILLISECONDS);
+
 	  	let output = '';
 	  	matchingWordsInOwnList = 0;
 	  	for(let i in response) {
@@ -245,7 +265,7 @@ function callServerAndDisplayServerResponse(userInputValue, serverURL)
 	  }).catch(error => {
 		  console.log(error.stack);
 		  document.getElementById("imgWaitScreen").style.visibility = 'hidden';
-		  showToast("Words is not present", 4000);
+		  showToast(MSG_SERVER_ERROR, DELAY_FOR_TOAST_MESSAGE_IN_MILLISECONDS);
 
 	  });
 }
@@ -254,7 +274,7 @@ function showToast(message, delayInMilliSeconds) {
 	// Create a toast element
 	const toast = document.createElement('div');
 	toast.classList.add('toast');
-	toast.textContent = message;
+	toast.innerHTML = message;
 
 	document.body.appendChild(toast);
 	// Hiding toast after the delay.
@@ -315,15 +335,13 @@ function setElementWidthAccordingToScreenSize()
 	var screenWidth = screen.width;
 	var screenWidthDecimalMultiplier = screenWidth / 100;
 	
-	 document.getElementById("No").style.width = TABLECOLUMN_NO_WIDTHPERCENT * screenWidthDecimalMultiplier; 
-	 document.getElementById("Word").style.width = TABLECOLUMN_WORD_WIDTHPERCENT * screenWidthDecimalMultiplier; 
+	 document.getElementById("Word").style.width = TABLECOLUMN_WORD_WIDTHPERCENT * screenWidthDecimalMultiplier;
 	 document.getElementById("Meaning").style.width = TABLECOLUMN_MEANING_WIDTHPERCENT * screenWidthDecimalMultiplier; 
 	 document.getElementById("Definition").style.width = TABLECOLUMN_DEFINITION_WIDTHPERCENT * screenWidthDecimalMultiplier; 
 	 document.getElementById("Additional_Info").style.width = TABLECOLUMN_ADDITIONAL_INFO_WIDTHPERCENT * screenWidthDecimalMultiplier; 
 	 document.getElementById("Date").style.width = TABLECOLUMN_DATE_WIDTHPERCENT * screenWidthDecimalMultiplier;
 	 
-	 document.getElementById("No").style.maxWidth = TABLECOLUMN_NO_WIDTHPERCENT * screenWidthDecimalMultiplier; 
-	 document.getElementById("Word").style.maxWidth = TABLECOLUMN_WORD_WIDTHPERCENT * screenWidthDecimalMultiplier; 
+	 document.getElementById("Word").style.maxWidth = TABLECOLUMN_WORD_WIDTHPERCENT * screenWidthDecimalMultiplier;
 	 document.getElementById("Meaning").style.maxWidth = TABLECOLUMN_MEANING_WIDTHPERCENT * screenWidthDecimalMultiplier; 
 	 document.getElementById("Definition").style.maxWidth = TABLECOLUMN_DEFINITION_WIDTHPERCENT * screenWidthDecimalMultiplier; 
 	 document.getElementById("Additional_Info").style.maxWidth = TABLECOLUMN_ADDITIONAL_INFO_WIDTHPERCENT * screenWidthDecimalMultiplier; 

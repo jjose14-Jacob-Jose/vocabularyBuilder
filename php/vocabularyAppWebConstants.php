@@ -12,4 +12,22 @@
     define("MSG_PLACEHOLDER_WORD_WITH_ENTER", "Enter word and press Enter");
     define("MSG_PLACEHOLDER_WORD_WITHOUT_ENTER", "Enter word to list while typing");
 
+    define("COUNT_MAXIMUM_QUERY_ROWS_WHEN_NO_CONDITION", 15);
+    define("COUNT_MAXIMUM_QUERY_ROWS_WITH_CONDITION", 50);
+
+    $username = 'azUsrypVYkFA9VbHJ8Rtt';
+    $password = 'zKJmey4D5Rh5CTvB323423';
+    $clusterUrl = 'portfoliocluster.dfelmtz.mongodb.net/';
+
+    $database = 'PortfolioDatabase';
+    $collectionName = 'all_words';
+
+    $connectionStringForLocal = 'mongodb://host.docker.internal:27017';
+    $connectionForMongoDBAtlas = "mongodb+srv://$username:$password@$clusterUrl";
+
+//    Specify value for CONNECTION_STRING_FOR_MONGO_DB as any of the following:
+//- $connectionStringForLocal
+//- $connectionForMongoDBAtlas
+    define("MONGODB_CONNECTION_STRING", $connectionForMongoDBAtlas);
+    define("MONGODB_COLLECTION_NAME", $database . "." . $collectionName);
 ?>

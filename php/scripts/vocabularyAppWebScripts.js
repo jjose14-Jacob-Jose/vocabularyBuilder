@@ -22,7 +22,7 @@ var DIV_CONFIGURATION_SECTION = "divConfigurationSection";
 var DIV_USER_INPUT_SECTION = "userInput";
 
 var SYMBOL_HASH = "#";
-var DELAY_FOR_TOAST_MESSAGE_IN_SECONDS = "50";
+var DELAY_FOR_TOAST_MESSAGE_IN_SECONDS = "10";
 
 //OTHER CONSTANTS
 var SERVER_URL = "vocabularyAppWebServer.php";

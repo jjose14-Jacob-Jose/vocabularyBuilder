@@ -2,9 +2,6 @@
 
     include 'vocabularyAppWebConstants.php';
 
-    // Connect to the MongoDB server running on localhost
-    $mongodb = new MongoDB\Driver\Manager("mongodb://host.docker.internal:27017");
-
     if (isset($_GET[USER_INPUT_TYPE]) && isset($_GET[USER_INPUT_VALUE])) {
         $userInputType = $_GET[USER_INPUT_TYPE];
         $userInputValue = $_GET[USER_INPUT_VALUE];
@@ -28,21 +25,19 @@
             ];
         }
 
-        // Define a query with the filter
 //        Database query with no limit.
 //        $query = new MongoDB\Driver\Query($filter);
 
-//        Only 50 records are pulled.
-        $query = new MongoDB\Driver\Query($filter, ['limit' => 50]);
+//        Only 'COUNT_MAXIMUM_QUERY_ROWS_WITH_CONDITION' records are pulled.
+        $query = new MongoDB\Driver\Query($filter, ['limit' => COUNT_MAXIMUM_QUERY_ROWS_WITH_CONDITION]);
 
     } else {
-//        10 records are pulled. This is similar to "SELECT * FROM"
-        // If no specific filter is provided, get all records
-        $query = new MongoDB\Driver\Query([], ['limit' => 10]);
+        $query = new MongoDB\Driver\Query([], ['limit' => COUNT_MAXIMUM_QUERY_ROWS_WHEN_NO_CONDITION]);
     }
 
+    $mongodbManager = new MongoDB\Driver\Manager(MONGODB_CONNECTION_STRING);
     // Execute the query against the MongoDB database
-    $cursor = $mongodb->executeQuery('VocabularyBuilder.all_words', $query);
+    $cursor = $mongodbManager->executeQuery(MONGODB_COLLECTION_NAME, $query);
 
     // Convert the MongoDB cursor to an array
     $result = iterator_to_array($cursor);

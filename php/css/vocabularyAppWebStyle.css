@@ -77,16 +77,25 @@ footer {
 .toast {
 	background-color: #fd1000; /* Red background color */
 	color: white;
-	padding: 16px;
+	padding: 10px;
+	padding-top: 50px;
 	border-radius: 8px;
 	position: fixed;
-	top: 20%;
+	top: 30%;
 	left: 50%;
 	transform: translate(-50%, -50%);
 	z-index: 1000; /* High z-index to overlay other content */
 	text-align: center;
 	font-size: 24px;
+}
 
+.toastCloseButton {
+	position: absolute;
+	top: 5px;
+	right: 5px;
+	cursor: pointer;
+	font-size:16px;
+	color: black;
 }
 
 

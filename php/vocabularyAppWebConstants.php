@@ -28,6 +28,6 @@
 //    Specify value for CONNECTION_STRING_FOR_MONGO_DB as any of the following:
 //- $connectionStringForLocal
 //- $connectionForMongoDBAtlas
-    define("MONGODB_CONNECTION_STRING", $connectionStringForLocal);
+    define("MONGODB_CONNECTION_STRING", $connectionForMongoDBAtlas);
     define("MONGODB_COLLECTION_NAME", $database . "." . $collectionName);
 ?>

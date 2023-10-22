@@ -22,7 +22,7 @@ var DIV_CONFIGURATION_SECTION = "divConfigurationSection";
 var DIV_USER_INPUT_SECTION = "userInput";
 
 var SYMBOL_HASH = "#";
-var DELAY_FOR_TOAST_MESSAGE_IN_MILLISECONDS = "5000";
+var DELAY_FOR_TOAST_MESSAGE_IN_SECONDS = "10";
 
 //OTHER CONSTANTS
 var SERVER_URL = "vocabularyAppWebServer.php";
@@ -49,6 +49,7 @@ var DIV_CONFIGURATION_SECTION_ID = SYMBOL_HASH + DIV_CONFIGURATION_SECTION;
 
 var STRING_VALUE_UNDEFINED = undefined;
 var STRING_VALUE_EMPTY = '';
+var MSG_TOAST_CLOSE = 'Press any key or click close';
 var MSG_WORD_NOT_FOUND = "I am sorry, the vocabulary list is not comprehensive."
 	+ getStringConcatenated("<br>", 3)
 	+ "Can you try another word?"
@@ -218,7 +219,7 @@ function callServerAndDisplayServerResponse(userInputValue, serverURL)
 	  	console.log(response);
 
 		if(response.length === 0)
-			showToast(MSG_WORD_NOT_FOUND, DELAY_FOR_TOAST_MESSAGE_IN_MILLISECONDS);
+			showToast(MSG_WORD_NOT_FOUND, DELAY_FOR_TOAST_MESSAGE_IN_SECONDS);
 
 	  	let output = '';
 	  	matchingWordsInOwnList = 0;
@@ -265,22 +266,40 @@ function callServerAndDisplayServerResponse(userInputValue, serverURL)
 	  }).catch(error => {
 		  console.log(error.stack);
 		  document.getElementById("imgWaitScreen").style.visibility = 'hidden';
-		  showToast(MSG_SERVER_ERROR, DELAY_FOR_TOAST_MESSAGE_IN_MILLISECONDS);
+		  showToast(MSG_SERVER_ERROR, DELAY_FOR_TOAST_MESSAGE_IN_SECONDS);
 
 	  });
 }
 
-function showToast(message, delayInMilliSeconds) {
+function showToast(message, delayInSeconds) {
 	// Create a toast element
 	const toast = document.createElement('div');
 	toast.classList.add('toast');
 	toast.innerHTML = message;
 
+	// Create a close button
+	const toastCloseButton = document.createElement('span');
+	toastCloseButton.textContent = MSG_TOAST_CLOSE; // Display "x" as the close button
+	toastCloseButton.classList.add('toastCloseButton');
+	toastCloseButton.addEventListener('click', () => {
+		document.body.removeChild(toast);
+	});
+	toast.appendChild(toastCloseButton);
 	document.body.appendChild(toast);
 	// Hiding toast after the delay.
 	setTimeout(() => {
 		document.body.removeChild(toast);
-	}, delayInMilliSeconds);
+	}, delayInSeconds * 1000);
+
+	// Hide the toast if the user clicks on the screen.
+	document.addEventListener('click', () => {
+		// Hide the toast element
+		document.body.removeChild(toast);
+	});
+	document.addEventListener('keypress', () => {
+		// Hide the toast element
+		document.body.removeChild(toast);
+	});
 }
 
 //FUNCTION TO HIDE THE LOAD SCREEN GIF

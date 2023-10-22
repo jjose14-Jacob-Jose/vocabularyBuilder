@@ -242,8 +242,26 @@ function callServerAndDisplayServerResponse(userInputValue, serverURL)
 		getWordDefinitionFromOtherSources(userInputValue);
 
 
-	  }).catch(error => console.log(error.stack));
-	}
+	  }).catch(error => {
+		  console.log(error.stack);
+		  document.getElementById("imgWaitScreen").style.visibility = 'hidden';
+		  showToast("Words is not present", 4000);
+
+	  });
+}
+
+function showToast(message, delayInMilliSeconds) {
+	// Create a toast element
+	const toast = document.createElement('div');
+	toast.classList.add('toast');
+	toast.textContent = message;
+
+	document.body.appendChild(toast);
+	// Hiding toast after the delay.
+	setTimeout(() => {
+		document.body.removeChild(toast);
+	}, delayInMilliSeconds);
+}
 
 //FUNCTION TO HIDE THE LOAD SCREEN GIF
 $(document).ready(function() {

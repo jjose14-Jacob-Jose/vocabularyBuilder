@@ -10,54 +10,54 @@
 
 </head>
     <body>
-    <div id="divFloating">
-        <div class="divHeading">
-            <a href="index.php"><h1>Vocabulary Builder</h1></a>
-            <a onclick="scrollToMiddle('divConfigurationSection')"><h4>Configuration</h4></a>
-            <a onclick="scrollToMiddle('divHelp')"><h4>Help</h4></a>
-            <a onclick="scrollToMiddle('divHotkeys')"><h4>Hotkeys</h4></a>
-            <a onclick="scrollToMiddle('divDisclaimer')"><h4>Disclaimer</h4></a>
-            <a onclick="scrollToMiddle('divAbout')"><h4>About</h4></a>
-       </div>
-        <!-- USER INPUT AREA START -->
-        <hr>
-        <div id="userInput" tabIndex="1">
-            <label> Meaning : </label>
-            <input type="text" id="<?php echo(TEXTBOX_ID_USER_INPUT_TYPE_WORD_WITH_ENTER); ?>" autofocus
-                   placeHolder="<?php echo(MSG_PLACEHOLDER_WORD_WITH_ENTER); ?>" class="txtUserInput"
-                   onKeyUp=displayLettersMagnified("<?php echo(TEXTBOX_ID_USER_INPUT_TYPE_WORD_WITH_ENTER); ?>")
-                   onclick=clearTextBoxContents("<?php echo(TEXTBOX_ID_USER_INPUT_TYPE_WORD_WITH_ENTER); ?>")>
-            <label> All : </label>
-            <input type="text" id="<?php echo(TEXTBOX_ID_USER_INPUT_TYPE_ALL_WITH_ENTER); ?>"
-                   placeHolder="<?php echo(MSG_PLACEHOLDER_WORD_WITH_ENTER); ?>" class="txtUserInput"
-                   onKeyUp=displayLettersMagnified("<?php echo(TEXTBOX_ID_USER_INPUT_TYPE_ALL_WITH_ENTER); ?>")
-                   onclick=clearTextBoxContents("<?php echo(TEXTBOX_ID_USER_INPUT_TYPE_ALL_WITH_ENTER); ?>")>
+        <div id="divFloating">
+            <div class="divHeading">
+                <a href="index.php"><h1>Vocabulary Builder</h1></a>
+                <a onclick="scrollToMiddle('divConfigurationSection')"><h4>Configuration</h4></a>
+                <a onclick="scrollToMiddle('divHelp')"><h4>Help</h4></a>
+                <a onclick="scrollToMiddle('divHotkeys')"><h4>Hotkeys</h4></a>
+                <a onclick="scrollToMiddle('divDisclaimer')"><h4>Disclaimer</h4></a>
+                <a onclick="scrollToMiddle('divAbout')"><h4>About</h4></a>
+           </div>
+            <!-- USER INPUT AREA START -->
+            <hr>
+            <div id="userInput" tabIndex="1">
+                <label> Meaning : </label>
+                <input type="text" id="<?php echo(TEXTBOX_ID_USER_INPUT_TYPE_WORD_WITH_ENTER); ?>" autofocus
+                       placeHolder="<?php echo(MSG_PLACEHOLDER_WORD_WITH_ENTER); ?>" class="txtUserInput"
+                       onKeyUp=displayLettersMagnified("<?php echo(TEXTBOX_ID_USER_INPUT_TYPE_WORD_WITH_ENTER); ?>")
+                       onclick=clearTextBoxContents("<?php echo(TEXTBOX_ID_USER_INPUT_TYPE_WORD_WITH_ENTER); ?>")>
+                <label> All : </label>
+                <input type="text" id="<?php echo(TEXTBOX_ID_USER_INPUT_TYPE_ALL_WITH_ENTER); ?>"
+                       placeHolder="<?php echo(MSG_PLACEHOLDER_WORD_WITH_ENTER); ?>" class="txtUserInput"
+                       onKeyUp=displayLettersMagnified("<?php echo(TEXTBOX_ID_USER_INPUT_TYPE_ALL_WITH_ENTER); ?>")
+                       onclick=clearTextBoxContents("<?php echo(TEXTBOX_ID_USER_INPUT_TYPE_ALL_WITH_ENTER); ?>")>
 
-            <label> Meaning (without Enter): </label>
-            <input type="text" id="<?php echo(TEXTBOX_ID_USER_INPUT_TYPE_WORD_WITHOUT_ENTER); ?>"
-                   onKeyUp="searchOnlyWordColumnWithoutEnter()" placeHolder="<?php echo(MSG_PLACEHOLDER_WORD_WITHOUT_ENTER); ?>"
-                   class="txtUserInput"
-                   onKeyUp=displayLettersMagnified("<?php echo(TEXTBOX_ID_USER_INPUT_TYPE_WORD_WITHOUT_ENTER); ?>")
-                   onclick=clearTextBoxContents("<?php echo(TEXTBOX_ID_USER_INPUT_TYPE_WORD_WITHOUT_ENTER); ?>")>
+                <label> Meaning (without Enter): </label>
+                <input type="text" id="<?php echo(TEXTBOX_ID_USER_INPUT_TYPE_WORD_WITHOUT_ENTER); ?>"
+                       onKeyUp="searchOnlyWordColumnWithoutEnter()" placeHolder="<?php echo(MSG_PLACEHOLDER_WORD_WITHOUT_ENTER); ?>"
+                       class="txtUserInput"
+                       onKeyUp=displayLettersMagnified("<?php echo(TEXTBOX_ID_USER_INPUT_TYPE_WORD_WITHOUT_ENTER); ?>")
+                       onclick=clearTextBoxContents("<?php echo(TEXTBOX_ID_USER_INPUT_TYPE_WORD_WITHOUT_ENTER); ?>")>
 
-            <label> All (without Enter): </label>
-            <input type="text" id="<?php echo(TEXTBOX_ID_USER_INPUT_TYPE_ALL_WITHOUT_ENTER); ?>"
-                   onKeyUp="searchAllColumnsWithoutEnter()" placeHolder="<?php echo(MSG_PLACEHOLDER_WORD_WITHOUT_ENTER); ?>"
-                   class="txtUserInput"
-                   onKeyUp=displayLettersMagnified("<?php echo(TEXTBOX_ID_USER_INPUT_TYPE_ALL_WITHOUT_ENTER); ?>")
-                   onclick=clearTextBoxContents("<?php echo(TEXTBOX_ID_USER_INPUT_TYPE_ALL_WITHOUT_ENTER); ?>")>
+                <label> All (without Enter): </label>
+                <input type="text" id="<?php echo(TEXTBOX_ID_USER_INPUT_TYPE_ALL_WITHOUT_ENTER); ?>"
+                       onKeyUp="searchAllColumnsWithoutEnter()" placeHolder="<?php echo(MSG_PLACEHOLDER_WORD_WITHOUT_ENTER); ?>"
+                       class="txtUserInput"
+                       onKeyUp=displayLettersMagnified("<?php echo(TEXTBOX_ID_USER_INPUT_TYPE_ALL_WITHOUT_ENTER); ?>")
+                       onclick=clearTextBoxContents("<?php echo(TEXTBOX_ID_USER_INPUT_TYPE_ALL_WITHOUT_ENTER); ?>")>
 
 
-            <label class="numberOfWords"></label>
+                <label class="numberOfWords"></label>
+            </div>
         </div>
-    </div>
         <!-- USER INPUT AREA END -->
         <hr>
         <!-- SEARCH RESULTS AREA START -->
         <!-- AREA TO DISPLAY INPUT BY USER IN BIGGER FONT START -->
-        <div class="lettersTypedByUserMagnified" id="lettersTypedByUserMagnified"></div>
+        <div class="lettersTypedByUserMagnified" id="lettersTypedByUserMagnified" ></div>
         <!-- AREA TO DISPLAY INPUT BY USER IN BIGGER FONT END -->
-        <div id="divWordsFromDB" tabIndex="2">
+        <div id="divWordsFromDB" tabIndex="3">
             <table id="tableWordsFromDB">
                 <thead id="theadTableWordsFromDB" class="theadTableWordsFromDB">
                 <th id="Word">Word</th>
@@ -66,18 +66,17 @@
                 <th id="Additional_Info">Additional Information</th>
                 <th id="Date">Date</th>
                 </thead>
-                <tbody id="tbodyTableWordsFromDB" class="tbodyTableWordsFromDB" tabIndex="3">
+                <tbody id="tbodyTableWordsFromDB" class="tbodyTableWordsFromDB" tabIndex="2">
                 </tbody>
             </table>
         </div>
         <img id="imgWaitScreen" src="images/loading-gif-1.gif" alt="Please wait" height="50%"/>
 
-        </div>
         <!-- SEARCH RESULTS AREA END -->
         <!-- AREA TO DISPLAY BIGGER FONT DISPLAY SETUP START -->
         <hr>
         <div class="divMenu">
-            <div class="divConfigurationSection" id="divConfigurationSection" tabIndex="4">
+            <div class="divConfigurationSection" id="divConfigurationSection" tabIndex="3">
                 <h3> Configuration </h3>
                 <ol>
                     <li>
@@ -97,7 +96,7 @@
 
                     <li>
                         <label for="cbMagnifyLetters">
-                            <input type="checkbox" id="cbMagnifyLetters" tabIndex="5"/>
+                            <input type="checkbox" id="cbMagnifyLetters" onclick="clearMagnifiedWords()" tabIndex="5"/>
                             Check if you want to magnify the words while you type.
                         </label>
                     </li>

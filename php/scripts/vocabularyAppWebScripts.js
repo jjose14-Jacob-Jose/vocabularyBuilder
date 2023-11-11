@@ -385,6 +385,9 @@ function displayLettersMagnified(inputTextBoxId)
 		
 		var magnifiedLetters = "<label id=\"lbllettersTypedByUser\" >" + textFieldContents + "</label>";
 		document.querySelector("#lettersTypedByUserMagnified").innerHTML = magnifiedLetters;
+		document.querySelector("#divFloating").style.position = "relative";
+	} else {
+		clearMagnifiedWords();
 	}
 	
 	if(textFieldContents.length === 0)
@@ -394,11 +397,7 @@ function displayLettersMagnified(inputTextBoxId)
 //FUNCTION CLEAR THE MAGNIFIED WORDS
 function clearMagnifiedWords()
 {
-	if (document.querySelector("#lbllettersTypedByUser") != null ) {
-			document.querySelector("#lbllettersTypedByUser").remove();
-	}	
-	
-	
+	document.querySelector("#divFloating").style.position = "absolute";
 }
 
 //FUNCTION TO SELECT ALL TEXTBOX CONTENTS 

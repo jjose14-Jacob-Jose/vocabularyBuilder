@@ -866,3 +866,26 @@ function scrollToMiddle(elementId) {
 		});
 	}
 }
+
+
+function onClick(e) {
+	e.preventDefault();
+	grecaptcha.ready(function() {
+		grecaptcha.execute('6LekFAwpAAAAALCkFj2KbJ64l2d2Uth42ti3weOq', {action: 'submit'}).then(function(token) {
+			// Add your logic to submit to your backend server here.
+			getToken(token);
+		});
+	});
+}
+
+
+function getToken(token) {
+	console.info("token: "+token);
+}
+
+function getGoogleToken() {
+	// Simulate a click event on an HTML element associated with onClick
+	var dummyElement = document.createElement("div");
+	dummyElement.onclick = onClick;
+	dummyElement.click();
+}

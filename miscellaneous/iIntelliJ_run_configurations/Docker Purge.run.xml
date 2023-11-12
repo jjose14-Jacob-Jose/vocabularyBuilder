@@ -1,6 +1,6 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="Docker Purge" type="ShConfigurationType">
-    <option name="SCRIPT_TEXT" value="docker stop $(docker ps -a -q) ; docker rm $(docker ps -a -q) ; docker rmi $(docker images -q) ; docker volume prune" />
+    <option name="SCRIPT_TEXT" value="docker stop $(docker ps -a -q) ; docker rm -f $(docker ps -a -q) ; docker rmi -f $(docker images -q) ; docker volume prune" />
     <option name="INDEPENDENT_SCRIPT_PATH" value="true" />
     <option name="SCRIPT_PATH" value="" />
     <option name="SCRIPT_OPTIONS" value="" />

@@ -209,12 +209,25 @@ function replaceStringWithString(stringOriginal, stringToBeChecked, stringReplac
 }
 
 //	FUNCTION TO CALL SERVER AND DISPLAY THE RESPONSE FROM SERVER
-function callServerAndDisplayServerResponse(userInputValue, serverURL)
+async function callServerAndDisplayServerResponse(userInputValue, serverURL)
 {
+	let googleReCaptchaToken = await getGoogleToken();
 	document.querySelector('.tbodyTableWordsFromDB').innerHTML = "" ;
 	document.getElementById("imgWaitScreen").style.visibility = 'visible';
 	document.getElementById("imgWaitScreen").style.height = "50%";
-	  fetch(serverURL).then((res) => res.json())
+
+	const data = {
+		userInputValue: userInputValue,
+		googleReCaptchaToken: googleReCaptchaToken
+	};
+
+	  fetch(serverURL, {
+		  method: 'POST',
+		  headers: {
+			  'Content-Type': 'application/json',
+		  },
+		  body: JSON.stringify(data),
+	  }).then((res) => res.json())
 	  .then(response => {
 	  	console.log(response);
 
@@ -327,10 +340,12 @@ $(USER_INPUT_TYPE_ALL_TEXTBOX_ID_WITH_ENTER).keyup(function(event) {
 });
 
 //Assigning Events to each Key Press
-$(document).keyup(function(event) {
-   keyPressEvent(event.keyCode)
+document.addEventListener('keydown', function (event) {
+	// Enabling shortcuts in combination with ALT key.
+	if (event.altKey) {
+		keyPressEvent(event.keyCode);
+	}
 });
-
 
 });
 
@@ -385,6 +400,9 @@ function displayLettersMagnified(inputTextBoxId)
 		
 		var magnifiedLetters = "<label id=\"lbllettersTypedByUser\" >" + textFieldContents + "</label>";
 		document.querySelector("#lettersTypedByUserMagnified").innerHTML = magnifiedLetters;
+		document.querySelector("#divFloating").style.position = "relative";
+	} else {
+		clearMagnifiedWords();
 	}
 	
 	if(textFieldContents.length === 0)
@@ -394,11 +412,7 @@ function displayLettersMagnified(inputTextBoxId)
 //FUNCTION CLEAR THE MAGNIFIED WORDS
 function clearMagnifiedWords()
 {
-	if (document.querySelector("#lbllettersTypedByUser") != null ) {
-			document.querySelector("#lbllettersTypedByUser").remove();
-	}	
-	
-	
+	document.querySelector("#divFloating").style.position = "absolute";
 }
 
 //FUNCTION TO SELECT ALL TEXTBOX CONTENTS 
@@ -580,6 +594,7 @@ function shortcutKeyPressedForClosingAdditionalTabs()
 //FUNCTION TO BIND KEY PRESS TO EVENTS
 function keyPressEvent(eventKeyCode)
 {
+		console.log("Toggling Configuration with Key Press : "+eventKeyCode);
 		switch (eventKeyCode) {
 
 		case 27:shortcutKeyPressedForClosingAdditionalTabs();
@@ -644,202 +659,31 @@ function keyPressEvent(eventKeyCode)
 
 }
 
-//FUNCTION TO TOGGLE CHECKBOXS BETWEEN checked AND unchecked
+/**
+ * Toggles the configuration options via key presses. A toast message is shown to the user.
+ * @param checkBoxID HTML ID of the checkbox.
+ */
 function toggleCheckBox (checkBoxID)
 {
+	let checkedStatus = "";
 	if($(checkBoxID).is(":checked"))
+	{
 		$(checkBoxID).prop("checked", false);
-	else 
+		checkedStatus = "Disabled."
+	}
+	else
+	{
 		$(checkBoxID).prop("checked", true);
+		checkedStatus = "Enabled."
+	}
 
+	// Showing toasting message to the user.
+	let checkboxLabelText = $(checkBoxID)[0].labels[0].innerText;
+	if (checkboxLabelText != null || checkboxLabelText.length > 0) {
+		let toastDisplayDurationInSeconds = 2;
+		showToast(checkedStatus + checkboxLabelText, toastDisplayDurationInSeconds);
+	}
 }	
-
-////FETCH DATA
-//var serverURL = 'wordlisterServer.php';
-////fetch('wordListerServer.php').then((res) => res.json())
-//fetch(serverURL).then((res) => res.json())
-//.then(response => {	
-//	console.log(response);
-//	let output = '';
-//	for(let i in response) {
-//		output += '<tr>';
-//			output += '<td id="No" class="tableRow" >';
-//			output += response[i].No;
-//			output += '</td>';		
-//			
-//			output += '<td id="Word" class="tableRow" >';
-//			output += response[i].Word;
-//			output += '</td>';		
-//			
-//			output += '<td id="Meaning" class="tableRow" >';
-//			output += response[i].Meaning;
-//			output += '</td>';
-//			
-//			output += '<td id="Definition" class="tableRow" >';
-//			output += response[i].Definition;
-//			output += '</td>';		
-//			
-//			output += '<td id="Additional_Info" class="tableRow" >';
-//			output += response[i].Additional_Info;
-//			output += '</td>';		
-//			
-//			output += '<td id="Relevant_Example" class="tableRow" >';
-//			output += response[i].Relevant_Example;
-//			output += '</td>';
-//			
-//			output += '<td id="Root_Index" class="tableRow" >';
-//			output += response[i].Root_Index;
-//			output += '</td>';		
-//			
-//			output += '<td id="Root_Unit" class="tableRow" >';
-//			output += response[i].Root_Unit;
-//			output += '</td>';		
-//			
-//			output += '<td id="Date" class="tableRow" >';
-//			output += response[i].Date;
-//			output += '</td>';
-//		
-//		output += '</tr>';
-//	}
-//	document.querySelector('.tbody').innerHTML = output;
-//}).catch(error => console.log(error));
-//
-////SEARCHING ALL DATA
-//$(document).ready(function(){
-//
-//	
-////OLD METHOD SEARCHING ALL
-//$("#txtUserInputAll").on("keyup", function() {
-//  var value = $(this).val().toLowerCase();
-//  $("#wordListTableBody tr").filter(function() {
-//    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-//  });
-//});
-//});
-//
-//////OLD METHOD SEARCHING ONLY MEANING
-////$("#txtUserInputMeaning").on("keyup", function() {
-////  var value = $(this).val().toLowerCase();
-////  $("#wordListTableBody tr").filter( "#meaning" ,function() {
-////    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-////  });
-////});
-//
-//
-////$(document).ready(function() {
-////	// Setup - add a text input to each footer cell
-////    $('#tableWords thead tr').clone(true).appendTo( '#tableWords thead' );
-////    $('#tableWords thead tr:eq(1) th').each( function (i) {
-////        var title = $(this).text();
-////        $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
-////        $( 'input', this ).on( 'keyup change', function () {
-////        if ( table.column(i).search() !== this.value ) {
-////                table
-////                    .column(i)
-////                    .search( this.value )
-////                    .draw();
-////            }
-////        } );
-////    } );
-//// 
-////    var table = $('#tableWords').DataTable( {
-////        orderCellsTop: true,
-////        fixedHeader: true
-////    } );
-////} );
-//
-//
-//
-////FROM NEW SITE TO SEARCH MEANINGS ONLY
-//$(document).ready(function() {
-//	(function($) {
-//		$("#tableWords tbody").addClass("search");
-//		$('#txtUserInputMeaning').keyup(function() {
-//			
-//			var rex = new RegExp($(this).val(), 'i');
-//			$('.search tr ').hide();
-//			
-//			//Recusively filter the jquery object to get results.
-//			$('.search tr ').filter(function(i, v) {
-//				var $t = $(this).children(":eq(" + "1" + ")");
-//				return rex.test($t.text());
-//			}).show();
-//		})
-//		
-//	}(jQuery));
-//	
-//});
-
-
-
-////FETCHING FROM DB BASED ON USER INPUT
-//$(document).ready(function(){
-//	  $("#txtUserInputMeaningNew").change(function(){
-////	    alert("The text has been changed.");
-//		  
-//		  var serverURLWordOnly= "wordListerServerUserInputWord.php";
-//		  var getMethodVariable = "/?userInputWord=";
-//		  var userInputWord= $("#txtUserInputMeaningNew").val();
-//		  if(userInputWord)
-//			  {
-//			  serverURLWordOnly = serverURLWordOnly + getMethodVariable + userInputWord;
-//			  }
-//		  else
-//			  {
-//			  
-//			  serverURLWordOnly = serverURL;
-//			  }
-//		   
-//		  
-//		  
-//		  fetch(serverURLWordOnly).then((res) => res.json())
-//		  .then(response => {	
-//		  	console.log(response);
-//		  	let output = '';
-//		  	for(let i in response) {
-//		  		output += '<tr>';
-//		  			output += '<td id="No" class="tableRow" >';
-//		  			output += response[i].No;
-//		  			output += '</td>';		
-//		  			
-//		  			output += '<td id="Word" class="tableRow" >';
-//		  			output += response[i].Word;
-//		  			output += '</td>';		
-//		  			
-//		  			output += '<td id="Meaning" class="tableRow" >';
-//		  			output += response[i].Meaning;
-//		  			output += '</td>';
-//		  			
-//		  			output += '<td id="Definition" class="tableRow" >';
-//		  			output += response[i].Definition;
-//		  			output += '</td>';		
-//		  			
-//		  			output += '<td id="Additional_Info" class="tableRow" >';
-//		  			output += response[i].Additional_Info;
-//		  			output += '</td>';		
-//		  			
-//		  			output += '<td id="Relevant_Example" class="tableRow" >';
-//		  			output += response[i].Relevant_Example;
-//		  			output += '</td>';
-//		  			
-//		  			output += '<td id="Root_Index" class="tableRow" >';
-//		  			output += response[i].Root_Index;
-//		  			output += '</td>';		
-//		  			
-//		  			output += '<td id="Root_Unit" class="tableRow" >';
-//		  			output += response[i].Root_Unit;
-//		  			output += '</td>';		
-//		  			
-//		  			output += '<td id="Date" class="tableRow" >';
-//		  			output += response[i].Date;
-//		  			output += '</td>';
-//		  		
-//		  		output += '</tr>';
-//		  	}
-//		  	document.querySelector('.tbody').innerHTML = output;
-//		  }).catch(error => console.log(error));
-//	  });
-//	});
 
 /**
  * Scroll and display the HTML element in the middle of the screen.
@@ -866,4 +710,30 @@ function scrollToMiddle(elementId) {
 			element.style.border = "none";
 		});
 	}
+}
+
+
+function onClick(e) {
+	e.preventDefault();
+	grecaptcha.ready(function() {
+		grecaptcha.execute('6LekFAwpAAAAALCkFj2KbJ64l2d2Uth42ti3weOq', {action: 'submit'}).then(function(token) {
+			// Add your logic to submit to your backend server here.
+			getToken(token);
+		});
+	});
+}
+
+
+function getToken(token) {
+	console.info("token: "+token);
+}
+
+async function getGoogleToken() {
+	return new Promise((resolve) => {
+		grecaptcha.ready(function () {
+			grecaptcha.execute('6LekFAwpAAAAALCkFj2KbJ64l2d2Uth42ti3weOq', { action: 'submit' }).then(function (token) {
+				resolve(token);
+			});
+		});
+	});
 }

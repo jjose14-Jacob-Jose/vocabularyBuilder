@@ -23,7 +23,7 @@ body {
 }
 
 #divFloating {
-	position: fixed;
+	position: absolute;
 	top: 0;
 	left: 0;
 	width: 100%;
@@ -35,6 +35,7 @@ body {
 #divWordsFromDB {
 	position: relative;
 	margin-top: var(--header_height_in_px);
+	min-height: 50vh;
 }
 
 .tbodyTableWordsFromDB {
@@ -47,10 +48,11 @@ body {
 	border-bottom: 1px solid #000000;  	
 }
 
-.lettersTypedByUserMagnified #lbllettersTypedByUser {
+.lettersTypedByUserMagnified {
 	font-size: 100px;
 	padding-left: 25%;
 	padding-right: 25%;
+	position: absolute;
 }
 
 
@@ -65,10 +67,63 @@ body {
 
 .divMenu {
 	background: var(--body_menu_background);
+	margin-bottom: 70px
+}
+
+.grecaptcha-badge {
+	margin-bottom: 55px;
 }
 
 footer {
-	display: flex;
-	justify-content: center;
-	background: var(--header_background);
+	/*display: flex;*/
+	background: var(--body_menu_background);
+	text-align: center;
+	height: 20px;
+	width: 100vw;
+	padding: 20px;
+	bottom: 0;
+	position: fixed;
+}
+
+.divFooterCenter {
+	display: inline-block;
+	text-align: center;
+	margin: 0 auto;
+}
+
+.divFooterRight {
+	display: inline-block;
+	float: right;
+	margin-right: 80px;
+}
+
+/* CSS styles for the toast */
+.toast {
+	background-color: #fd1000; /* Red background color */
+	color: white;
+	padding: 10px;
+	padding-top: 50px;
+	border-radius: 8px;
+	position: fixed;
+	top: 30%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 1000; /* High z-index to overlay other content */
+	text-align: center;
+	font-size: 24px;
+}
+
+.toastCloseButton {
+	position: absolute;
+	top: 5px;
+	right: 5px;
+	cursor: pointer;
+	font-size:16px;
+	color: black;
+}
+
+
+/* Style for the toast content */
+.toast-content {
+	font-size: 16px;
 }

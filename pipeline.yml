@@ -1,0 +1,14 @@
+pipelines:
+  default:
+    - step:
+        name: Build and Push Docker Image
+        image: docker:19.03.12
+        script:
+          - export IMAGE_NAME=VocabularyBuilder
+          - export IMAGE_TAG=$(date -u +"%Y%m%d%H%M")
+          - docker build -t $IMAGE_NAME:$IMAGE_TAG .
+          - docker login -u $secrets.DOCKER_HUB_USERNAME -p $secrets.DOCKER_HUB_PASSWORD
+          - docker push $IMAGE_NAME:$IMAGE_TAG
+branches:
+  only:
+    - production

@@ -209,12 +209,25 @@ function replaceStringWithString(stringOriginal, stringToBeChecked, stringReplac
 }
 
 //	FUNCTION TO CALL SERVER AND DISPLAY THE RESPONSE FROM SERVER
-function callServerAndDisplayServerResponse(userInputValue, serverURL)
+async function callServerAndDisplayServerResponse(userInputValue, serverURL)
 {
+	let googleReCaptchaToken = await getGoogleToken();
 	document.querySelector('.tbodyTableWordsFromDB').innerHTML = "" ;
 	document.getElementById("imgWaitScreen").style.visibility = 'visible';
 	document.getElementById("imgWaitScreen").style.height = "50%";
-	  fetch(serverURL).then((res) => res.json())
+
+	const data = {
+		userInputValue: userInputValue,
+		googleReCaptchaToken: googleReCaptchaToken
+	};
+
+	  fetch(serverURL, {
+		  method: 'POST',
+		  headers: {
+			  'Content-Type': 'application/json',
+		  },
+		  body: JSON.stringify(data),
+	  }).then((res) => res.json())
 	  .then(response => {
 	  	console.log(response);
 
@@ -883,9 +896,19 @@ function getToken(token) {
 	console.info("token: "+token);
 }
 
-function getGoogleToken() {
-	// Simulate a click event on an HTML element associated with onClick
-	var dummyElement = document.createElement("div");
-	dummyElement.onclick = onClick;
-	dummyElement.click();
+// function getGoogleToken() {
+// 	// Simulate a click event on an HTML element associated with onClick
+// 	var dummyElement = document.createElement("div");
+// 	dummyElement.onclick = onClick;
+// 	dummyElement.click();
+// }
+
+async function getGoogleToken() {
+	return new Promise((resolve) => {
+		grecaptcha.ready(function () {
+			grecaptcha.execute('6LekFAwpAAAAALCkFj2KbJ64l2d2Uth42ti3weOq', { action: 'submit' }).then(function (token) {
+				resolve(token);
+			});
+		});
+	});
 }

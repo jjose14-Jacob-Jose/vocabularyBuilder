@@ -92,6 +92,7 @@
                             <input type="checkbox" id="cbsearchSelectAllExternalSearchOptions"/
                             onClick="selectAllExternalSearchOptions()">
                             Check if you select all the external search options.
+                            *Search results open in new tabs, please allow 'Pop-up windows' for this functionality to work.
                         </label>
                     </li>
 
@@ -165,18 +166,17 @@
             <div id="divHelp">
                 <ul style="list-style-type:disc;">
                     <h3>Help</h3>
-                    <li>Enter word or characters in the 1st and 2nd TextBoxes and press 'Enter' key to search and display the
+                    <li>Type a word or characters in the 'Meaning' or 'All' fields (textboxes) and press 'Enter' key to search and display the
                         words.
                     </li>
-                    <li>Enter word or characters in the 3rd and 4th TextBoxes to search and display the words while you type.</li>
-                    <li>Simply press 'Enter' on 1st and 2nd TextBoxes WITHOUT any content to list all words.</li>
-                    <li>Delete ALL contents from 3rd and 4th TextBoxes to list all words.</li>
+                    <li>Type a word or characters in the 'without Enter' fields to search and display the words while you type.</li>
+                    <li>Simply press 'Enter' in either of the first 2 fields WITHOUT any content to list all words.</li>
+                    <li>Delete ALL contents from last fields to list all words.</li>
                 </ul>
                 <ul style="list-style-type:disc;">
                     <div id="divHotkeys">
                     <h3>Hotkeys</h3>
-                        <li>Toggle a checkbox of index "#" by pressing the corresponding "#" key.</li>
-                        <li>Configuration Item #10 can be toggled by pressing "1".</li>
+                        <li>Toggle a checkbox of index "#" by pressing the corresponding ALT/Option + "#" key. E.g. 'ALT + 1' to enable checkbox 1.</li>
                         <li>Press "~" to go to the Configuration Section.</li>
                         <li>Press "-" on NumPad to focus on the 'Search-all-fields Textbox Field'.</li>
                         <li>Press "+" on NumPad to focus on the 'Search-only-meaning Textbox Field'.</li>

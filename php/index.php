@@ -5,6 +5,7 @@
     <title>Vocabulary Builder Web App</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script type="text/javascript" src="scripts/vocabularyAppWebScripts.js"></script>
+    <script type="text/javascript" src="scripts/apm.js"></script>
     <script src="https://www.google.com/recaptcha/api.js?render=6LekFAwpAAAAALCkFj2KbJ64l2d2Uth42ti3weOq"></script>
     <link rel="stylesheet" type="text/css" href="css/vocabularyAppWebStyle.css"/>
     <?php include 'vocabularyAppWebConstants.php' ?>

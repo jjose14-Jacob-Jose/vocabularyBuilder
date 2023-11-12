@@ -15,12 +15,14 @@
     define("COUNT_MAXIMUM_QUERY_ROWS_WHEN_NO_CONDITION", 15);
     define("COUNT_MAXIMUM_QUERY_ROWS_WITH_CONDITION", 50);
 
-    $username = 'azUsrypVYkFA9VbHJ8Rtt';
-    $password = 'zKJmey4D5Rh5CTvB323423';
-    $clusterUrl = 'portfoliocluster.dfelmtz.mongodb.net/';
+//  --------------->   Specify your MongoDB details below. <---------------
 
-    $database = 'PortfolioDatabase';
-    $collectionName = 'all_words';
+    $username = '<username>';
+    $password = '<password>';
+    $clusterUrl = '<clusterURL>';
+
+    $database = '<databasename>';
+    $collectionName = '<collection_name>';
 
     $connectionStringForLocal = 'mongodb://host.docker.internal:27017';
     $connectionForMongoDBAtlas = "mongodb+srv://$username:$password@$clusterUrl";

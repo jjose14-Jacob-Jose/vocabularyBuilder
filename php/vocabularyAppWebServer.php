@@ -7,13 +7,15 @@
     }
 
 //    Following block is to validate the Google reCaptcha Token.
+//        Uncomment the following after adding your own Google reCaptcha v3 server key.
+/**
     {
 
         function validateGoogleReCaptchaToken($token)
         {
             // Make a request to Google ReCaptcha verification endpoint
             $url = 'https://www.google.com/recaptcha/api/siteverify';
-            $secretKey = '6LekFAwpAAAAAJ-V0ZXFBRpSx58SXEq7kbCYYD5s';
+            $secretKey = '<google_recaptcha_server_key>'; //-----------> Google reCaptcha v3 key.
 
             $response = file_get_contents("$url?secret=$secretKey&response=$token");
             $responseData = json_decode($response);
@@ -38,7 +40,7 @@
             exit;
     }
     }
-
+*/
     if (isset($_GET[USER_INPUT_TYPE]) && isset($_GET[USER_INPUT_VALUE])) {
         $userInputType = $_GET[USER_INPUT_TYPE];
         $userInputValue = $_GET[USER_INPUT_VALUE];

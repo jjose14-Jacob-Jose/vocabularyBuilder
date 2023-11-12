@@ -21,14 +21,15 @@ It has been designed in a way that you can work with as few clicks and typing as
 2. [Docker](https://www.docker.com/)
 
 #### Steps
-1. Ensure MongoDB is running `localhost` in `port: 27017`.
-2. Build and run a  image from the  Dockerfile in the root directory.
-    `docker run -p 80:80 -d vocabularyBuilder`
-3. Access the project from: http://localhost:80
+1. Specify your MongoDB credentials in the file `php/vocabularyAppWebConstants.php`.  
+2. Build and run the Docker image from the  Dockerfile in the root directory. `docker run -p 80:80 -d vocabularyBuilder`
+3. Access the project from: http://localhost
+
+Optional: If you plan to use Google reCaptcha v3, specify your _client-key_ in `php/scripts/vocabularyAppWebScripts.js` and _server-key_ in `php/vocabularyAppWebServer.php`
 
 #### MongoDB Structure
-Database name must be 'VocabularyBuilder' and collections name must be 'all_words'.
-If you are using different names, kindly update in the file `php/vocabularyAppWebServer.php`
+Specify your MongoDB database and collections names in `php/vocabularyAppWebServer.php`.
+
 ###### Collection: VocabularyBuilder.all_words (structure)
     _id: ObjectId('6531c1fe5fcacb701d73e8b4')
     Word : "a"
@@ -40,15 +41,23 @@ If you are using different names, kindly update in the file `php/vocabularyAppWe
 
 
 ### Version History
-#### v.1
-    Development started on 22-March-2020 IST.
-    Development completed on at 23:23 on 29-March-2020 IST.
+#### v1.0 
+* Development timeline: 22-March-2020 (start) to 23:23 on 29-March-2020 (end) IST.
+* Functionalities: PHP application with MySQL database, running in local machine using XAMPP server. 
 
-#### v.2
+#### v2.0 
+* Timeline: 10:00 of 17-October-2023 (start) to 23:30 of 19-October-2023 PT.
+* Updates: 
+  * Changed to MongoDB.
+  * Deployed to Microsoft Azure. 
 
-    Redesign started 10:000 17-October-2023 PT
-    Deployed to cloud around 23:30 of 19-October-2023 PT.
-
+#### v2.1
+* Timeline: 13:30 of 11-Nov-2023 (start) to 13:30 of 12-November-2023 (end) PT.
+* Updates:
+  * Updated keyboard-shortcuts to toggle configurations. 
+  * Incorporated Google reCaptcha v3. 
+  * Integrated [APM](https://applicationmonitor.azurewebsites.net/). 
+  * Added footer with contact information. 
 
 ## Disclaimer 
 While developing and using the application I had used study proprietary materials of other companies, to comply with copyright laws and their works I have excluded them from the deployed database.

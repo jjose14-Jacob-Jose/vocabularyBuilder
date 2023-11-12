@@ -11,6 +11,17 @@
     <link rel="icon" href="images/vocab_builder_logo-20231112_0336.ico" type="image/x-icon">
     <?php include 'vocabularyAppWebConstants.php' ?>
 
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-CWX0JMQJJ7"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-CWX0JMQJJ7');
+    </script>
+
+
 </head>
     <body>
         <div id="divFloating">

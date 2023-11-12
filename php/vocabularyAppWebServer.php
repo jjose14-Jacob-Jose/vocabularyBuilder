@@ -2,37 +2,42 @@
 
     include 'vocabularyAppWebConstants.php';
 
-{
-    // Function to validate Google ReCaptcha token
-    function validateGoogleReCaptchaToken($token)
     {
-        // Make a request to Google ReCaptcha verification endpoint
-        $url = 'https://www.google.com/recaptcha/api/siteverify';
-        $secretKey = '6LekFAwpAAAAAJ-V0ZXFBRpSx58SXEq7kbCYYD5s';
 
-        $response = file_get_contents("$url?secret=$secretKey&response=$token");
-        $responseData = json_decode($response);
-
-        // Check if the verification was successful
-        return $responseData->success;
     }
-    $jsonData = json_decode(file_get_contents('php://input'), true);
-// Check if 'Google_ReCaptcha_Token' header is present
-    if (isset($jsonData['googleReCaptchaToken'])) {
-        $googleReCaptchaToken = $jsonData['googleReCaptchaToken'];
-        // Validate the ReCaptcha token
-        if (!validateGoogleReCaptchaToken($googleReCaptchaToken)) {
-            http_response_code(400);  // Bad Request
-            echo json_encode(['error' => 'Invalid Google ReCaptcha Token']);
-            exit;
+
+//    Following block is to validate the Google reCaptcha Token.
+    {
+
+        function validateGoogleReCaptchaToken($token)
+        {
+            // Make a request to Google ReCaptcha verification endpoint
+            $url = 'https://www.google.com/recaptcha/api/siteverify';
+            $secretKey = '6LekFAwpAAAAAJ-V0ZXFBRpSx58SXEq7kbCYYD5s';
+
+            $response = file_get_contents("$url?secret=$secretKey&response=$token");
+            $responseData = json_decode($response);
+
+            // Check if the verification was successful
+            return $responseData->success;
         }
-    } else {
-        // Return an error response if 'Google_ReCaptcha_Token' header is not present
-        http_response_code(400);  // Bad Request
-        echo json_encode(['error' => 'Missing Google ReCaptcha Token']);
-        exit;
+        $jsonData = json_decode(file_get_contents('php://input'), true);
+    // Check if 'Google_ReCaptcha_Token' header is present
+        if (isset($jsonData['googleReCaptchaToken'])) {
+            $googleReCaptchaToken = $jsonData['googleReCaptchaToken'];
+            // Validate the ReCaptcha token
+            if (!validateGoogleReCaptchaToken($googleReCaptchaToken)) {
+                http_response_code(400);  // Bad Request
+                echo json_encode(['error' => 'Invalid Google ReCaptcha Token']);
+                exit;
+            }
+        } else {
+            // Return an error response if 'Google_ReCaptcha_Token' header is not present
+            http_response_code(400);  // Bad Request
+            echo json_encode(['error' => 'Missing Google ReCaptcha Token']);
+            exit;
     }
-}
+    }
 
     if (isset($_GET[USER_INPUT_TYPE]) && isset($_GET[USER_INPUT_VALUE])) {
         $userInputType = $_GET[USER_INPUT_TYPE];

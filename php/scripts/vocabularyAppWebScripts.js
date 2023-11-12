@@ -211,6 +211,7 @@ function replaceStringWithString(stringOriginal, stringToBeChecked, stringReplac
 //	FUNCTION TO CALL SERVER AND DISPLAY THE RESPONSE FROM SERVER
 async function callServerAndDisplayServerResponse(userInputValue, serverURL)
 {
+	saveToApm(userInputValue);
 	let googleReCaptchaToken = await getGoogleToken();
 	document.querySelector('.tbodyTableWordsFromDB').innerHTML = "" ;
 	document.getElementById("imgWaitScreen").style.visibility = 'visible';

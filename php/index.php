@@ -8,6 +8,7 @@
     <script type="text/javascript" src="scripts/apm.js"></script>
     <script src="https://www.google.com/recaptcha/api.js?render=6LekFAwpAAAAALCkFj2KbJ64l2d2Uth42ti3weOq"></script>
     <link rel="stylesheet" type="text/css" href="css/vocabularyAppWebStyle.css"/>
+    <link rel="icon" href="images/vocab_builder_logo-20231112_0336.ico" type="image/x-icon">
     <?php include 'vocabularyAppWebConstants.php' ?>
 
 </head>

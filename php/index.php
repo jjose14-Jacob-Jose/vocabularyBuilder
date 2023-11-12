@@ -177,12 +177,11 @@
                     <div id="divHotkeys">
                     <h3>Hotkeys</h3>
                         <li>Toggle a checkbox of index "#" by pressing the corresponding ALT/Option + "#" key. E.g. 'ALT + 1' to enable checkbox 1.</li>
-                        <li>Press "~" to go to the Configuration Section.</li>
-                        <li>Press "-" on NumPad to focus on the 'Search-all-fields Textbox Field'.</li>
-                        <li>Press "+" on NumPad to focus on the 'Search-only-meaning Textbox Field'.</li>
-                        <li>Press "*" on NumPad to focus on the 'Search-all-fields without enter Textbox Field'.</li>
-                        <li>Press "/" on NumPad to focus on the 'Search-only-meaning without enter Textbox Field'.</li>
-                        <li>Press "Esc" twice within 2 seconds to close additional tabs.</li>
+                        <li>Press "ALT + ~" to go to the Configuration Section.</li>
+                        <li>Press "ALT + -" on NumPad to focus on the 'Search-all-fields Textbox Field'.</li>
+                        <li>Press "ALT + +" on NumPad to focus on the 'Search-only-meaning Textbox Field'.</li>
+                        <li>Press "ALT + *" on NumPad to focus on the 'Search-all-fields without enter Textbox Field'.</li>
+                        <li>Press "ALT + /" on NumPad to focus on the 'Search-only-meaning without enter Textbox Field'.</li>
                     </div>
                 </ul>
             </div>
@@ -221,6 +220,13 @@
         <!-- 	DISCLAIMER INFORMATION END -->
     </body>
     <footer>
-        &copy; 2023 <a href="https://www.jacobjose.live/">Jacob Jose</a>. All rights reserved.
+        <div class="divFooterRight">
+            Contact us:
+            <a href="mailto:apm@jacobjose.live">apm@jacobjose.live</a>
+        </div>
+        <div class="divFooterCenter">
+            &copy; 2023 <a href="https://www.jacobjose.live/">Jacob Jose</a>. All rights reserved.
+        </div>
+        <div class="justifiedRight"></div>
     </footer>
 </html>

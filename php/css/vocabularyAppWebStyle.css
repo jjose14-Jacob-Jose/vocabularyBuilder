@@ -67,12 +67,34 @@ body {
 
 .divMenu {
 	background: var(--body_menu_background);
+	margin-bottom: 70px
+}
+
+.grecaptcha-badge {
+	margin-bottom: 55px;
 }
 
 footer {
-	display: flex;
-	justify-content: center;
-	background: var(--header_background);
+	/*display: flex;*/
+	background: var(--body_menu_background);
+	text-align: center;
+	height: 20px;
+	width: 100vw;
+	padding: 20px;
+	bottom: 0;
+	position: fixed;
+}
+
+.divFooterCenter {
+	display: inline-block;
+	text-align: center;
+	margin: 0 auto;
+}
+
+.divFooterRight {
+	display: inline-block;
+	float: right;
+	margin-right: 80px;
 }
 
 /* CSS styles for the toast */
